@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_afterdead_explosion_anim_spritesheet.png-39023894676c6cd9992d14da1702920e.stex"
+path="res://.import/enemy_afterdead_explosion_anim_spritesheet.png-117da38f4122ff01c48c491e25d7301e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dungeon Crawler Pack/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png"
-dest_files=[ "res://.import/enemy_afterdead_explosion_anim_spritesheet.png-39023894676c6cd9992d14da1702920e.stex" ]
+source_file="res://assets/Dungeon Crawler Pack/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png"
+dest_files=[ "res://.import/enemy_afterdead_explosion_anim_spritesheet.png-117da38f4122ff01c48c491e25d7301e.stex" ]
 
 [params]
 

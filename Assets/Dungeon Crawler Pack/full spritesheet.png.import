@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/full spritesheet.png-9ca3682c48235b206ea2562325a555cd.stex"
+path="res://.import/full spritesheet.png-c9b7174a113deba3f2a5db9e4dbb85c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dungeon Crawler Pack/full spritesheet.png"
-dest_files=[ "res://.import/full spritesheet.png-9ca3682c48235b206ea2562325a555cd.stex" ]
+source_file="res://assets/Dungeon Crawler Pack/full spritesheet.png"
+dest_files=[ "res://.import/full spritesheet.png-c9b7174a113deba3f2a5db9e4dbb85c5.stex" ]
 
 [params]
 

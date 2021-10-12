@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Character
 
 export (int) var speed:int
 export (int) var hp:int
@@ -15,5 +16,3 @@ func _on_Hurtbox_entered():
 
 func die():
   queue_free()
-
-

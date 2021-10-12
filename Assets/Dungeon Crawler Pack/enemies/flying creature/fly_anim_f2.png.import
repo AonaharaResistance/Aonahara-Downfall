@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fly_anim_f2.png-96a2a05f881872d034c69a91faff5621.stex"
+path="res://.import/fly_anim_f2.png-285ee72576338f4096f574d7307a5c3a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dungeon Crawler Pack/enemies/flying creature/fly_anim_f2.png"
-dest_files=[ "res://.import/fly_anim_f2.png-96a2a05f881872d034c69a91faff5621.stex" ]
+source_file="res://assets/Dungeon Crawler Pack/enemies/flying creature/fly_anim_f2.png"
+dest_files=[ "res://.import/fly_anim_f2.png-285ee72576338f4096f574d7307a5c3a.stex" ]
 
 [params]
 
