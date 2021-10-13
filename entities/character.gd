@@ -1,8 +1,11 @@
 extends KinematicBody2D
 class_name Character
 
+# TODO: Cleanup logic and separation
+
 onready var animation = $AnimationPlayer
 onready var sprite = $Sprite
+onready var weapon = $Weapon
 
 export(int) var acceleration: int
 export(int) var max_speed: int
@@ -34,10 +37,7 @@ func get_input_direction() -> Vector2:
 		Input.get_action_strength("move_down")
 		- Input.get_action_strength("move_up")
 	)
-
-	# To not make diagonal movement faster
 	input_direction = input_direction.normalized()
-
 	return input_direction
 
 
@@ -55,3 +55,12 @@ func flip_control():
 		sprite.scale.x *= -1
 	elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
 		sprite.scale.x *= -1
+	weapon.rotation = mouse_direction.angle()
+	if mouse_direction.x < 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
+		weapon.scale.y *= -1
+	elif mouse_direction.x > 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
+		weapon.scale.y *= -1
+	if mouse_direction.y < 0 and sign(weapon.z_index) != sign(mouse_direction.y):
+		weapon.z_index *= -1
+	elif mouse_direction.y > 0 and sign(weapon.z_index) != sign(mouse_direction.y):
+		weapon.z_index *= -1
