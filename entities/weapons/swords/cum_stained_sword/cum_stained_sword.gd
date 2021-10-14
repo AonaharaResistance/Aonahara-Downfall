@@ -6,7 +6,5 @@ onready var sound: AudioStreamPlayer2D = $SoundEffect
 
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("attack"):
-		# effect.play("slash")
-		sound.play()
+	if Input.is_action_pressed("attack"):
 		animation.play("attack")
