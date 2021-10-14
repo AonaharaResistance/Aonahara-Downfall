@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/nom_nom/nom_nom.gd" type="Script" id=2]
 [ext_resource path="res://assets/place_holder/DinoSprites - tard.png" type="Texture" id=3]
 [ext_resource path="res://entities/characters/nom_nom/nom_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://ui/character_debugger.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/weapons/swords/cum_stained_sword/cum_stained_sword.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.4305
@@ -63,7 +62,6 @@ script = ExtResource( 4 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 hframes = 24
-frame = 1
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource( 1 )
@@ -74,7 +72,3 @@ anims/move = SubResource( 3 )
 
 [node name="Weapon" parent="." index="6"]
 position = Vector2( 0.297298, -0.322042 )
-
-[node name="cum_stained_sword" parent="Weapon" index="0" instance=ExtResource( 6 )]
-position = Vector2( 24.4079, 15.975 )
-scale = Vector2( 3, 3 )

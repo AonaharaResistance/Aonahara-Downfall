@@ -1,28 +1,31 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/weapons/swords/sword.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/place_holder/Sword Pack.png" type="Texture" id=2]
 [ext_resource path="res://entities/weapons/swords/cum_stained_sword/cum_stained_sword.gd" type="Script" id=3]
 [ext_resource path="res://assets/place_holder/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://entities/weapons/swords/cum_stained_sword/swing.wav" type="AudioStream" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.4077
+height = 31.428
 
 [sub_resource type="Animation" id=2]
-resource_name = "attack"
 length = 0.8
 tracks/0/type = "value"
-tracks/0/path = NodePath("WeaponContainer/Sprite:rotation_degrees")
+tracks/0/path = NodePath("WeaponContainer:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.8 ),
-"transitions": PoolRealArray( 0.267943, 0.965936, 2.37842 ),
+"times": PoolRealArray( 0, 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 0.233258, 1 ),
 "update": 0,
-"values": [ -68.0922, 108.8, -68.1 ]
+"values": [ -68.1, 108.8, -68.1 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "slash"
+[sub_resource type="Animation" id=3]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("EffectSprite:visible")
@@ -62,32 +65,42 @@ tracks/2/keys = {
 }
 
 [node name="CumStainedSword" instance=ExtResource( 1 )]
+position = Vector2( 23.4061, 11.9055 )
 rotation = 0.0174533
 script = ExtResource( 3 )
 
 [node name="WeaponContainer" parent="." index="0"]
 position = Vector2( -0.00150087, -0.00423738 )
+rotation = -1.18857
 
 [node name="Sprite" parent="WeaponContainer" index="0"]
 position = Vector2( 0.00109183, -0.0191966 )
-rotation = -1.18857
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 offset = Vector2( 7.01487, -7.32288 )
 flip_h = true
 hframes = 3
 vframes = 30
-frame = 81
+frame = 78
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponContainer/HurtBox" index="0"]
+position = Vector2( 29.2296, -30.2703 )
+rotation = 0.762731
+shape = SubResource( 1 )
 
 [node name="EffectSprite" parent="." index="1"]
 visible = false
-position = Vector2( 29.183, 14.951 )
+position = Vector2( 25.468, 12.4358 )
 rotation = 0.667016
+scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 hframes = 3
-frame = 2
 
 [node name="WeaponAnimation" parent="." index="2"]
 anims/attack = SubResource( 2 )
 
 [node name="EffectAnimation" parent="." index="3"]
-anims/slash = SubResource( 1 )
+anims/slash = SubResource( 3 )
+
+[node name="SoundEffect" parent="." index="4"]
+stream = ExtResource( 5 )

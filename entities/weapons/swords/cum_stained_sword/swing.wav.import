@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swing.wav-d5565b80979040cd13e277d072ccabdd.sample"
+
+[deps]
+
+source_file="res://entities/weapons/swords/cum_stained_sword/swing.wav"
+dest_files=[ "res://.import/swing.wav-d5565b80979040cd13e277d072ccabdd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

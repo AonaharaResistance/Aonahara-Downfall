@@ -13,3 +13,5 @@
 [node name="WeaponAnimation" type="AnimationPlayer" parent="."]
 
 [node name="EffectAnimation" type="AnimationPlayer" parent="."]
+
+[node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
