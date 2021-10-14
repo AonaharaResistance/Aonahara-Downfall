@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var sprite: Sprite = $Sprite
-onready var animation: AnimationPlayer = $AnimationPlayer
+onready var animation: AnimationPlayer = $WeaponAnimation
+onready var effect: AnimationPlayer = $EffectAnimation
 
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if Input.is_action_pressed("attack"):
 		animation.play("attack")

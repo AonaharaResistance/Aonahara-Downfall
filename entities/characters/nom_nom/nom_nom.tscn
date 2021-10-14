@@ -63,6 +63,7 @@ script = ExtResource( 4 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 hframes = 24
+frame = 1
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource( 1 )
@@ -75,5 +76,5 @@ anims/move = SubResource( 3 )
 position = Vector2( 0.297298, -0.322042 )
 
 [node name="cum_stained_sword" parent="Weapon" index="0" instance=ExtResource( 6 )]
-position = Vector2( 52.4705, 7.62566 )
+position = Vector2( 24.4079, 15.975 )
 scale = Vector2( 3, 3 )

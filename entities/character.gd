@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name Character
 
-# TODO: Cleanup logic and separation
-
 onready var animation = $AnimationPlayer
 onready var sprite = $Sprite
 onready var weapon = $Weapon
@@ -17,6 +15,8 @@ var friction: float = 0.20
 
 func move() -> void:
 	var input_direction: Vector2 = get_input_direction()
+
+	# * Using lerp or Linear Interpolation to simulate friction
 	velocity += acceleration * input_direction
 	velocity = lerp(velocity, Vector2.ZERO, friction)
 	velocity = velocity.clamped(max_speed)
@@ -41,20 +41,17 @@ func get_input_direction() -> Vector2:
 	return input_direction
 
 
-func _on_Hurtbox_entered():
-	emit_signal("_on_hp_changed")
-
-
-func die():
-	queue_free()
-
-
-func flip_control():
+func sprite_control() -> void:
+	# ? Pretty sure there's a better way of doing this
 	var mouse_direction: Vector2 = get_mouse_direction()
+
+	# Character control
 	if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
 		sprite.scale.x *= -1
 	elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
 		sprite.scale.x *= -1
+
+	# Weapon control
 	weapon.rotation = mouse_direction.angle()
 	if mouse_direction.x < 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
 		weapon.scale.y *= -1
@@ -64,3 +61,11 @@ func flip_control():
 		weapon.z_index *= -1
 	elif mouse_direction.y > 0 and sign(weapon.z_index) != sign(mouse_direction.y):
 		weapon.z_index *= -1
+
+
+func _on_Hurtbox_entered() -> void:
+	emit_signal("_on_hp_changed")
+
+
+func die() -> void:
+	queue_free()
