@@ -63,8 +63,8 @@ func sprite_control() -> void:
 		weapon.z_index *= -1
 
 
-func _on_Hurtbox_entered() -> void:
-	emit_signal("_on_hp_changed")
+func _on_HurtBox_area_entered(hitbox: Area2D) -> void:
+	pass
 
 
 func die() -> void:

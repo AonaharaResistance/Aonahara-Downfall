@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://common/hit_box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://common/hurt_box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/enemies/enemy.gd" type="Script" id=3]
+
+[node name="Enemy" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HurtBox" parent="." instance=ExtResource( 2 )]
+collision_layer = 4
+collision_mask = 2
+
+[node name="HitBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 2
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

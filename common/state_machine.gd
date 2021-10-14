@@ -41,3 +41,7 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 
 func _exit_state(_state_exited: int) -> void:
 	pass
+
+
+func _get_state_name():
+	return states.keys()[state]

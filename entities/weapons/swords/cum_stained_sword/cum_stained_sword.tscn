@@ -6,11 +6,11 @@
 [ext_resource path="res://assets/place_holder/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://entities/weapons/swords/cum_stained_sword/swing.wav" type="AudioStream" id=5]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 6.4077
-height = 31.428
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 2.84953
+height = 10.7932
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("WeaponContainer:rotation_degrees")
@@ -23,6 +23,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 0.233258, 1 ),
 "update": 0,
 "values": [ -68.1, 108.8, -68.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WeaponContainer/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -65,17 +77,15 @@ tracks/2/keys = {
 }
 
 [node name="CumStainedSword" instance=ExtResource( 1 )]
-position = Vector2( 23.4061, 11.9055 )
-rotation = 0.0174533
+position = Vector2( 9.22342, 3.89646 )
 script = ExtResource( 3 )
 
 [node name="WeaponContainer" parent="." index="0"]
 position = Vector2( -0.00150087, -0.00423738 )
-rotation = -1.18857
+rotation = -1.13917
 
 [node name="Sprite" parent="WeaponContainer" index="0"]
-position = Vector2( 0.00109183, -0.0191966 )
-scale = Vector2( 3, 3 )
+position = Vector2( -0.0439283, 0.683683 )
 texture = ExtResource( 2 )
 offset = Vector2( 7.01487, -7.32288 )
 flip_h = true
@@ -83,10 +93,13 @@ hframes = 3
 vframes = 30
 frame = 78
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponContainer/HurtBox" index="0"]
-position = Vector2( 29.2296, -30.2703 )
-rotation = 0.762731
-shape = SubResource( 1 )
+[node name="HitBox" parent="WeaponContainer" index="1"]
+damage = 20
+
+[node name="CollisionShape2D" parent="WeaponContainer/HitBox" index="0"]
+position = Vector2( 9.12472, -9.07636 )
+rotation = 0.792574
+shape = SubResource( 6 )
 
 [node name="EffectSprite" parent="." index="1"]
 visible = false
@@ -97,10 +110,12 @@ texture = ExtResource( 4 )
 hframes = 3
 
 [node name="WeaponAnimation" parent="." index="2"]
-anims/attack = SubResource( 2 )
+anims/attack = SubResource( 5 )
 
 [node name="EffectAnimation" parent="." index="3"]
 anims/slash = SubResource( 3 )
 
 [node name="SoundEffect" parent="." index="4"]
 stream = ExtResource( 5 )
+
+[editable path="WeaponContainer/HitBox"]

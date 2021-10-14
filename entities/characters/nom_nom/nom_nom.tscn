@@ -4,10 +4,10 @@
 [ext_resource path="res://entities/characters/nom_nom/nom_nom.gd" type="Script" id=2]
 [ext_resource path="res://assets/place_holder/DinoSprites - tard.png" type="Texture" id=3]
 [ext_resource path="res://entities/characters/nom_nom/nom_state_machine.gd" type="Script" id=4]
-[ext_resource path="res://ui/character_debugger.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 12.4305
+radius = 5.24396
+height = 6.22077
 
 [sub_resource type="Animation" id=2]
 length = 0.4
@@ -41,34 +41,36 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 5.24396
+height = 6.22077
+
 [node name="NomNom" instance=ExtResource( 1 )]
 scale = Vector2( 1, 0.923192 )
-collision_layer = 2
 collision_mask = 21
 script = ExtResource( 2 )
-acceleration = 300
-max_speed = 450
+acceleration = 100
+max_speed = 200
 
-[node name="CharacterDebugger" parent="." index="0" instance=ExtResource( 5 )]
-margin_left = 127.356
-margin_top = 55.1808
-margin_right = 127.356
-margin_bottom = 55.1808
-
-[node name="StateMachine" parent="." index="1"]
+[node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="Sprite" parent="." index="2"]
-scale = Vector2( 3, 3 )
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 hframes = 24
+frame = 3
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="3"]
 anims/idle = SubResource( 2 )
 anims/move = SubResource( 3 )
 
-[node name="Weapon" parent="." index="6"]
+[node name="Weapon" parent="." index="4"]
 position = Vector2( 0.297298, -0.322042 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 4 )
+
+[editable path="HurtBox"]

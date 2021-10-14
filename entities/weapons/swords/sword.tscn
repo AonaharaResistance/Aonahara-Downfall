@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://common/hit_box.tscn" type="PackedScene" id=1]
 
 [node name="Sword" type="Node2D"]
 
@@ -6,7 +8,9 @@
 
 [node name="Sprite" type="Sprite" parent="WeaponContainer"]
 
-[node name="HurtBox" type="Area2D" parent="WeaponContainer"]
+[node name="HitBox" parent="WeaponContainer" instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 4
 
 [node name="EffectSprite" type="Sprite" parent="."]
 
@@ -15,3 +19,5 @@
 [node name="EffectAnimation" type="AnimationPlayer" parent="."]
 
 [node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
+
+[editable path="WeaponContainer/HitBox"]
