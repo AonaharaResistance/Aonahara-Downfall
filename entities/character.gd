@@ -17,10 +17,10 @@ func move() -> void:
 	var input_direction: Vector2 = get_input_direction()
 
 	# * Using lerp or Linear Interpolation to simulate friction
+	velocity = move_and_slide(velocity)
 	velocity += acceleration * input_direction
 	velocity = lerp(velocity, Vector2.ZERO, friction)
 	velocity = velocity.clamped(max_speed)
-	velocity = move_and_slide(velocity)
 
 
 func get_mouse_direction() -> Vector2:

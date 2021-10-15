@@ -1,0 +1,20 @@
+{
+	"color": "#ff655cff",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1634302643.json",
+	"mirror_portraits": false,
+	"name": "Nom Nom",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 350,
+	"offset_y": -30,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://assets/place_holder/nomnom/NomNomPog.png"
+		}
+	],
+	"scale": 10
+}

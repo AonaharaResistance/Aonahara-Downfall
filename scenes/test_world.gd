@@ -6,6 +6,8 @@ onready var player_state = player.get_node("StateMachine")
 
 
 func _ready():
+	var dialog = Dialogic.start("sexooooooo")
+	add_child(dialog)
 	var overlay = load("res://ui/debug_overlay.tscn").instance()
 	overlay.add_stat("player speed", player, "velocity", false)
 	overlay.add_stat("movement state", player_state, "_get_state_name", true)

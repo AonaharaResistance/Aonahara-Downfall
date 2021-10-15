@@ -6,11 +6,11 @@
 [ext_resource path="res://assets/place_holder/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://entities/weapons/swords/cum_stained_sword/swing.wav" type="AudioStream" id=5]
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 2.84953
 height = 10.7932
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("WeaponContainer:rotation_degrees")
@@ -99,7 +99,7 @@ damage = 20
 [node name="CollisionShape2D" parent="WeaponContainer/HitBox" index="0"]
 position = Vector2( 9.12472, -9.07636 )
 rotation = 0.792574
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="EffectSprite" parent="." index="1"]
 visible = false
@@ -110,7 +110,7 @@ texture = ExtResource( 4 )
 hframes = 3
 
 [node name="WeaponAnimation" parent="." index="2"]
-anims/attack = SubResource( 5 )
+anims/attack = SubResource( 2 )
 
 [node name="EffectAnimation" parent="." index="3"]
 anims/slash = SubResource( 3 )

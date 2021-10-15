@@ -49,8 +49,8 @@ height = 6.22077
 scale = Vector2( 1, 0.923192 )
 collision_mask = 21
 script = ExtResource( 2 )
-acceleration = 100
-max_speed = 200
+acceleration = 50
+max_speed = 100
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -72,5 +72,9 @@ position = Vector2( 0.297298, -0.322042 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 4 )
+
+[node name="Camera2D" parent="." index="6"]
+smoothing_enabled = true
+smoothing_speed = 10.0
 
 [editable path="HurtBox"]

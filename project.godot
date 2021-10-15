@@ -115,6 +115,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg", "res://addons/dialogic/plugin.cfg" )
 
+[gui]
+
+theme/custom_font="res://assets/Fonts/pixellocale_8.tres"
+
 [input]
 
 right={
