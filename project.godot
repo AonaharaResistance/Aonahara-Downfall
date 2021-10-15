@@ -15,6 +15,36 @@ _global_script_classes=[ {
 "path": "res://entities/character.gd"
 }, {
 "base": "Reference",
+"class": "DTS",
+"language": "GDScript",
+"path": "res://addons/dialogic/Localization/translation_service.gd"
+}, {
+"base": "Node",
+"class": "Dialogic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicClass.gd"
+}, {
+"base": "Control",
+"class": "DialogicBackgroundMusic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
+}, {
+"base": "Node",
+"class": "DialogicDefinitionsUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
+}, {
+"base": "Reference",
+"class": "DialogicResources",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicResources.gd"
+}, {
+"base": "Reference",
+"class": "DialogicUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+}, {
+"base": "Reference",
 "class": "ResourceAsyncLoader",
 "language": "GDScript",
 "path": "res://addons/GameTemplate/Utility/ResourceAsyncLoader.gd"
@@ -31,6 +61,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "",
+"DTS": "",
+"Dialogic": "",
+"DialogicBackgroundMusic": "",
+"DialogicDefinitionsUtil": "",
+"DialogicResources": "",
+"DialogicUtil": "",
 "ResourceAsyncLoader": "",
 "SaveSettings": "",
 "StateMachine": ""
@@ -48,6 +84,7 @@ default_bus_layout="res://addons/GameTemplate/Assets/Audio_bus_layout.tres"
 
 [autoload]
 
+Util="*res://singletons/util.gd"
 SettingsAudio="*res://addons/GameTemplate/Autoload/SettingsAudio.gd"
 SettingsControls="*res://addons/GameTemplate/Autoload/SettingsControls.gd"
 SettingsLanguage="*res://addons/GameTemplate/Autoload/SettingsLanguage.gd"
@@ -63,7 +100,6 @@ MenuEvent="*res://addons/GameTemplate/Autoload/MenuEvent.gd"
 Music="*res://addons/GameTemplate/Autoload/Music.tscn"
 SfxManager="*res://addons/GameTemplate/Autoload/SfxManager.gd"
 HtmlFocus="*res://addons/GameTemplate/Autoload/HtmlFocus.tscn"
-Util="*res://singletons/util.gd"
 
 [display]
 
@@ -77,7 +113,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg", "res://addons/dialogic/plugin.cfg" )
 
 [input]
 
