@@ -6,6 +6,7 @@ onready var sprite = $Sprite
 onready var weapon = $Weapon
 onready var dash = $Dash
 onready var stamina_timer = $StaminaTimer
+onready var hurt_box = $HurtBox/CollisionShape2D
 
 export(int) var acceleration: int
 export(int) var max_speed: int
@@ -41,7 +42,7 @@ func get_mouse_direction() -> Vector2:
 	return (get_global_mouse_position() - global_position).normalized()
 
 
-func regenerate_stamina():
+func regenerate_stamina() -> void:
 	while stamina < max_stamina && stamina_timer.is_stopped():
 		stamina += 1
 		yield(get_tree().create_timer(1), "timeout")
@@ -51,23 +52,23 @@ func get_stamina_timer() -> float:
 	return stamina_timer.time_left
 
 
-func _on_StaminaTimer_timeout():
+func _on_StaminaTimer_timeout() -> void:
 	regenerate_stamina()
 
 
-func apply_dash(input_direction: Vector2):
-	if dash.is_dashing():
-		velocity = (acceleration * 8) * input_direction
-
-
-func set_stamina_regen_timer(current_stamina):
+func set_stamina_regen_timer(current_stamina) -> void:
 	if current_stamina == 0:
 		stamina_timer.wait_time = stamina_regen * 2
 	else:
 		stamina_timer.wait_time = stamina_regen
 
 
-func activate_dash():
+func apply_dash(input_direction: Vector2) -> void:
+	if dash.is_dashing():
+		velocity = (acceleration * 8) * input_direction
+
+
+func activate_dash() -> void:
 	if Input.is_action_just_pressed("dash"):
 		stamina -= 1
 		set_stamina_regen_timer(stamina)

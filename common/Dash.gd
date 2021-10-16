@@ -9,7 +9,7 @@ onready var ghost_timer: Timer = $GhostTimer
 onready var cooldown_timer: Timer = $CooldownTimer
 onready var dust_trail: Particles2D = $DustTrail
 onready var dust_burst: Particles2D = $DustBurst
-onready var character: KinematicBody2D = get_parent()
+onready var character: Character = get_parent()
 
 var ghost_scene: PackedScene = preload("res://common/DashGhost.tscn")
 var can_dash: bool setget set_can_dash, get_can_dash
@@ -32,6 +32,7 @@ func get_can_dash() -> bool:
 
 func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -> void:
 	set_can_dash(false)
+	character.hurt_box.disabled = true
 	cooldown_timer.start()
 	duration_timer.wait_time = duration
 	duration_timer.start()
@@ -74,6 +75,7 @@ func is_dashing():
 
 func end_dash():
 	emit_signal("dash_ended")
+	character.hurt_box.disabled = false
 	dash_sprite.material.set_shader_param("whiten", false)
 	ghost_timer.stop()
 
