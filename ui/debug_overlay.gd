@@ -1,22 +1,23 @@
 extends CanvasLayer
 
-# Debug overlay by Gonkee - full tutorial https://youtu.be/8Us2cteHbbo
+# Debug overlay by Gonkee
+# Posei snatched it, big thanks Gonkee
 
-var stats = []
+var stats: Array = []
 
 
-func add_stat(stat_name, object, stat_ref, is_method):
+func add_stat(stat_name, object, stat_ref, is_method) -> void:
 	stats.append([stat_name, object, stat_ref, is_method])
 
 
-func _process(_delta):
-	var label_text = ""
+func _process(_delta) -> void:
+	var label_text: String = ""
 
-	var fps = Engine.get_frames_per_second()
+	var fps: float = Engine.get_frames_per_second()
 	label_text += str("FPS: ", fps)
 	label_text += "\n"
 
-	var mem = OS.get_static_memory_usage()
+	var mem: int = OS.get_static_memory_usage()
 	label_text += str("Static Memory: ", String.humanize_size(mem))
 	label_text += "\n"
 

@@ -51,6 +51,11 @@ collision_mask = 21
 script = ExtResource( 2 )
 acceleration = 50
 max_speed = 100
+hp = 4
+stamina = 4
+max_stamina = 4
+base_damage = 4
+stamina_regen = 2.0
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -77,4 +82,11 @@ shape = SubResource( 4 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 
+[node name="DustTrail" parent="Dash" index="2"]
+position = Vector2( -0.832449, 8.38362 )
+
+[node name="DustBurst" parent="Dash" index="3"]
+position = Vector2( -0.523373, 2.30857 )
+
 [editable path="HurtBox"]
+[editable path="Dash"]

@@ -1,13 +1,9 @@
 extends Control
 
 
-func _ready():
-	pass
-
-
-func _on_OptionButton_pressed():
+func _on_OptionButton_pressed() -> void:
 	MenuEvent.Options = true
 
 
-func _on_PlayButton_pressed():
+func _on_PlayButton_pressed() -> void:
 	Game.emit_signal("ChangeScene", "res://scenes/TestWorld.tscn")

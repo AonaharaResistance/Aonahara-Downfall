@@ -10,7 +10,10 @@ func _ready():
 
 
 func _on_HurtBox_area_entered(hitbox: Area2D):
-	_take_damage(hitbox.damage)
+	print("received: " + str(hitbox.damage) + " weapon damage")
+	print("received: " + str(hitbox.character_damage) + " character damage")
+	print("received: " + str(hitbox.total_damage) + " total damage")
+	_take_damage(hitbox.total_damage)
 
 
 func _take_damage(damage: int):

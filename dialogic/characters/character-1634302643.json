@@ -14,6 +14,10 @@
 		{
 			"name": "Default",
 			"path": "res://assets/place_holder/nomnom/NomNomPog.png"
+		},
+		{
+			"name": "NomNomTF",
+			"path": "res://assets/place_holder/nomnom/NomNomTF.png"
 		}
 	],
 	"scale": 10

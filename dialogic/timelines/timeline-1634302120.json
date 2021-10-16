@@ -1,12 +1,6 @@
 {
 	"events": [
 		{
-			"character": "character-1634302643.json",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "SEXOOOOOOOOOOOOOOOOOOOOOOO"
-		},
-		{
 			"action": "join",
 			"character": "character-1634302643.json",
 			"event_id": "dialogic_002",
@@ -24,13 +18,19 @@
 			"character": "character-1634302643.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "UWWWOOUUGHHHHHHHH"
+			"text": "Hello welcome to the prosperosus test project"
 		},
 		{
 			"character": "character-1634302643.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "i think i've fallen in love with youmu, lately i've been playing PCB quite a lot and i realize something about her.\nthe first time i saw and fight her and it was an an awesome experience but that's nothing rare in touhou,\nthen i attempted 1cc i fought her again again and again then it hits me... so first i'm pretty sure she realize her opponent isn't someone she can scoff at and yet she charges straight at them without any doubt for the sake of guarding her mistress and to carry her duty that is nut.\n\nAfter she have been defeated she didn't just accept her lost she came back for the second time, and is fully engaging you, it was a close fight both of us did our best but there can only be one winner, however she didn't falter, got beaten up twice should make the huge majority of people back down, one must be real insane to get up for the third time, but Youmu isn't huge majority of people, she won't let you pass no matter what it's her duty after all. that's when i realize she's special , i don't advocate for blind loyalty but i love it when someone have the level of dedication to something like her, like holy shit it's literally out of this world, to charge at someone who you know is equally strong or even stronger than you and face them again after defeated, i am now loving every moment when i fight her, especially when she slowed time down and the theme hits right in the\nsol do sol fa sol mi sol re sol do\nre mi sol mi re mi re do sol\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\nThere's also the other side of her when she's not on job mode which frankly is really freakin pretty. now every time i see her it's feel a whole lot different , she appears to be more majestically pretty and powerful than before"
+			"text": "You can try to roam around and see what's here"
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "altho not much is here currently"
 		}
 	],
 	"metadata": {
