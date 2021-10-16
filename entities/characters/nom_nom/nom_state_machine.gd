@@ -10,9 +10,10 @@ func _ready() -> void:
 	set_state(states.idle)
 
 
-func _state_logic(_delta) -> void:
+func _state_logic(delta) -> void:
 	parent.move()
 	parent.sprite_control()
+	parent.listen_knockback(delta)
 
 	if state != states.idle && parent.velocity.length() > 20 && parent.dash.can_dash:
 		parent.activate_dash()

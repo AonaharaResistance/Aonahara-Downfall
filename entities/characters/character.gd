@@ -14,10 +14,14 @@ export(int) var hp: int
 export(int) var stamina: int
 export(int) var max_stamina: int
 export(int) var base_damage: int
+export(float) var attack_speed: float
 export(float) var stamina_regen: float
+export(float) var stamina_regen_rate: float
 
 var velocity: Vector2 = Vector2.ZERO
+var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
+var receives_knockback: bool = true
 
 const DASH_DURATION: float = 0.2
 
@@ -45,7 +49,7 @@ func get_mouse_direction() -> Vector2:
 func regenerate_stamina() -> void:
 	while stamina < max_stamina && stamina_timer.is_stopped():
 		stamina += 1
-		yield(get_tree().create_timer(1), "timeout")
+		yield(get_tree().create_timer(stamina_regen_rate), "timeout")
 
 
 func get_stamina_timer() -> float:
@@ -119,6 +123,16 @@ func _take_damage(damage: int) -> void:
 	_die_check(hp)
 
 
+func listen_knockback(delta):
+	if receives_knockback:
+		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+		knockback = move_and_slide(knockback)
+
+
+func apply_knockback(direction, strength):
+	knockback = (direction.direction_to(self.global_position) * strength)
+
+
 func _die_check(current_hp: int) -> void:
 	if current_hp <= 0:
 		die()
@@ -126,6 +140,7 @@ func _die_check(current_hp: int) -> void:
 
 func _on_HurtBox_area_entered(hitbox: Area2D) -> void:
 	_take_damage(hitbox.damage)
+	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 
 
 func die() -> void:

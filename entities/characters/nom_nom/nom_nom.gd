@@ -1,9 +1,9 @@
-extends "res://entities/character.gd"
+extends "res://entities/characters/character.gd"
 
 # TODO: Attack Mechanic
 
 onready var weapon_container: Node2D = $Weapon
-var cum_stained_sword = preload("res://entities/weapons/swords/cum_stained_sword/cum_stained_sword.tscn")
+var cum_stained_sword = preload("res://objects/weapons/swords/cum_stained_sword/cum_stained_sword.tscn")
 
 
 func _process(_delta):
