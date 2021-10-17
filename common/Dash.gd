@@ -52,13 +52,9 @@ func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -
 	dust_burst.emitting = true
 
 
-func check_stamina(stamina: int) -> void:
-	if stamina <= 0:
-		return
-
-
 func instance_ghost() -> void:
 	var ghost: Sprite = ghost_scene.instance()
+	ghost.add_to_group("dash_ghosts")
 	get_node("../..").add_child(ghost)
 
 	ghost.global_position = global_position
@@ -69,15 +65,17 @@ func instance_ghost() -> void:
 	ghost.flip_h = dash_sprite.flip_h
 
 
-func is_dashing():
+func is_dashing() -> bool:
 	return !duration_timer.is_stopped()
 
 
-func end_dash():
+func end_dash() -> void:
 	emit_signal("dash_ended")
 	character.hurt_box.disabled = false
 	dash_sprite.material.set_shader_param("whiten", false)
 	ghost_timer.stop()
+	yield(get_tree().create_timer(2), "timeout")
+	get_tree().call_group("dash_ghosts", "queue_free")
 
 
 func _on_DurationTimer_timeout() -> void:
