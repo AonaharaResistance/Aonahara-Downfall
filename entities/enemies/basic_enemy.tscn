@@ -5,11 +5,10 @@
 [ext_resource path="res://common/HitEffect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://common/DeathEffect.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 radius = 5.89892
 
-[sub_resource type="Animation" id=1]
-resource_name = "fly"
+[sub_resource type="Animation" id=2]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -25,11 +24,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 7.8033
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 5.85876
 height = 0.0
 
@@ -44,21 +43,21 @@ texture = ExtResource( 2 )
 hframes = 4
 
 [node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="." index="2"]
-anims/fly = SubResource( 1 )
+anims/fly = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, 0.176777 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="HitBox" parent="." index="4"]
 damage = 1
 knockback_strength = 120
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

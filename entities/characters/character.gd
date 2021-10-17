@@ -6,6 +6,7 @@ onready var sprite = $Sprite
 onready var weapon = $Weapon
 onready var dash = $Dash
 onready var stamina_timer = $StaminaTimer
+onready var camera = $Camera2D
 onready var hurt_box = $HurtBox/CollisionShape2D
 
 export(int) var acceleration: int
@@ -28,6 +29,7 @@ const DASH_DURATION: float = 0.2
 
 func _ready() -> void:
 	stamina_timer.wait_time = stamina_regen
+	camera.add_to_group("current_camera")
 	add_to_group("current_character")
 
 

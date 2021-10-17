@@ -39,6 +39,7 @@ func _on_HurtBox_area_entered(hitbox: Area2D):
 	var final_damage = _randomize_damage(hitbox.total_damage)
 	print(final_damage)
 	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
+	Shake.shake(1.0, 0.2, 1)
 	_take_damage(_randomize_damage(final_damage))
 	spawn_effect(EFFECT_HIT)
 	spawn_dmgIndicator(final_damage)
