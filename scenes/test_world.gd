@@ -18,5 +18,6 @@ func _ready():
 	overlay.add_stat("dash cooldown: ", dash, "get_cooldown_timer", true)
 	overlay.add_stat("stamina: ", player, "stamina", false)
 	overlay.add_stat("stamina regen timer: ", player, "get_stamina_timer", true)
+	overlay.add_stat("hp: ", player, "hp", false)
 
 	add_child(overlay)

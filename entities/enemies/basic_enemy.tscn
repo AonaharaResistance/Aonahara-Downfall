@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/place_holder/enemies/flying creature/fly_anim_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://common/HitEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/DeathEffect.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 5.89892
@@ -34,6 +36,8 @@ height = 0.0
 [node name="BasicEnemy" instance=ExtResource( 1 )]
 collision_layer = 4
 hp = 40
+EFFECT_HIT = ExtResource( 3 )
+EFFECT_DIED = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
