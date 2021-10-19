@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Aonahara: Downfall"
-run/main_scene="res://main_menu/main_menu.tscn"
+run/main_scene="res://menus/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -101,6 +101,14 @@ Music="*res://addons/GameTemplate/Autoload/Music.tscn"
 SfxManager="*res://addons/GameTemplate/Autoload/SfxManager.gd"
 HtmlFocus="*res://addons/GameTemplate/Autoload/HtmlFocus.tscn"
 Shake="*res://singletons/shake.gd"
+
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/unsafe_property_access=true
+gdscript/warnings/unsafe_method_access=true
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
 
 [display]
 
@@ -188,4 +196,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
