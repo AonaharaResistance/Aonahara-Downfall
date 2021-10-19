@@ -12,19 +12,19 @@ onready var hurt_box = $HurtBox/CollisionShape2D
 export(int) var acceleration: int
 export(int) var max_speed: int
 export(int) var hp: int
+export(int) var max_hp: int
 export(int) var stamina: int
 export(int) var max_stamina: int
 export(int) var base_damage: int
 export(float) var attack_speed: float
 export(float) var stamina_regen: float
 export(float) var stamina_regen_rate: float
+export(float) var dash_duration: float = 0.2
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
 var receives_knockback: bool = true
-
-const DASH_DURATION: float = 0.2
 
 
 func _ready() -> void:
@@ -41,7 +41,6 @@ func move() -> void:
 	velocity += acceleration * input_direction
 	velocity = lerp(velocity, Vector2.ZERO, friction)
 	velocity = velocity.clamped(max_speed)
-	apply_dash(input_direction)
 
 
 func get_mouse_direction() -> Vector2:
@@ -69,9 +68,9 @@ func set_stamina_regen_timer(current_stamina) -> void:
 		stamina_timer.wait_time = stamina_regen
 
 
-func apply_dash(input_direction: Vector2) -> void:
+func apply_dash() -> void:
 	if dash.is_dashing():
-		velocity = (acceleration * 8) * input_direction
+		velocity = (acceleration * 8) * get_input_direction()
 
 
 func activate_dash() -> void:
@@ -79,7 +78,7 @@ func activate_dash() -> void:
 		stamina -= 1
 		set_stamina_regen_timer(stamina)
 		stamina_timer.start()
-		dash.start_dash(sprite, DASH_DURATION, get_input_direction())
+		dash.start_dash(sprite, dash_duration, get_input_direction())
 
 
 func get_input_direction() -> Vector2:
@@ -140,9 +139,11 @@ func _die_check(current_hp: int) -> void:
 		die()
 
 
-func _on_HurtBox_area_entered(hitbox: Area2D) -> void:
-	_take_damage(hitbox.damage)
-	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
+# ? Should i adjust the hurtbox individually or set it on the hurtbox itself
+# func _on_HurtBox_area_entered(hitbox: Area2D) -> void:
+# 	pass
+# _take_damage(hitbox.damage)
+# apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 
 
 func die() -> void:

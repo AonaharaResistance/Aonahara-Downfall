@@ -1,5 +1,8 @@
 extends Area2D
 
+# * The difference between normal hitbox is that
+# * Weapon hitbox require character damage
+
 export(int) var damage: int
 export(int) var knockback_strength: float
 var total_damage: int

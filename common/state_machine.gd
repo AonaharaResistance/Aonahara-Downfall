@@ -5,6 +5,7 @@ var previous_state = null
 var states: Dictionary = {}
 var state: int = -1 setget set_state
 
+# * Not specifying the type because it might vary
 onready var parent = get_parent()
 
 
@@ -14,6 +15,10 @@ func _physics_process(delta) -> void:
 		var transition: int = _get_transition()
 		if transition != -1:
 			set_state(transition)
+
+
+func _get_state_name() -> String:
+	return states.keys()[state]
 
 
 func _state_logic(_delta) -> void:
@@ -41,7 +46,3 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 
 func _exit_state(_state_exited: int) -> void:
 	pass
-
-
-func _get_state_name():
-	return states.keys()[state]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://common/collisions/hurt_box.gd" type="Script" id=1]
+[ext_resource path="res://common/shaders/whiten.tres" type="Material" id=2]
+
+[node name="HurtBox" type="Area2D"]
+monitorable = false
+script = ExtResource( 1 )
+whiten_material = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0.87451, 1, 0, 1 )
