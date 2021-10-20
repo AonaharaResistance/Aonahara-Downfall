@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 
 func _on_OptionButton_pressed() -> void:
@@ -6,4 +6,4 @@ func _on_OptionButton_pressed() -> void:
 
 
 func _on_PlayButton_pressed() -> void:
-	Game.emit_signal("ChangeScene", "res://scenes/TestWorld.tscn")
+	Game.emit_signal("ChangeScene", "res://levels/TestWorld.tscn")

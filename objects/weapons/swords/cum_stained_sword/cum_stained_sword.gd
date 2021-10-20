@@ -6,9 +6,9 @@ onready var sound: AudioStreamPlayer2D = $SoundEffect
 
 
 func _ready():
-	print(str(get_node("../../").attack_speed))
+	var character: Character = get_node("../../")
 	# ! a fucked up way of getting the player, might have to change
-	animation.set_speed_scale(get_node("../../").attack_speed)
+	animation.set_speed_scale(character.attack_speed)
 
 
 func _process(_delta) -> void:

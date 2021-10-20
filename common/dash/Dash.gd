@@ -14,6 +14,7 @@ onready var character: Character = get_parent()
 var ghost_scene: PackedScene = preload("res://common/dash/DashGhost.tscn")
 var can_dash: bool setget set_can_dash, get_can_dash
 var dash_sprite: Sprite
+var dash_sprite_shader: ShaderMaterial
 
 
 # * Just in case the dash delay can change
@@ -32,15 +33,20 @@ func get_can_dash() -> bool:
 
 
 func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -> void:
+	Shake.shake(1, 0.1)
 	set_can_dash(false)
+
+	# warning-ignore:unsafe_property_access
 	character.hurt_box.disabled = true
+
 	cooldown_timer.start()
 	duration_timer.wait_time = duration
 	duration_timer.start()
 
 	dash_sprite = character_sprite
-	dash_sprite.material.set_shader_param("mix_weight", 0.7)
-	dash_sprite.material.set_shader_param("whiten", true)
+	dash_sprite_shader = dash_sprite.material
+	dash_sprite_shader.set_shader_param("mix_weight", 0.7)
+	dash_sprite_shader.set_shader_param("whiten", true)
 
 	ghost_timer.start()
 	instance_ghost()
@@ -55,7 +61,6 @@ func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -
 
 func instance_ghost() -> void:
 	var ghost: Sprite = ghost_scene.instance()
-	ghost.add_to_group("dash_ghosts")
 
 	# ? Will hopefully get the character node :koronesweat:
 	get_node("../..").add_child(ghost)
@@ -74,11 +79,12 @@ func is_dashing() -> bool:
 
 func end_dash() -> void:
 	emit_signal("dash_ended")
+
+	# warning-ignore:unsafe_property_access
 	character.hurt_box.disabled = false
-	dash_sprite.material.set_shader_param("whiten", false)
+
+	dash_sprite_shader.set_shader_param("whiten", false)
 	ghost_timer.stop()
-	yield(get_tree().create_timer(2), "timeout")
-	get_tree().call_group("dash_ghosts", "queue_free")
 
 
 func _on_DurationTimer_timeout() -> void:

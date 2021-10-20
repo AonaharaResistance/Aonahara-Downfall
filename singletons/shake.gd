@@ -25,6 +25,10 @@ func _ready():
 	noise.persistence = 0.8
 
 
+func zoom():
+	camera.offset(10, 10)
+
+
 func shake(intensity, duration, type = Type.Random):
 	# Set the shake parameters
 	#

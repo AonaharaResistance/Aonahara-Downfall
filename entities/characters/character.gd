@@ -32,6 +32,8 @@ func _ready() -> void:
 	camera.add_to_group("current_camera")
 	add_to_group("current_character")
 
+	print(get_tree().current_scene.get_node("Player").get_child(0).name)
+
 
 func move() -> void:
 	var input_direction: Vector2 = get_input_direction()
@@ -134,16 +136,14 @@ func apply_knockback(direction, strength):
 	knockback = (direction.direction_to(self.global_position) * strength)
 
 
+func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
+	_take_damage(hitbox.damage)
+	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
+
+
 func _die_check(current_hp: int) -> void:
 	if current_hp <= 0:
 		die()
-
-
-# ? Should i adjust the hurtbox individually or set it on the hurtbox itself
-# func _on_HurtBox_area_entered(hitbox: Area2D) -> void:
-# 	pass
-# _take_damage(hitbox.damage)
-# apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 
 
 func die() -> void:

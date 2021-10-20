@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/place_holder/enemies/flying creature/fly_anim_spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://common/effects/HitEffect.tscn" type="PackedScene" id=3]
-[ext_resource path="res://common/shaders/whiten.gdshader" type="Shader" id=4]
-[ext_resource path="res://assets/place_holder/light.png" type="Texture" id=5]
-[ext_resource path="res://assets/place_holder/effects (new)/explosion_anim_f1.png" type="Texture" id=6]
+[ext_resource path="res://entities/enemies/basic_enemy.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemies/basic_enemy_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://common/effects/HitEffect.tscn" type="PackedScene" id=5]
 [ext_resource path="res://common/effects/DeathEffect.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -27,62 +26,49 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = ExtResource( 4 )
-shader_param/whiten = false
-shader_param/mix_weight = 0.6
-
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 7.8033
 height = 0.0
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 5.85876
+radius = 2.75064
 height = 0.0
 
 [node name="BasicEnemy" instance=ExtResource( 1 )]
 collision_layer = 4
 collision_mask = 5
-hp = 40
-EFFECT_HIT = ExtResource( 3 )
-EFFECT_DIED = ExtResource( 7 )
+script = ExtResource( 3 )
+hp = 100
+effect_hit = ExtResource( 5 )
+effect_died = ExtResource( 7 )
 
-[node name="Sprite" parent="." index="0"]
+[node name="StateMachine" parent="." index="0"]
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
 hframes = 4
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="3"]
 anims/fly = SubResource( 2 )
-
-[node name="HurtBox" parent="." index="3"]
-whiten_material = SubResource( 5 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, 0.176777 )
 shape = SubResource( 3 )
 
-[node name="HitBox" parent="." index="4"]
+[node name="HitBox" parent="." index="5"]
 damage = 1
 knockback_strength = 120
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0.471939, 0.943874 )
 shape = SubResource( 4 )
 
-[node name="Sprite2" type="Sprite" parent="." index="7"]
-modulate = Color( 1, 1, 1, 0.235294 )
-position = Vector2( 0.667419, 13.0981 )
-scale = Vector2( 1, 0.588077 )
-texture = ExtResource( 6 )
-
-[node name="Light2D" type="Light2D" parent="." index="8"]
-texture = ExtResource( 5 )
-texture_scale = 0.1
-color = Color( 0.858824, 0.141176, 0.141176, 1 )
-energy = 0.6
+[node name="Rays" parent="." index="6"]
+visible = false
 
 [editable path="HurtBox"]
 [editable path="HitBox"]
