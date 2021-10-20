@@ -52,12 +52,14 @@ script = ExtResource( 2 )
 acceleration = 50
 max_speed = 100
 hp = 4
+max_hp = 0
 stamina = 4
 max_stamina = 4
 base_damage = 4
 attack_speed = 1.0
 stamina_regen = 2.0
 stamina_regen_rate = 1.0
+dash_duration = 0.2
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -91,3 +93,4 @@ position = Vector2( -0.523373, 2.30857 )
 
 [editable path="HurtBox"]
 [editable path="Dash"]
+[editable path="Blinker"]

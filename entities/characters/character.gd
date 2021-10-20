@@ -1,13 +1,15 @@
 extends KinematicBody2D
 class_name Character
 
-onready var animation = $AnimationPlayer
-onready var sprite = $Sprite
-onready var weapon = $Weapon
-onready var dash = $Dash
-onready var stamina_timer = $StaminaTimer
-onready var camera = $Camera2D
-onready var hurt_box = $HurtBox/CollisionShape2D
+onready var animation: AnimationPlayer = $AnimationPlayer
+onready var sprite: Sprite = $Sprite
+onready var weapon: Node2D = $Weapon
+onready var dash := $Dash
+onready var stamina_timer: Timer = $StaminaTimer
+onready var camera: Camera2D = $Camera2D
+onready var blinker: Blinker = $Blinker
+onready var hurt_box: CollisionShape2D = $HurtBox/CollisionShape2D
+onready var sprite_shader_material: ShaderMaterial = sprite.material
 
 export(int) var acceleration: int
 export(int) var max_speed: int
@@ -126,19 +128,34 @@ func _take_damage(damage: int) -> void:
 	_die_check(hp)
 
 
-func listen_knockback(delta):
+func listen_knockback(delta) -> void:
 	if receives_knockback:
 		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 		knockback = move_and_slide(knockback)
 
 
-func apply_knockback(direction, strength):
+func apply_knockback(direction, strength) -> void:
 	knockback = (direction.direction_to(self.global_position) * strength)
 
 
 func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
+	blinker.start_blinking(sprite, 1.0)
+	_whiten_sprite(0.1)
 	_take_damage(hitbox.damage)
 	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
+	_enable_iframes(1.0)
+
+
+func _enable_iframes(duration: float) -> void:
+	hurt_box.set_deferred("disabled", true)
+	yield(get_tree().create_timer(duration), "timeout")
+	hurt_box.disabled = false
+
+
+func _whiten_sprite(duration: float):
+	sprite_shader_material.set_shader_param("whiten", true)
+	yield(get_tree().create_timer(duration), "timeout")
+	sprite_shader_material.set_shader_param("whiten", false)
 
 
 func _die_check(current_hp: int) -> void:
