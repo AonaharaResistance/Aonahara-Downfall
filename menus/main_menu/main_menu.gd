@@ -1,6 +1,10 @@
 extends CanvasLayer
 
 
+func _ready():
+	PauseMenu.can_show = false
+
+
 func _on_OptionButton_pressed() -> void:
 	MenuEvent.Options = true
 

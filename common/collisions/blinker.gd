@@ -14,7 +14,6 @@ func start_blinking(object, duration) -> void:
 
 
 func _on_BlinkTimer_timeout() -> void:
-	print("posei")
 	blink_object.visible = !blink_object.visible
 
 

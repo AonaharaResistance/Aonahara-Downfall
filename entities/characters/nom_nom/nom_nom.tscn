@@ -1,15 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/nom_nom/nom_nom.gd" type="Script" id=2]
 [ext_resource path="res://assets/place_holder/DinoSprites - tard.png" type="Texture" id=3]
 [ext_resource path="res://entities/characters/nom_nom/nom_state_machine.gd" type="Script" id=4]
+[ext_resource path="res://assets/place_holder/effects (new)/explosion_anim_f1.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.24396
 height = 6.22077
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 5.24396
+height = 6.22077
+
+[sub_resource type="Animation" id=3]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -25,7 +30,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -41,10 +46,6 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 5.24396
-height = 6.22077
-
 [node name="NomNom" instance=ExtResource( 1 )]
 scale = Vector2( 1, 0.923192 )
 collision_mask = 17
@@ -52,38 +53,18 @@ script = ExtResource( 2 )
 acceleration = 50
 max_speed = 100
 hp = 4
-max_hp = 0
 stamina = 4
 max_stamina = 4
 base_damage = 4
 attack_speed = 1.0
 stamina_regen = 2.0
 stamina_regen_rate = 1.0
-dash_duration = 0.2
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="Sprite" parent="." index="1"]
-texture = ExtResource( 3 )
-hframes = 24
-
-[node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
-
-[node name="AnimationPlayer" parent="." index="3"]
-anims/idle = SubResource( 2 )
-anims/move = SubResource( 3 )
-
-[node name="Weapon" parent="." index="4"]
+[node name="Weapon" parent="." index="2"]
 position = Vector2( 0.297298, -0.322042 )
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 4 )
-
-[node name="Camera2D" parent="." index="6"]
-smoothing_enabled = true
-smoothing_speed = 10.0
 
 [node name="DustTrail" parent="Dash" index="2"]
 position = Vector2( -0.832449, 8.38362 )
@@ -91,6 +72,31 @@ position = Vector2( -0.832449, 8.38362 )
 [node name="DustBurst" parent="Dash" index="3"]
 position = Vector2( -0.523373, 2.30857 )
 
-[editable path="HurtBox"]
-[editable path="Dash"]
+[node name="ShadowSprite" parent="." index="4"]
+modulate = Color( 1, 1, 1, 0.258824 )
+position = Vector2( -0.393724, 7.07961 )
+scale = Vector2( 0.611197, 0.285642 )
+texture = ExtResource( 5 )
+
+[node name="Sprite" parent="." index="5"]
+texture = ExtResource( 3 )
+hframes = 24
+
+[node name="CollisionShape2D" parent="." index="6"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="8"]
+anims/idle = SubResource( 3 )
+anims/move = SubResource( 4 )
+
+[node name="Camera2D" parent="." index="11"]
+smoothing_enabled = true
+smoothing_speed = 10.0
+
 [editable path="Blinker"]
+[editable path="Dash"]
+[editable path="HurtBox"]
+[editable path="InteractionComponent"]

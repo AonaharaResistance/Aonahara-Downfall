@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/characters/character.gd"
 }, {
+"base": "InteractableItem",
+"class": "ConsumableItem",
+"language": "GDScript",
+"path": "res://common/interactions/ConsumableItem.gd"
+}, {
 "base": "Reference",
 "class": "DTS",
 "language": "GDScript",
@@ -59,6 +64,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/collisions/hit_box.gd"
 }, {
+"base": "Node",
+"class": "InteractableItem",
+"language": "GDScript",
+"path": "res://common/interactions/InteractableItem.gd"
+}, {
+"base": "Area2D",
+"class": "InteractionComponent",
+"language": "GDScript",
+"path": "res://common/interactions/interaction_component.gd"
+}, {
+"base": "Control",
+"class": "InteractionComponentUI",
+"language": "GDScript",
+"path": "res://common/interactions/InteractionComponentUI.gd"
+}, {
 "base": "Reference",
 "class": "ResourceAsyncLoader",
 "language": "GDScript",
@@ -82,6 +102,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Blinker": "",
 "Character": "",
+"ConsumableItem": "",
 "DTS": "",
 "Dash": "",
 "Dialogic": "",
@@ -90,6 +111,9 @@ _global_script_class_icons={
 "DialogicResources": "",
 "DialogicUtil": "",
 "HitBox": "",
+"InteractableItem": "",
+"InteractionComponent": "",
+"InteractionComponentUI": "",
 "ResourceAsyncLoader": "",
 "SaveSettings": "",
 "StateMachine": "",
@@ -204,6 +228,11 @@ dash={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -212,6 +241,7 @@ dash={
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="player_projectile"
 2d_physics/layer_5="enemy_projectile"
+2d_physics/layer_6="interactables"
 
 [physics]
 

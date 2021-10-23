@@ -10,12 +10,14 @@ onready var camera: Camera2D = $Camera2D
 onready var blinker: Blinker = $Blinker
 onready var hurt_box: CollisionShape2D = $HurtBox/CollisionShape2D
 onready var sprite_shader_material: ShaderMaterial = sprite.material
+onready var battle_timer: Timer = $BattleTimer
+onready var interaction_component: InteractionComponent = $InteractionComponent
 
 export(int) var acceleration: int
 export(int) var max_speed: int
 export(int) var hp: int
 export(int) var max_hp: int
-export(int) var stamina: int
+export(int) var stamina: int setget set_stamina
 export(int) var max_stamina: int
 export(int) var base_damage: int
 export(float) var attack_speed: float
@@ -27,6 +29,11 @@ var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
 var receives_knockback: bool = true
+var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
+
+
+func set_stamina(new_value):
+	stamina += new_value
 
 
 func _ready() -> void:
@@ -34,7 +41,6 @@ func _ready() -> void:
 	camera.add_to_group("current_camera")
 	add_to_group("current_character")
 
-	print(get_tree().current_scene.get_node("Player").get_child(0).name)
 
 
 func move() -> void:
@@ -45,6 +51,14 @@ func move() -> void:
 	velocity += acceleration * input_direction
 	velocity = lerp(velocity, Vector2.ZERO, friction)
 	velocity = velocity.clamped(max_speed)
+
+
+func set_is_on_battle(new_state) -> void:
+	is_on_battle = new_state
+
+
+func get_is_on_battle() -> bool:
+	return is_on_battle
 
 
 func get_mouse_direction() -> Vector2:
@@ -103,6 +117,12 @@ func sprite_control() -> void:
 	# ? Pretty sure there's a better way of doing this
 	var mouse_direction: Vector2 = get_mouse_direction()
 
+	# Interaction Component
+	if mouse_direction.x < 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
+		interaction_component.scale.x *= -1
+	elif mouse_direction.x > 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
+		interaction_component.scale.x *= -1
+
 	# Character control
 	if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
 		sprite.scale.x *= -1
@@ -139,8 +159,9 @@ func apply_knockback(direction, strength) -> void:
 
 
 func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
+	set_is_on_battle(false)
 	blinker.start_blinking(sprite, 1.0)
-	_whiten_sprite(0.1)
+	_whiten_sprite(0.3)
 	_take_damage(hitbox.damage)
 	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 	_enable_iframes(1.0)
@@ -165,3 +186,7 @@ func _die_check(current_hp: int) -> void:
 
 func die() -> void:
 	queue_free()
+
+
+func _on_BattleTimer_timeout():
+	set_is_on_battle(false)

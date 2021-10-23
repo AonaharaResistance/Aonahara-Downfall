@@ -7,11 +7,17 @@ export(PackedScene) var indicator_damage: PackedScene = preload("res://ui/damage
 
 onready var animation = $AnimationPlayer
 onready var attack_timer = $AttackTimer
-
+onready var player = get_node("../Player").get_child(0)
 var receives_knockback: bool = true
 var linear_velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var speed = 100
+
+
+func _ready():
+	pass
+
+
 
 
 func get_hp() -> int:

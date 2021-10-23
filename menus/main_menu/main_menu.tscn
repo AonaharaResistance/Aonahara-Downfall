@@ -4,6 +4,9 @@
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0

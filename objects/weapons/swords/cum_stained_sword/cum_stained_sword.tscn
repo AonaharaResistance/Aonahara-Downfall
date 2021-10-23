@@ -98,7 +98,7 @@ frame = 78
 scale = Vector2( 1.36043, 0.87706 )
 script = ExtResource( 3 )
 damage = 2
-knockback_strength = 50
+knockback_strength = 100
 
 [node name="CollisionShape2D" parent="WeaponContainer/HitBox" index="0"]
 position = Vector2( 7.15894, -10.8955 )
