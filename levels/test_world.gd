@@ -1,9 +1,10 @@
+tool
 extends Node2D
 
 # * This thing is purposely messy for testing
+export var player_path: NodePath
 
-onready var player_container = get_node("Player")
-onready var player = player_container.get_child(0)
+onready var player = get_tree().get_nodes_in_group("current_character").front()
 onready var player_state = player.get_node("StateMachine")
 onready var dash = player.get_node("Dash")
 

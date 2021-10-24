@@ -12,6 +12,8 @@ onready var hurt_box: CollisionShape2D = $HurtBox/CollisionShape2D
 onready var sprite_shader_material: ShaderMaterial = sprite.material
 onready var battle_timer: Timer = $BattleTimer
 onready var interaction_component: InteractionComponent = $InteractionComponent
+onready var skills = $Skills
+onready var container: Node2D = get_parent()
 
 export(int) var acceleration: int
 export(int) var max_speed: int
@@ -41,6 +43,10 @@ func _ready() -> void:
 	camera.add_to_group("current_camera")
 	add_to_group("current_character")
 
+
+func listen_to_skills():
+	if Input.is_action_just_pressed("first_skill"):
+		skills.get_child(0).activate_skill()
 
 
 func move() -> void:

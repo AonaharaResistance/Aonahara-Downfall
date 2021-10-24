@@ -441,9 +441,9 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
+player_path = NodePath("YSort/NomNom")
 
 [node name="Light2D2" type="Light2D" parent="."]
-visible = false
 position = Vector2( 176.875, 35.905 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -453,7 +453,6 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D3" type="Light2D" parent="."]
-visible = false
 position = Vector2( 314.938, 21.313 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -463,7 +462,6 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D4" type="Light2D" parent="."]
-visible = false
 position = Vector2( 5.13837, 13.4557 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -473,7 +471,6 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D5" type="Light2D" parent="."]
-visible = false
 position = Vector2( 5.13837, 143.808 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -483,7 +480,6 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D6" type="Light2D" parent="."]
-visible = false
 position = Vector2( 307.047, 137.815 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -493,7 +489,6 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D7" type="Light2D" parent="."]
-visible = false
 position = Vector2( 146.356, 195.004 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -501,39 +496,24 @@ texture_scale = 0.3
 color = Color( 1, 0.988235, 0.356863, 1 )
 range_height = -503.9
 
-[node name="BasicEnemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 52.5414, 88.8388 )
+[node name="YSort" type="YSort" parent="."]
 
-[node name="BasicEnemy2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 75.016, 51.0065 )
+[node name="BasicEnemy" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 42.1964, 105.191 )
 
-[node name="BasicEnemy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 60.7821, 41.2675 )
+[node name="BasicEnemy2" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 168.339, 103.522 )
 
-[node name="BasicEnemy4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 48.4211, 65.2405 )
+[node name="BasicEnemy3" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 75.3671, 24.7085 )
 
-[node name="BasicEnemy5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 68.6482, 75.7286 )
+[node name="KinematicBody2D" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 253.861, 66.3968 )
 
-[node name="BasicEnemy6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 45.4245, 87.3405 )
-
-[node name="BasicEnemy7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 69.772, 57.7489 )
-
-[node name="BasicEnemy8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 48.0465, 52.1303 )
-
-[node name="BasicEnemy9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 69.3974, 91.4608 )
-
-[node name="Player" type="Node2D" parent="."]
-
-[node name="NomNom" parent="Player" instance=ExtResource( 1 )]
-position = Vector2( 104, 72 )
+[node name="NomNom" parent="YSort" instance=ExtResource( 1 )]
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -2
 tile_set = SubResource( 10 )
 cell_size = Vector2( 16, 16 )
 collision_mask = 6
@@ -542,6 +522,3 @@ tile_data = PoolIntArray( -2424872, 23, 0, -2424871, 23, 0, -2424870, 23, 0, -24
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.447059, 0.635294, 0.854902, 1 )
-
-[node name="KinematicBody2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 253.861, 66.3968 )
