@@ -13,6 +13,8 @@ script = ExtResource( 3 )
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
 
+[node name="Ai" type="Node2D" parent="."]
+
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

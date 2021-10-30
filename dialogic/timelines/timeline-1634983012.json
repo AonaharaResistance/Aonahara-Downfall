@@ -19,6 +19,50 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Hello"
+		},
+		{
+			"character": "character-1634983024.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Are you going to Aonahara for vacation"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "?"
+		},
+		{
+			"choice": "Why?",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1634983024.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Nah nothing, i just think that it's not really a great place to live in, at least for now"
+		},
+		{
+			"choice": "sure...",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1634983024.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "cya"
+		},
+		{
+			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {
