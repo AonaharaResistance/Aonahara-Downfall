@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/knight_run_spritesheet.png-d437c025fdd5323c0fa7d6b5007978f8.stex"
+path="res://.import/knight_run_spritesheet.png-643f8f4ba8a060f41d8915d71d374e53.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Dungeon Crawler Pack/heroes/knight/knight_run_spritesheet.png"
-dest_files=[ "res://.import/knight_run_spritesheet.png-d437c025fdd5323c0fa7d6b5007978f8.stex" ]
+source_file="res://Assets/Dungeon Crawler Pack/heroes/knight/knight_run_spritesheet.png"
+dest_files=[ "res://.import/knight_run_spritesheet.png-643f8f4ba8a060f41d8915d71d374e53.stex" ]
 
 [params]
 

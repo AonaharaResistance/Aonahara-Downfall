@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Enchanted Forest Characters with animations.png-5849dbe2c0518430403971ddfd972f00.stex"
+path="res://.import/Enchanted Forest Characters with animations.png-56c3ef70719e02276109919770d9a63d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/Enchanted Forest Characters with animations.png"
-dest_files=[ "res://.import/Enchanted Forest Characters with animations.png-5849dbe2c0518430403971ddfd972f00.stex" ]
+source_file="res://Assets/place_holder/Enchanted Forest Characters with animations.png"
+dest_files=[ "res://.import/Enchanted Forest Characters with animations.png-56c3ef70719e02276109919770d9a63d.stex" ]
 
 [params]
 

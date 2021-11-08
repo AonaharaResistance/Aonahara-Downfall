@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goblin_run_anim_f0.png-c01b185004f4c94a476b6bf47c965a5a.stex"
+path="res://.import/goblin_run_anim_f0.png-79f947ca95348ec5ce6e2d00d6232877.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/goblin/goblin_run_anim_f0.png"
-dest_files=[ "res://.import/goblin_run_anim_f0.png-c01b185004f4c94a476b6bf47c965a5a.stex" ]
+source_file="res://Assets/place_holder/enemies/goblin/goblin_run_anim_f0.png"
+dest_files=[ "res://.import/goblin_run_anim_f0.png-79f947ca95348ec5ce6e2d00d6232877.stex" ]
 
 [params]
 

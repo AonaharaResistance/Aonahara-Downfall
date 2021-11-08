@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/knight_idle_anim_f3.png-02bd91ecbc84eeb92fa96094e60a698e.stex"
+path="res://.import/knight_idle_anim_f3.png-251d890fd903aa0bff90c9de2ec44e4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Dungeon Crawler Pack/heroes/knight/knight_idle_anim_f3.png"
-dest_files=[ "res://.import/knight_idle_anim_f3.png-02bd91ecbc84eeb92fa96094e60a698e.stex" ]
+source_file="res://Assets/Dungeon Crawler Pack/heroes/knight/knight_idle_anim_f3.png"
+dest_files=[ "res://.import/knight_idle_anim_f3.png-251d890fd903aa0bff90c9de2ec44e4d.stex" ]
 
 [params]
 

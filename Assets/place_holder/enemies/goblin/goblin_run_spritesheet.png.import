@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goblin_run_spritesheet.png-d17605467d36d7471ab03bca43e7b792.stex"
+path="res://.import/goblin_run_spritesheet.png-22c19d9bad365685e1958f7ac27b02bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/goblin/goblin_run_spritesheet.png"
-dest_files=[ "res://.import/goblin_run_spritesheet.png-d17605467d36d7471ab03bca43e7b792.stex" ]
+source_file="res://Assets/place_holder/enemies/goblin/goblin_run_spritesheet.png"
+dest_files=[ "res://.import/goblin_run_spritesheet.png-22c19d9bad365685e1958f7ac27b02bc.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

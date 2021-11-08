@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/run.png-bea1b5693e146ff09bc5ea329a7c9a2a.stex"
+path="res://.import/run.png-b0bae01431d7d49542fd48cd85d3e923.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/Toaster Bot/run.png"
-dest_files=[ "res://.import/run.png-bea1b5693e146ff09bc5ea329a7c9a2a.stex" ]
+source_file="res://Assets/place_holder/Toaster Bot/run.png"
+dest_files=[ "res://.import/run.png-b0bae01431d7d49542fd48cd85d3e923.stex" ]
 
 [params]
 

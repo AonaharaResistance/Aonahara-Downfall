@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AWOUNAPARA.mp3-34159525a13830beacc9fb6f4ae4551d.mp3str"
+
+[deps]
+
+source_file="res://Assets/AWOUNAPARA.mp3"
+dest_files=[ "res://.import/AWOUNAPARA.mp3-34159525a13830beacc9fb6f4ae4551d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

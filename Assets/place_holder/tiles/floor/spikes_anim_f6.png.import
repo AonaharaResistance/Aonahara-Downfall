@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spikes_anim_f6.png-bd38b2eedc85449602656cdb5bc5c88c.stex"
+path="res://.import/spikes_anim_f6.png-35362cb50805f36e197f1ac40b840e53.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/tiles/floor/spikes_anim_f6.png"
-dest_files=[ "res://.import/spikes_anim_f6.png-bd38b2eedc85449602656cdb5bc5c88c.stex" ]
+source_file="res://Assets/place_holder/tiles/floor/spikes_anim_f6.png"
+dest_files=[ "res://.import/spikes_anim_f6.png-35362cb50805f36e197f1ac40b840e53.stex" ]
 
 [params]
 

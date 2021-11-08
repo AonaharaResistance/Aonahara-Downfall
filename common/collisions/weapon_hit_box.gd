@@ -10,7 +10,7 @@ var total_damage: int
 var character_damage: int
 
 
-func _ready():
+func _ready() -> void:
 	if !get_tree().get_nodes_in_group("current_character").empty():
 		character_damage = get_tree().get_nodes_in_group("current_character").front().base_damage
 		total_damage = damage + character_damage

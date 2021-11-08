@@ -18,7 +18,7 @@ var dash_sprite: Sprite
 var dash_sprite_shader: ShaderMaterial
 
 
-# * Just in case the dash delay can change
+# * Just in case we ~~need~~ want to change the dash delay
 func _ready() -> void:
 	cooldown_timer.wait_time = dash_delay
 

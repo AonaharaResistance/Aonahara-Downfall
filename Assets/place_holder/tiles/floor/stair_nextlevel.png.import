@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stair_nextlevel.png-08ad8843127df6870cd8609443e73a5a.stex"
+path="res://.import/stair_nextlevel.png-1e5f011285e83483c428798625bd106b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/tiles/floor/stair_nextlevel.png"
-dest_files=[ "res://.import/stair_nextlevel.png-08ad8843127df6870cd8609443e73a5a.stex" ]
+source_file="res://Assets/place_holder/tiles/floor/stair_nextlevel.png"
+dest_files=[ "res://.import/stair_nextlevel.png-1e5f011285e83483c428798625bd106b.stex" ]
 
 [params]
 

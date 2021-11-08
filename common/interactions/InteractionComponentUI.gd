@@ -11,5 +11,5 @@ export var interaction_default_text: String
 var fixed_position: Vector2
 
 
-func _ready():
+func _ready() -> void:
 	hide()

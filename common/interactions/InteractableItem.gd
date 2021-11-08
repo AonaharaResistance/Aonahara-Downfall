@@ -6,7 +6,7 @@ var ui_component
 export var ui_component_path: NodePath
 
 
-func _ready():
+func _ready()->void:
 	ui_component = get_node(ui_component_path)
 
 

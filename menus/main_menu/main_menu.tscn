@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://menus/main_menu/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://output.ogv" type="VideoStream" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform bool use_mult;
+uniform float key_distance : hint_range(0, 1);
+uniform vec4 chroma_key : hint_color;
+uniform vec4 color : hint_color;
+
+void fragment() {
+  COLOR = texture(TEXTURE, UV);
+
+  if (distance(COLOR, chroma_key) < key_distance) {
+    if (use_mult) {
+      COLOR =  COLOR * color;      
+     }
+    else {
+      COLOR = color;
+     }
+   }
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/use_mult = true
+shader_param/key_distance = 0.7
+shader_param/chroma_key = Color( 0.384314, 0.72549, 0.364706, 1 )
+shader_param/color = Color( 0.12549, 0, 0.835294, 0 )
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -11,6 +41,10 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.12373
+margin_top = -0.749153
+margin_right = 1.12372
+margin_bottom = -0.749146
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,6 +69,17 @@ margin_top = 28.0
 margin_right = 47.0
 margin_bottom = 52.0
 text = "Option"
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+stream = ExtResource( 2 )
+autoplay = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]

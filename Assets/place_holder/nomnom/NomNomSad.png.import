@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NomNomSad.png-e697c3f80082557d6372e1e65c7a154b.stex"
+path="res://.import/NomNomSad.png-13b7dc7c5765ed82ee4a4c06f3031635.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/nomnom/NomNomSad.png"
-dest_files=[ "res://.import/NomNomSad.png-e697c3f80082557d6372e1e65c7a154b.stex" ]
+source_file="res://Assets/place_holder/nomnom/NomNomSad.png"
+dest_files=[ "res://.import/NomNomSad.png-13b7dc7c5765ed82ee4a4c06f3031635.stex" ]
 
 [params]
 

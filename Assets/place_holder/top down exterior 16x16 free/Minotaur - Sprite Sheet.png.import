@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Minotaur - Sprite Sheet.png-af13809b996e16bf51b9b5eced8552ae.stex"
+path="res://.import/Minotaur - Sprite Sheet.png-ee5da09f850cde02430fca6ea7008578.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/top down exterior 16x16 free/Minotaur - Sprite Sheet.png"
-dest_files=[ "res://.import/Minotaur - Sprite Sheet.png-af13809b996e16bf51b9b5eced8552ae.stex" ]
+source_file="res://Assets/place_holder/top down exterior 16x16 free/Minotaur - Sprite Sheet.png"
+dest_files=[ "res://.import/Minotaur - Sprite Sheet.png-ee5da09f850cde02430fca6ea7008578.stex" ]
 
 [params]
 

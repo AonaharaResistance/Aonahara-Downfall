@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime_run_spritesheeet.png-624188e0ece2fe94c807b12fa08a9e8e.stex"
+path="res://.import/slime_run_spritesheeet.png-ba3d3b1cb3d54408c428e4829b964302.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/slime/slime_run_spritesheeet.png"
-dest_files=[ "res://.import/slime_run_spritesheeet.png-624188e0ece2fe94c807b12fa08a9e8e.stex" ]
+source_file="res://Assets/place_holder/enemies/slime/slime_run_spritesheeet.png"
+dest_files=[ "res://.import/slime_run_spritesheeet.png-ba3d3b1cb3d54408c428e4829b964302.stex" ]
 
 [params]
 

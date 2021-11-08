@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall_crack.png-ad3ef1625c42f7a51dfc047d7aa259ae.stex"
+path="res://.import/wall_crack.png-2ba0906b6f785dd4fdc261b14d2b5dd5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/tiles/wall/wall_crack.png"
-dest_files=[ "res://.import/wall_crack.png-ad3ef1625c42f7a51dfc047d7aa259ae.stex" ]
+source_file="res://Assets/place_holder/tiles/wall/wall_crack.png"
+dest_files=[ "res://.import/wall_crack.png-2ba0906b6f785dd4fdc261b14d2b5dd5.stex" ]
 
 [params]
 

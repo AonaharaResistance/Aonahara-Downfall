@@ -123,7 +123,9 @@ _global_script_class_icons={
 [application]
 
 config/name="Aonahara: Downfall"
-run/main_scene="res://menus/main_menu/main_menu.tscn"
+run/main_scene="res://scenes/splash_screen.tscn"
+boot_splash/image="res://Assets/poseicum.png"
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
 
 [audio]
@@ -163,7 +165,7 @@ window/size/width=320
 window/size/height=180
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://assets/place_holder/ui (new)/crosshair_1.png"
+mouse_cursor/custom_image="res://Assets/place_holder/ui (new)/crosshair_3.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -173,7 +175,7 @@ enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg", "res://addons/d
 
 [gui]
 
-theme/custom_font="res://assets/Fonts/pixellocale_8.tres"
+theme/custom_font="res://Assets/Fonts/pixellocale_8.tres"
 
 [input]
 

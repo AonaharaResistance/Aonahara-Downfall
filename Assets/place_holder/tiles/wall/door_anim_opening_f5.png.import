@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door_anim_opening_f5.png-2bad0f3ad2508a8d066098cb89864dd3.stex"
+path="res://.import/door_anim_opening_f5.png-45f42277dd24911b27931ebf5b003b1d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/tiles/wall/door_anim_opening_f5.png"
-dest_files=[ "res://.import/door_anim_opening_f5.png-2bad0f3ad2508a8d066098cb89864dd3.stex" ]
+source_file="res://Assets/place_holder/tiles/wall/door_anim_opening_f5.png"
+dest_files=[ "res://.import/door_anim_opening_f5.png-45f42277dd24911b27931ebf5b003b1d.stex" ]
 
 [params]
 

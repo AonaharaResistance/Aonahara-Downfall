@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potion_red.png-f047210c8724ec9b071551d9b54e622d.stex"
+path="res://.import/potion_red.png-ffb300813729f53e4cd6b83037149389.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/props_itens/potion_red.png"
-dest_files=[ "res://.import/potion_red.png-f047210c8724ec9b071551d9b54e622d.stex" ]
+source_file="res://Assets/place_holder/props_itens/potion_red.png"
+dest_files=[ "res://.import/potion_red.png-ffb300813729f53e4cd6b83037149389.stex" ]
 
 [params]
 

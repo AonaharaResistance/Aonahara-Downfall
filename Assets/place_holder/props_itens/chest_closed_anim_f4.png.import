@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chest_closed_anim_f4.png-b122998b92f4fd2f19f8be8b5da0453d.stex"
+path="res://.import/chest_closed_anim_f4.png-10d8d04b0c78c44608809ea6370fb45a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/props_itens/chest_closed_anim_f4.png"
-dest_files=[ "res://.import/chest_closed_anim_f4.png-b122998b92f4fd2f19f8be8b5da0453d.stex" ]
+source_file="res://Assets/place_holder/props_itens/chest_closed_anim_f4.png"
+dest_files=[ "res://.import/chest_closed_anim_f4.png-10d8d04b0c78c44608809ea6370fb45a.stex" ]
 
 [params]
 

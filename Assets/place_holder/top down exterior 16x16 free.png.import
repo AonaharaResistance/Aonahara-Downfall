@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/top down exterior 16x16 free.png-6c521eb41d3d4628dfe694891d0eb337.stex"
+path="res://.import/top down exterior 16x16 free.png-77eaf968efaa5c8d514c0f16f1548151.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/top down exterior 16x16 free.png"
-dest_files=[ "res://.import/top down exterior 16x16 free.png-6c521eb41d3d4628dfe694891d0eb337.stex" ]
+source_file="res://Assets/place_holder/top down exterior 16x16 free.png"
+dest_files=[ "res://.import/top down exterior 16x16 free.png-77eaf968efaa5c8d514c0f16f1548151.stex" ]
 
 [params]
 

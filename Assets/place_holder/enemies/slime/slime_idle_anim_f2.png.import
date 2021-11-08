@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime_idle_anim_f2.png-5faa793712507e0c0909f2f86bd3da87.stex"
+path="res://.import/slime_idle_anim_f2.png-71cfbc12a777dac168cda72da48ad024.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/slime/slime_idle_anim_f2.png"
-dest_files=[ "res://.import/slime_idle_anim_f2.png-5faa793712507e0c0909f2f86bd3da87.stex" ]
+source_file="res://Assets/place_holder/enemies/slime/slime_idle_anim_f2.png"
+dest_files=[ "res://.import/slime_idle_anim_f2.png-71cfbc12a777dac168cda72da48ad024.stex" ]
 
 [params]
 

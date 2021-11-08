@@ -3,8 +3,8 @@
 [ext_resource path="res://entities/characters/nom_nom/nom_nom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/enemies/basic_enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/test_world.gd" type="Script" id=3]
-[ext_resource path="res://assets/place_holder/top down exterior 16x16 free/top down exterior 16x16 free.png" type="Texture" id=4]
-[ext_resource path="res://assets/place_holder/light.png" type="Texture" id=5]
+[ext_resource path="res://Assets/place_holder/top down exterior 16x16 free/top down exterior 16x16 free.png" type="Texture" id=4]
+[ext_resource path="res://Assets/place_holder/light.png" type="Texture" id=5]
 [ext_resource path="res://entities/NPCs/test_npc.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -444,6 +444,7 @@ script = ExtResource( 3 )
 player_path = NodePath("YSort/NomNom")
 
 [node name="Light2D2" type="Light2D" parent="."]
+visible = false
 position = Vector2( 176.875, 35.905 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -453,6 +454,7 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D3" type="Light2D" parent="."]
+visible = false
 position = Vector2( 314.938, 21.313 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -462,6 +464,7 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D4" type="Light2D" parent="."]
+visible = false
 position = Vector2( 5.13837, 13.4557 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -471,6 +474,7 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D5" type="Light2D" parent="."]
+visible = false
 position = Vector2( 5.13837, 143.808 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -480,6 +484,7 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D6" type="Light2D" parent="."]
+visible = false
 position = Vector2( 307.047, 137.815 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )
@@ -489,6 +494,7 @@ energy = 0.68
 range_height = -503.9
 
 [node name="Light2D7" type="Light2D" parent="."]
+visible = false
 position = Vector2( 146.356, 195.004 )
 scale = Vector2( 1.97669, 1.97669 )
 texture = ExtResource( 5 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fly_anim_f2.png-c37446e4f3117e92733e3a549ffe499b.stex"
+path="res://.import/fly_anim_f2.png-b89c56cda0980b7cbb9cb7e5ac011f6c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/flying creature/fly_anim_f2.png"
-dest_files=[ "res://.import/fly_anim_f2.png-c37446e4f3117e92733e3a549ffe499b.stex" ]
+source_file="res://Assets/place_holder/enemies/flying creature/fly_anim_f2.png"
+dest_files=[ "res://.import/fly_anim_f2.png-b89c56cda0980b7cbb9cb7e5ac011f6c.stex" ]
 
 [params]
 

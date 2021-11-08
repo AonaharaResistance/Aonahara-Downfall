@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/weapon_sword_1.png-9eeab10aca22c7a5aab17570f30923f9.stex"
+path="res://.import/weapon_sword_1.png-ca717f71ebbbd66bbff2418dd5cae1f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Dungeon Crawler Pack/heroes/knight/weapon_sword_1.png"
-dest_files=[ "res://.import/weapon_sword_1.png-9eeab10aca22c7a5aab17570f30923f9.stex" ]
+source_file="res://Assets/Dungeon Crawler Pack/heroes/knight/weapon_sword_1.png"
+dest_files=[ "res://.import/weapon_sword_1.png-ca717f71ebbbd66bbff2418dd5cae1f5.stex" ]
 
 [params]
 

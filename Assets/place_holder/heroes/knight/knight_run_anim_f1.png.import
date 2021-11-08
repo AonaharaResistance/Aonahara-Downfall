@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/knight_run_anim_f1.png-18183acf2de4c4647faa7ea7ce40a8c2.stex"
+path="res://.import/knight_run_anim_f1.png-16d0eb65da67e09bc7edce11d830fc4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/heroes/knight/knight_run_anim_f1.png"
-dest_files=[ "res://.import/knight_run_anim_f1.png-18183acf2de4c4647faa7ea7ce40a8c2.stex" ]
+source_file="res://Assets/place_holder/heroes/knight/knight_run_anim_f1.png"
+dest_files=[ "res://.import/knight_run_anim_f1.png-16d0eb65da67e09bc7edce11d830fc4d.stex" ]
 
 [params]
 

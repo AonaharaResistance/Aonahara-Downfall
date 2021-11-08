@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/knight_idle_anim_f2.png-4b77108828e292015e3faea0c730c309.stex"
+path="res://.import/knight_idle_anim_f2.png-709ac7356b8a651eaab6d5c43670d42c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/heroes/knight/knight_idle_anim_f2.png"
-dest_files=[ "res://.import/knight_idle_anim_f2.png-4b77108828e292015e3faea0c730c309.stex" ]
+source_file="res://Assets/place_holder/heroes/knight/knight_idle_anim_f2.png"
+dest_files=[ "res://.import/knight_idle_anim_f2.png-709ac7356b8a651eaab6d5c43670d42c.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/happy.png-4197db5997825a39561bd7ff16618036.stex"
+path="res://.import/happy.png-ad66c95e435e6398355f62e2836023a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/nomnom/expressions/happy.png"
-dest_files=[ "res://.import/happy.png-4197db5997825a39561bd7ff16618036.stex" ]
+source_file="res://Assets/place_holder/nomnom/expressions/happy.png"
+dest_files=[ "res://.import/happy.png-ad66c95e435e6398355f62e2836023a8.stex" ]
 
 [params]
 

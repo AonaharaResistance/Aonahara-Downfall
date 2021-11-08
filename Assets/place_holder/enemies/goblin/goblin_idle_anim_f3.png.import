@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goblin_idle_anim_f3.png-1408b5d44afb240b4f9323f70e0e5891.stex"
+path="res://.import/goblin_idle_anim_f3.png-0a89344428a1bf43d6232c49f3a75eac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/enemies/goblin/goblin_idle_anim_f3.png"
-dest_files=[ "res://.import/goblin_idle_anim_f3.png-1408b5d44afb240b4f9323f70e0e5891.stex" ]
+source_file="res://Assets/place_holder/enemies/goblin/goblin_idle_anim_f3.png"
+dest_files=[ "res://.import/goblin_idle_anim_f3.png-0a89344428a1bf43d6232c49f3a75eac.stex" ]
 
 [params]
 

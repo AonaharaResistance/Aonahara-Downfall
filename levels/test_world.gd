@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 # * This thing is purposely messy for testing

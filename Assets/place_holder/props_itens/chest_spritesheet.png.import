@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chest_spritesheet.png-f57c54b9eeb1b185b24309104c38749a.stex"
+path="res://.import/chest_spritesheet.png-a1439e2095eadd796e85c62572716ed5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/props_itens/chest_spritesheet.png"
-dest_files=[ "res://.import/chest_spritesheet.png-f57c54b9eeb1b185b24309104c38749a.stex" ]
+source_file="res://Assets/place_holder/props_itens/chest_spritesheet.png"
+dest_files=[ "res://.import/chest_spritesheet.png-a1439e2095eadd796e85c62572716ed5.stex" ]
 
 [params]
 

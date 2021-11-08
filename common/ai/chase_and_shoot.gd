@@ -8,42 +8,9 @@ onready var patrol_duration: Timer = $PatrolDuration
 
 var origin: Vector2 = Vector2.ZERO
 var patrol_location: Vector2 = Vector2.ZERO
-var patrol_location_reached: bool = false setget set_patrol, get_patrol
-
-
-func set_patrol(value):
-	patrol_location_reached = value
-
-
-func get_patrol():
-	return patrol_location_reached
-
-
-func _process(delta):
-	if get_patrol():
-		agent.move_and_slide(agent_velocity)
-	if Input.is_action_just_pressed("ui_down"):
-		patrol_timer.start()
 
 
 func wander():
-	pass
-
-
-func shoot():
-	pass
-
-
-func case():
-	pass
-
-
-func retreat():
-	pass
-
-
-func _on_PatrolTimer_timeout():
-	set_patrol(true)
 	randomize()
 	patrol_duration.wait_time = rand_range(1.0, 2.2)
 	patrol_timer.wait_time = rand_range(1.0, 4.2)
@@ -59,6 +26,21 @@ func _on_PatrolTimer_timeout():
 		agent_velocity = patrol_location.clamped(30)
 
 
+func shoot():
+	pass
+
+
+func case():
+	pass
+
+
+func retreat():
+	pass
+
+
+func _on_PatrolTimer_timeout():
+	wander()
+
+
 func _on_PatrolDuration_timeout():
-	set_patrol(false)
 	patrol_timer.start()

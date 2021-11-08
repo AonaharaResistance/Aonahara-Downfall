@@ -51,8 +51,6 @@ __meta__ = {
 }
 
 [node name="General" parent="OptionsMenu/BG/Margin" instance=ExtResource( 3 )]
-margin_right = 1016.0
-margin_bottom = 592.0
 
 [node name="Controls" parent="OptionsMenu/BG/Margin" instance=ExtResource( 2 )]
 visible = false
@@ -60,10 +58,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 1016.0
-margin_bottom = 592.0
+margin_right = 312.0
+margin_bottom = 172.0
 
 [node name="Languages" parent="OptionsMenu/BG/Margin" instance=ExtResource( 1 )]
 visible = false
-margin_right = 1016.0
-margin_bottom = 592.0

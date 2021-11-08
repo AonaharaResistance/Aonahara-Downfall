@@ -16,8 +16,6 @@ var knockback = Vector2.ZERO
 var speed = 100
 
 
-
-
 func get_hp() -> int:
 	return hp
 

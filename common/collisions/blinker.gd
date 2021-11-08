@@ -1,6 +1,8 @@
 extends Node
 class_name Blinker
 
+# * Instance into something to make them blink blink :KoroneEye:
+
 onready var blink_timer: Timer = $BlinkTimer
 onready var duration_timer: Timer = $DurationTimer
 var blink_object: Node2D

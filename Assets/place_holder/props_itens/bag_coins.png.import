@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bag_coins.png-27d90ee66675e50661064363094f1ba7.stex"
+path="res://.import/bag_coins.png-a1b76be0ab5b9617867c1ee533cdb78e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/props_itens/bag_coins.png"
-dest_files=[ "res://.import/bag_coins.png-27d90ee66675e50661064363094f1ba7.stex" ]
+source_file="res://Assets/place_holder/props_itens/bag_coins.png"
+dest_files=[ "res://.import/bag_coins.png-a1b76be0ab5b9617867c1ee533cdb78e.stex" ]
 
 [params]
 

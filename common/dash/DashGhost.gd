@@ -3,7 +3,7 @@ extends Sprite
 onready var tween: Tween = $Tween
 
 
-func _ready():
+func _ready() -> void:
 	var _interpolate: bool = tween.interpolate_property(self, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
 	var _tween_status: bool = tween.start()
 

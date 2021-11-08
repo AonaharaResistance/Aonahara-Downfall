@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door_floor.png-fd54675d3b40474f92c389b92fa9ad3c.stex"
+path="res://.import/door_floor.png-1b6888d206947954c9ba4fe67f175295.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/tiles/floor/door_floor.png"
-dest_files=[ "res://.import/door_floor.png-fd54675d3b40474f92c389b92fa9ad3c.stex" ]
+source_file="res://Assets/place_holder/tiles/floor/door_floor.png"
+dest_files=[ "res://.import/door_floor.png-1b6888d206947954c9ba4fe67f175295.stex" ]
 
 [params]
 

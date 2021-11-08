@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://common/dash/Dash.gd" type="Script" id=1]
-[ext_resource path="res://assets/place_holder/dust.png" type="Texture" id=2]
+[ext_resource path="res://Assets/place_holder/dust.png" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true

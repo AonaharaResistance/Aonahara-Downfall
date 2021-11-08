@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/weapon_sword_1.png-48d3d50b1d2b6e94d9e321f64146c610.stex"
+path="res://.import/weapon_sword_1.png-9213855a9094dcdeddddb5109f9abbeb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/place_holder/heroes/knight/weapon_sword_1.png"
-dest_files=[ "res://.import/weapon_sword_1.png-48d3d50b1d2b6e94d9e321f64146c610.stex" ]
+source_file="res://Assets/place_holder/heroes/knight/weapon_sword_1.png"
+dest_files=[ "res://.import/weapon_sword_1.png-9213855a9094dcdeddddb5109f9abbeb.stex" ]
 
 [params]
 
