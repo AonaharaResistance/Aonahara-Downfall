@@ -3,7 +3,7 @@
 [ext_resource path="res://common/collisions/hit_box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://common/collisions/hurt_box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/enemies/enemy.gd" type="Script" id=3]
-[ext_resource path="res://Assets/place_holder/hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/place_holder/hit.wav" type="AudioStream" id=4]
 [ext_resource path="res://common/state_machine.gd" type="Script" id=5]
 
 [node name="Enemy" type="KinematicBody2D"]

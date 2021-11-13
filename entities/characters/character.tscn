@@ -57,7 +57,9 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
+scale = Vector2( 0.990656, 1 )
+smoothing_enabled = true
+smoothing_speed = 10.0
 
 [node name="InteractionComponent" parent="." instance=ExtResource( 7 )]
 interaction_parent = NodePath("..")

@@ -13,7 +13,6 @@ onready var sprite_shader_material: ShaderMaterial = sprite.material
 onready var battle_timer: Timer = $BattleTimer
 onready var interaction_component: InteractionComponent = $InteractionComponent
 onready var skills = $Skills
-onready var container: Node2D = get_parent()
 
 export(int) var acceleration: int
 export(int) var max_speed: int
@@ -30,6 +29,7 @@ export(float) var dash_duration: float = 0.2
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
+var isOnControl: bool = true
 var receives_knockback: bool = true
 var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
 
@@ -40,12 +40,11 @@ func set_stamina(new_value):
 
 func _ready() -> void:
 	stamina_timer.wait_time = stamina_regen
-	camera.add_to_group("current_camera")
 	add_to_group("current_character")
 
 
 func listen_to_skills():
-	if Input.is_action_just_pressed("first_skill"):
+	if Input.is_action_just_pressed("first_skill") && isOnControl:
 		skills.get_child(0).activate_skill()
 
 
@@ -98,7 +97,7 @@ func apply_dash() -> void:
 
 
 func activate_dash() -> void:
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && isOnControl:
 		stamina -= 1
 		set_stamina_regen_timer(stamina)
 		stamina_timer.start()
@@ -116,7 +115,10 @@ func get_input_direction() -> Vector2:
 		- Input.get_action_strength("move_up")
 	)
 	input_direction = input_direction.normalized()
-	return input_direction
+	if isOnControl:
+		return input_direction
+	else:
+		return Vector2.ZERO
 
 
 func sprite_control() -> void:

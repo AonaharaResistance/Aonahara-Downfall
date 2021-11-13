@@ -3,8 +3,8 @@
 [ext_resource path="res://objects/weapons/swords/sword.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/weapons/swords/cum_stained_sword/cum_stained_sword.gd" type="Script" id=2]
 [ext_resource path="res://common/collisions/weapon_hit_box.gd" type="Script" id=3]
-[ext_resource path="res://Assets/place_holder/Sword Pack.png" type="Texture" id=4]
-[ext_resource path="res://Assets/place_holder/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://assets/place_holder/Sword Pack.png" type="Texture" id=4]
+[ext_resource path="res://assets/place_holder/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=5]
 [ext_resource path="res://objects/weapons/swords/cum_stained_sword/swing.wav" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -20,8 +20,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 0.233258, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 0.176777, 1 ),
 "update": 0,
 "values": [ -68.1, 108.8, -68.1 ]
 }
@@ -32,7 +32,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -108,11 +108,12 @@ disabled = true
 
 [node name="EffectSprite" parent="." index="1"]
 visible = false
-position = Vector2( 25.468, 12.4358 )
+position = Vector2( 29.183, 14.951 )
 rotation = 0.667016
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 hframes = 3
+frame = 2
 
 [node name="WeaponAnimation" parent="." index="2"]
 anims/attack = SubResource( 2 )

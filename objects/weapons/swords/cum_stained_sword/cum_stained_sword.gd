@@ -14,7 +14,7 @@ func _ready():
 
 func _process(_delta) -> void:
 	# ! posei wtf, please use the state machine
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack") && character.isOnControl:
 		character.set_is_on_battle(true)
 		character.battle_timer.start()
 		animation.play("attack")

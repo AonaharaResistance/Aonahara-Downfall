@@ -2,19 +2,29 @@ extends Node2D
 
 # * This thing is purposely messy for testing
 export var player_path: NodePath
+var res = preload("res://entities/characters/nom_nom/nom_nom.tscn").instance()
+var res2 = preload("res://entities/characters/emuwaa/emuwaa.tscn").instance()
+var player
+var player_state
+var dash
+var overlay = load("res://ui/debug_overlay.tscn").instance()
 
-onready var player = get_tree().get_nodes_in_group("current_character").front()
-onready var player_state = player.get_node("StateMachine")
-onready var dash = player.get_node("Dash")
+
+func _process(delta):
+	if Input.is_action_just_pressed("interact"):
+		print(player)
+		print(player.get_node("Sprite"))
 
 
-func _ready():
-	var dialog = Dialogic.start("sexooooooo")
-	add_child(dialog)
+func _on_party_changed():
+	player = Party.party_members[Party.selected_member]
+	dash = player.get_node("Dash")
+	player_state = player.get_node("StateMachine")
+	overlay.stats.clear()
+	set_debug_overlay()
 
-	# * Debug overlay settings
-	# warning-ignore:unsafe_method_access
-	var overlay = load("res://ui/debug_overlay.tscn").instance()
+
+func set_debug_overlay():
 	overlay.add_stat("player speed", player, "velocity", false)
 	overlay.add_stat("movement state", player_state, "_get_state_name", true)
 	overlay.add_stat("is on battle: ", player, "get_is_on_battle", true)
@@ -23,5 +33,17 @@ func _ready():
 	overlay.add_stat("stamina: ", player, "stamina", false)
 	overlay.add_stat("stamina regen timer: ", player, "get_stamina_timer", true)
 	overlay.add_stat("hp: ", player, "hp", false)
+
+
+func _ready():
+	Party.connect("current_active_changed", self, "_on_party_changed")
+	print(Party.add_party_member(res))
+	print(Party.add_party_member(res2))
+	print(Party.party_members)
+	player = Party.party_members[Party.selected_member]
+	Party.spawn_party(self)
+
+	var dialog = Dialogic.start("sexooooooo")
+	add_child(dialog)
 
 	add_child(overlay)
