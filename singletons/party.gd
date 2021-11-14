@@ -45,6 +45,7 @@ func get_selected_member_index() -> int:
 func spawn_party(target_node) -> void:
 	for member in party_members:
 		target_node.add_child(member)
+	tactical_character_showing(current_character())
 
 
 func add_party_member(member) -> void:

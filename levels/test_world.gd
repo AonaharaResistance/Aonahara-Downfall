@@ -8,12 +8,7 @@ var player
 var player_state
 var dash
 var overlay = load("res://ui/debug_overlay.tscn").instance()
-
-
-func _process(delta):
-	if Input.is_action_just_pressed("interact"):
-		print(player)
-		print(player.get_node("Sprite"))
+var title = preload("res://scenes/area_title/area_title.tscn").instance()
 
 
 func _on_party_changed():
@@ -47,3 +42,4 @@ func _ready():
 	add_child(dialog)
 
 	add_child(overlay)
+	add_child(title)

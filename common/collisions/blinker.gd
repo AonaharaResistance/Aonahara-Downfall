@@ -6,6 +6,7 @@ class_name Blinker
 onready var blink_timer: Timer = $BlinkTimer
 onready var duration_timer: Timer = $DurationTimer
 var blink_object: Node2D
+var flipper: bool = true
 
 
 func start_blinking(object, duration) -> void:
@@ -16,9 +17,14 @@ func start_blinking(object, duration) -> void:
 
 
 func _on_BlinkTimer_timeout() -> void:
-	blink_object.visible = !blink_object.visible
+	if flipper:
+		blink_object.modulate.a = 0
+	else:
+		blink_object.modulate.a = 1
+	flipper = !flipper
 
 
 func _on_DurationTimer_timeout() -> void:
+	print("pog")
 	blink_timer.stop()
-	blink_object.visible = true
+	blink_object.modulate.a = 1

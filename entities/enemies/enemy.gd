@@ -5,6 +5,8 @@ export(PackedScene) var effect_hit: PackedScene = null
 export(PackedScene) var effect_died: PackedScene = null
 export(PackedScene) var indicator_damage: PackedScene = preload("res://ui/damage_indicator.tscn")
 
+export(PackedScene) var DAGGER: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
+
 onready var animation = $AnimationPlayer
 onready var attack_timer = $AttackTimer
 onready var ai = $Ai
@@ -14,6 +16,10 @@ var receives_knockback: bool = true
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var speed = 100
+
+
+func _process(delta):
+	shoot()
 
 
 func get_hp() -> int:
@@ -38,12 +44,14 @@ func apply_knockback(direction, strength) -> void:
 
 
 func _on_HurtBox_area_entered(hitbox):
-	var final_damage = _randomize_damage(hitbox.total_damage)
-	apply_knockback(hitbox.global_position, hitbox.knockback_strength)
-	Shake.shake(1.0, 0.2, 1)
-	spawn_hit_effect()
-	_take_damage(final_damage)
-	spawn_damage_indicator(final_damage)
+	if hitbox.has_method("do_damage"):
+		$Hurt.play()
+		var final_damage = _randomize_damage(hitbox.total_damage)
+		apply_knockback(hitbox.global_position, hitbox.knockback_strength)
+		Shake.shake(1.0, 0.2, 1)
+		spawn_hit_effect()
+		_take_damage(final_damage)
+		spawn_damage_indicator(final_damage)
 
 
 func _randomize_damage(damage: int) -> int:
@@ -84,3 +92,20 @@ func _die_check(current_hp: int) -> void:
 
 func die() -> void:
 	queue_free()
+
+
+func shoot():
+	var dagger_direction = self.global_position.direction_to(
+		Party.current_character().global_position
+	)
+	throw_dagger(dagger_direction)
+
+
+func throw_dagger(dagger_direction: Vector2):
+	if DAGGER:
+		var dagger = DAGGER.instance()
+		get_tree().current_scene.add_child(dagger)
+		dagger.global_position = self.global_position
+
+		var dagger_rotation = dagger_direction.angle()
+		dagger.rotation = dagger_rotation

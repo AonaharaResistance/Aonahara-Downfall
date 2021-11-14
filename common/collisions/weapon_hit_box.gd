@@ -10,7 +10,10 @@ var total_damage: int
 var character_damage: int
 
 
+func do_damage():
+	pass
+
+
 func _ready() -> void:
-	if !get_tree().get_nodes_in_group("current_character").empty():
-		character_damage = get_tree().get_nodes_in_group("current_character").front().base_damage
-		total_damage = damage + character_damage
+	character_damage = Party.current_character().base_damage
+	total_damage = damage + character_damage

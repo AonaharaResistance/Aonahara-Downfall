@@ -30,13 +30,16 @@ script = ExtResource( 3 )
 [node name="Skills" type="Node" parent="."]
 
 [node name="Weapon" type="Node2D" parent="."]
+visible = false
 z_index = 1
 
 [node name="Dash" parent="." instance=ExtResource( 2 )]
 
 [node name="ShadowSprite" type="Sprite" parent="."]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 material = SubResource( 1 )
 scale = Vector2( 1, 0.923644 )
 hframes = 6
@@ -46,6 +49,9 @@ hframes = 6
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
 collision_layer = 2
 collision_mask = 20
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

@@ -5,7 +5,7 @@
 [ext_resource path="res://entities/enemies/basic_enemy.gd" type="Script" id=3]
 [ext_resource path="res://entities/enemies/basic_enemy_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://common/effects/HitEffect.tscn" type="PackedScene" id=5]
-[ext_resource path="res://common/ai/chase_and_shoot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://common/ai/chase_and_shoot/chase_and_shoot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://common/effects/DeathEffect.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]

@@ -53,7 +53,6 @@ func _process(delta):
 	# Maybe your game has two cameras, maybe it has 10, who knows?
 	# Do what you like
 	# var camera = get_tree().current_scene.get_node("Camera2D")
-	print(get_tree().get_nodes_in_group("current_camera").empty())
 	if get_tree().get_nodes_in_group("current_camera").empty():
 		camera = GlobalCamera.get_camera()
 	else:

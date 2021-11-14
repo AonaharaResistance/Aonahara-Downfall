@@ -34,18 +34,37 @@ var receives_knockback: bool = true
 var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
 
 
-func set_stamina(new_value):
-	stamina += new_value
-
-
 func _ready() -> void:
 	stamina_timer.wait_time = stamina_regen
 	add_to_group("current_character")
 
 
+func equiped_weapon():
+	if !weapon.get_children().empty():
+		return weapon.get_child(0)
+	else:
+		# TDOO: Handle if weapon is not equiped
+		return null
+
+
+func listen_to_attacks():
+	if Input.is_action_just_pressed("light_attack") && isOnControl:
+		equiped_weapon().light_attack()
+	if Input.is_action_just_released("light_attack") && isOnControl:
+		equiped_weapon().light_attack_release()
+	if Input.is_action_just_pressed("heavy_attack") && isOnControl:
+		equiped_weapon().heavy_attack()
+	if Input.is_action_just_released("heavy_attack") && isOnControl:
+		equiped_weapon().heavy_attack_release()
+
+
 func listen_to_skills():
 	if Input.is_action_just_pressed("first_skill") && isOnControl:
 		skills.get_child(0).activate_skill()
+
+
+func set_stamina(new_value):
+	stamina += new_value
 
 
 func move() -> void:
