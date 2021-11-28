@@ -37,7 +37,6 @@ func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -
 	Shake.shake(1, 0.1)
 	set_can_dash(false)
 
-	# warning-ignore:unsafe_property_access
 	character.hurt_box.disabled = true
 
 	cooldown_timer.start()
@@ -81,7 +80,6 @@ func is_dashing() -> bool:
 func end_dash() -> void:
 	emit_signal("dash_ended")
 
-	# warning-ignore:unsafe_property_access
 	character.hurt_box.disabled = false
 
 	dash_sprite_shader.set_shader_param("whiten", false)

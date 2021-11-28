@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "WeaponHitBox",
 "class": "ExplosionHitBox",
 "language": "GDScript",
-"path": "res://common/collisions/explosion_hit_box.gd"
+"path": "res://objects/projectiles/explosives/explosion_hit_box.gd"
 }, {
 "base": "Area2D",
 "class": "Explosive",
@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/interactions/InteractionComponentUI.gd"
 }, {
+"base": "Node2D",
+"class": "Piercing",
+"language": "GDScript",
+"path": "res://objects/projectiles/piercings/piercing.gd"
+}, {
 "base": "Reference",
 "class": "ResourceAsyncLoader",
 "language": "GDScript",
@@ -117,7 +122,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://common/state_machine.gd"
+"path": "res://common/state_machine/state_machine.gd"
+}, {
+"base": "Node2D",
+"class": "Sword",
+"language": "GDScript",
+"path": "res://objects/weapons/swords/sword.gd"
 }, {
 "base": "Area2D",
 "class": "WeaponHitBox",
@@ -143,10 +153,12 @@ _global_script_class_icons={
 "InteractableItem": "",
 "InteractionComponent": "",
 "InteractionComponentUI": "",
+"Piercing": "",
 "ResourceAsyncLoader": "",
 "SaveSettings": "",
 "Staff": "",
 "StateMachine": "",
+"Sword": "",
 "WeaponHitBox": ""
 }
 
