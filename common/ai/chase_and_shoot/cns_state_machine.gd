@@ -9,13 +9,13 @@ func _ready() -> void:
 	set_state(states.wander)
 
 
-func _state_logic(delta) -> void:
+func _state_logic(_delta) -> void:
 	if state == states.wander:
 		pass
 		# parent.agent.move_and_slide(parent.agent_velocity)
 
 
-func _enter_state(_previous_state: int, new_state: int) -> void:
+func _enter_state(_previous_state: int, _new_state: int) -> void:
 	pass
 	# for animation
 	# match new_state:

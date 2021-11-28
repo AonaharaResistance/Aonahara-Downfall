@@ -33,13 +33,14 @@ func _physics_process(delta):
 	var desired_velocity = chosen_dir.rotated(rotation) * max_speed
 	velocity = velocity.linear_interpolate(desired_velocity, steer_force)
 	rotation = velocity.angle()
-	move_and_collide(velocity * delta)
+	velocity = move_and_collide(velocity * delta)
 
 
 func set_interest():
 	# Set interest in each slot based on world direction
 
 	if owner and owner.has_method("get_path_direction"):
+		# warning-ignore:unsafe_method_access
 		var path_direction = owner.get_path_direction(position)
 		for i in num_rays:
 			var d = ray_directions[i].rotated(rotation).dot(path_direction)

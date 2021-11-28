@@ -85,6 +85,7 @@ tracks/5/keys = {
 [node name="ParseidsStaff" instance=ExtResource( 1 )]
 scale = Vector2( 0.725224, 0.725224 )
 script = ExtResource( 4 )
+heavy_cooldown_time = 1.0
 heavy_projectile = ExtResource( 7 )
 chargable_heavy = true
 
