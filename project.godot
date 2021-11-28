@@ -220,7 +220,6 @@ enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg", "res://addons/d
 
 [gui]
 
-theme/custom="res://assets/prosperosus_standard_theme.tres"
 theme/custom_font="res://assets/fonts/pixellocale_8.tres"
 
 [input]

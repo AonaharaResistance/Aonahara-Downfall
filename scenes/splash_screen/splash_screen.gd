@@ -8,6 +8,7 @@ extends Node2D
 # ^ this'll do :KoroneEye:
 
 onready var tween: Tween = $Tween
+
 onready var rect: ColorRect = $ColorRect
 onready var bg: Node2D = $bg
 onready var camera = $Camera2D
@@ -56,4 +57,7 @@ func _on_ModulateTween_tween_completed(object, key):
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
+			for bgss in bg.get_children():
+				$ModulateTween.stop_all()
+			tween.stop_all()
 			Game.emit_signal("ChangeScene", "res://menus/main_menu/main_menu.tscn")
