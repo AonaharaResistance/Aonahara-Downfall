@@ -162,11 +162,12 @@ disabled = true
 
 [node name="EffectSprite" parent="." index="1"]
 visible = false
-position = Vector2( 25.468, 12.4358 )
+position = Vector2( 29.183, 14.951 )
 rotation = 0.667016
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )
 hframes = 3
+frame = 2
 
 [node name="WeaponAnimation" parent="." index="2"]
 anims/RESET = SubResource( 5 )
