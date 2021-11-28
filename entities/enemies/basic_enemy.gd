@@ -1,1 +1,1 @@
-extends "res://entities/enemies/enemy.gd"
+extends Enemy

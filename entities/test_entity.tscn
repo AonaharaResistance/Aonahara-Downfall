@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/place_holder/Enchanted Forest Characters with animations.png" type="Texture" id=1]
+[ext_resource path="res://entities/test_entity.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.20005, 9.96693 )
+
+[node name="TestEntity" type="KinematicBody2D"]
+collision_mask = 127
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.66672 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 16
+vframes = 14
+frame = 136

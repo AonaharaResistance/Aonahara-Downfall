@@ -31,32 +31,22 @@ collision_mask = 2
 
 [node name="Rays" type="Node2D" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="Rays"]
-scale = Vector2( 1, 1.00799 )
-enabled = true
-collision_mask = 7
-collide_with_areas = true
-
 [node name="RayCast2D2" type="RayCast2D" parent="Rays"]
-rotation = -1.57079
 scale = Vector2( 1, 1.00799 )
 enabled = true
-collision_mask = 7
-collide_with_areas = true
+cast_to = Vector2( 0, 0 )
 
 [node name="RayCast2D3" type="RayCast2D" parent="Rays"]
-rotation = -3.14159
+position = Vector2( 0, -8.19874 )
 scale = Vector2( 1, 1.00799 )
 enabled = true
-collision_mask = 7
-collide_with_areas = true
+cast_to = Vector2( 0, 0 )
 
 [node name="RayCast2D4" type="RayCast2D" parent="Rays"]
-rotation = -4.71238
+position = Vector2( 0, 9.24986 )
 scale = Vector2( 1, 1.00799 )
 enabled = true
-collision_mask = 7
-collide_with_areas = true
+cast_to = Vector2( 0, 0 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

@@ -10,10 +10,10 @@ var total_damage: int
 var character_damage: int
 
 
-func do_damage():
-	pass
+func sum_damage():
+	character_damage = Party.current_character().base_damage
+	total_damage = damage + character_damage
 
 
 func _ready() -> void:
-	character_damage = Party.current_character().base_damage
-	total_damage = damage + character_damage
+	sum_damage()

@@ -3,28 +3,9 @@
 [ext_resource path="res://objects/weapons/staves/staff.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/place_holder/1px/20.png" type="Texture" id=2]
 [ext_resource path="res://assets/place_holder/effects (new)/hit_effect_anim_f1.png" type="Texture" id=3]
-
-[sub_resource type="Gradient" id=8]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=9]
-gradient = SubResource( 8 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-emission_shape = 1
-emission_sphere_radius = 7.0
-emission_ring_axis = Vector3( 2, 0, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, -98, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 4.48
-scale = 2.0
-scale_random = 0.53
-color = Color( 1, 0.52549, 0.0941176, 1 )
-color_ramp = SubResource( 9 )
-hue_variation = 0.43
-hue_variation_random = 0.55
+[ext_resource path="res://objects/projectiles/explosives/hot_ballz/hot_ballz.tscn" type="PackedScene" id=4]
+[ext_resource path="res://common/particles/probably_flame/probably_flame.tres" type="Material" id=5]
+[ext_resource path="res://assets/place_holder/light.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=6]
 tracks/0/type = "value"
@@ -51,20 +32,80 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:charged")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WeaponContainer/Particles2D:amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 30 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WeaponContainer/Light2D:enabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("WeaponContainer/ChargeParticle:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="ParseidsStaff" instance=ExtResource( 1 )]
 scale = Vector2( 0.725224, 0.725224 )
+heavy_cooldown_time = 1.0
+heavy_projectile = ExtResource( 4 )
+chargable_heavy = true
 
 [node name="Sprite" parent="WeaponContainer" index="0"]
 scale = Vector2( 1, 1.02222 )
 texture = ExtResource( 2 )
 
-[node name="Particles2D" parent="WeaponContainer" index="1"]
-position = Vector2( 0, -13.2718 )
-amount = 100
-local_coords = false
-process_material = SubResource( 7 )
+[node name="ChargeParticle" parent="WeaponContainer" index="1"]
+position = Vector2( 0, -16.3988 )
+scale = Vector2( 1, 0.948891 )
+amount = 5
+process_material = ExtResource( 5 )
 texture = ExtResource( 3 )
+
+[node name="ChargeLight" parent="WeaponContainer" index="2"]
+position = Vector2( 0, -16.3988 )
+scale = Vector2( 0.0656596, 0.0762848 )
+texture = ExtResource( 6 )
+color = Color( 1, 0.576471, 0.12549, 1 )
 
 [node name="WeaponAnimation" parent="." index="1"]
 anims/RESET = SubResource( 6 )
+
+[node name="HeavyCooldown" parent="." index="3"]
+one_shot = true

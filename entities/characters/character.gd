@@ -78,6 +78,8 @@ func move() -> void:
 
 
 func set_is_on_battle(new_state) -> void:
+	if new_state == true:
+		battle_timer.start()
 	is_on_battle = new_state
 
 

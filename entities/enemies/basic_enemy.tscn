@@ -47,12 +47,15 @@ effect_died = ExtResource( 7 )
 script = ExtResource( 4 )
 
 [node name="chase_and_shoot" parent="Ai" index="0" instance=ExtResource( 6 )]
+scale = Vector2( 1, 0.979242 )
 agent_path = NodePath("../..")
+patrol_range = 10
+maximum_patrol_rest = 5.0
+maximum_patrol_duration = 3.0
 
 [node name="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 hframes = 4
-frame = 2
 
 [node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource( 1 )
@@ -71,6 +74,15 @@ knockback_strength = 120
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.471939, 0.943874 )
 shape = SubResource( 4 )
+
+[node name="RayCast2D2" parent="Rays" index="0"]
+collision_mask = 3
+
+[node name="RayCast2D3" parent="Rays" index="1"]
+collision_mask = 3
+
+[node name="RayCast2D4" parent="Rays" index="2"]
+collision_mask = 3
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

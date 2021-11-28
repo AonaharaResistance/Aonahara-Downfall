@@ -31,9 +31,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="DeathEffect" type="Sprite" groups=[
-"Effects",
-]]
+[node name="DeathEffect" type="Sprite" groups=["Effects"]]
 scale = Vector2( 2, 2 )
 z_index = 1
 texture = ExtResource( 1 )

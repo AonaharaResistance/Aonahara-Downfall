@@ -1,25 +1,76 @@
 extends KinematicBody2D
+class_name Enemy
 
 export(int) var hp: int setget set_hp, get_hp
 export(PackedScene) var effect_hit: PackedScene = null
 export(PackedScene) var effect_died: PackedScene = null
 export(PackedScene) var indicator_damage: PackedScene = preload("res://ui/damage_indicator.tscn")
+export(PackedScene) var projectile: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
 
-export(PackedScene) var DAGGER: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
-
-onready var animation = $AnimationPlayer
-onready var attack_timer = $AttackTimer
+onready var animation: AnimationPlayer = $AnimationPlayer
+onready var attack_timer: Timer = $AttackTimer
+onready var spawn_location: Vector2 = global_position
 onready var ai = $Ai
-onready var spawn_location = global_position
 
 var receives_knockback: bool = true
-var velocity = Vector2.ZERO
-var knockback = Vector2.ZERO
-var speed = 100
+var velocity: Vector2 = Vector2.ZERO
+var knockback: Vector2 = Vector2.ZERO
+
+var max_speed: int = 100
+var max_steering: float = 2.5
+var avoid_force: int = 100000
+
+var arrival_zone_radius: int = 20
+var vector_to_target: Vector2 = Vector2.ZERO setget set_target
+
+onready var raycasts: Node2D = get_node("Rays")
+
+
+func set_target(new_target):
+	vector_to_target = new_target - position
 
 
 func _process(delta):
-	shoot()
+	var steering: Vector2 = Vector2.ZERO
+
+	if vector_to_target.length() > arrival_zone_radius:
+		steering += seek_steering()
+	else:
+		steering += arrival_steering()
+	steering += avoid_obstacles_steering()
+	steering = steering.clamped(max_steering)
+
+	velocity += steering * delta * 100
+	velocity = velocity.clamped(max_speed)
+
+	velocity = move_and_slide(
+		velocity * int(ai.get_children().front().patrol_duration.is_stopped())
+	)
+
+
+func seek_steering() -> Vector2:
+	var desired_velocity: Vector2 = vector_to_target.normalized() * max_speed
+
+	return desired_velocity - velocity
+
+
+func arrival_steering() -> Vector2:
+	var speed: float = (vector_to_target.length() / arrival_zone_radius) * max_speed
+	var desired_velocity: Vector2 = vector_to_target.normalized() * speed
+
+	return desired_velocity - velocity
+
+
+func avoid_obstacles_steering() -> Vector2:
+	raycasts.rotation = velocity.angle()
+
+	for raycast in raycasts.get_children():
+		raycast.cast_to.x = velocity.length()
+		if raycast.is_colliding():
+			var obstacle = raycast.get_collider()
+			return (position + velocity - obstacle.position).normalized() * avoid_force
+
+	return Vector2.ZERO
 
 
 func get_hp() -> int:
@@ -43,9 +94,8 @@ func apply_knockback(direction, strength) -> void:
 	knockback = (direction.direction_to(self.global_position) * strength)
 
 
-func _on_HurtBox_area_entered(hitbox):
-	if hitbox.has_method("do_damage"):
-		$Hurt.play()
+func _on_HurtBox_area_entered(hitbox) -> void:
+	if hitbox is WeaponHitBox:
 		var final_damage = _randomize_damage(hitbox.total_damage)
 		apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 		Shake.shake(1.0, 0.2, 1)
@@ -95,17 +145,17 @@ func die() -> void:
 
 
 func shoot():
-	var dagger_direction = self.global_position.direction_to(
+	var projectile_direction = self.global_position.direction_to(
 		Party.current_character().global_position
 	)
-	throw_dagger(dagger_direction)
+	throw_projectile(projectile_direction)
 
 
-func throw_dagger(dagger_direction: Vector2):
-	if DAGGER:
-		var dagger = DAGGER.instance()
-		get_tree().current_scene.add_child(dagger)
-		dagger.global_position = self.global_position
+func throw_projectile(projectile_direction: Vector2):
+	if projectile:
+		var _projectile = projectile.instance()
+		get_tree().current_scene.add_child(_projectile)
+		_projectile.global_position = self.global_position
 
-		var dagger_rotation = dagger_direction.angle()
-		dagger.rotation = dagger_rotation
+		var projectile_rotation = projectile_direction.angle()
+		_projectile.rotation = projectile_rotation

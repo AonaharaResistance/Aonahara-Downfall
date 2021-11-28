@@ -114,9 +114,9 @@ __meta__ = {
 }
 
 [node name="TextureRect7" type="TextureRect" parent="bg"]
-margin_left = -264.581
+margin_left = -263.581
 margin_top = -140.675
-margin_right = 55.419
+margin_right = 56.419
 margin_bottom = 39.3249
 rect_pivot_offset = Vector2( 169.264, 140.675 )
 texture = ExtResource( 1 )

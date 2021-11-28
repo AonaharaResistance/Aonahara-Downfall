@@ -50,12 +50,10 @@ func _on_Aonares_body_entered(body):
 
 func _on_ModulateTween_tween_completed(object, key):
 	camera.queue_free()
-	Game.emit_signal("ChangeScene", "res://scenes/license_and_agreement/license_and_agreement.tscn")
+	Game.emit_signal("ChangeScene", "res://menus/main_menu/main_menu.tscn")
 
 
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
-			Game.emit_signal(
-				"ChangeScene", "res://scenes/license_and_agreement/license_and_agreement.tscn"
-			)
+			Game.emit_signal("ChangeScene", "res://menus/main_menu/main_menu.tscn")

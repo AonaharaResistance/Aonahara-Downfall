@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/enemies/basic_enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/test_world.gd" type="Script" id=3]
@@ -443,6 +443,9 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 25/shapes = [  ]
 25/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 10, 94.5219 )
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -554,36 +557,6 @@ __meta__ = {
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="BasicEnemy" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 42.1964, 105.191 )
-
-[node name="BasicEnemy2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 168.339, 103.522 )
-
-[node name="BasicEnemy4" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 182.312, 115.117 )
-
-[node name="BasicEnemy5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 185.88, 98.4679 )
-
-[node name="BasicEnemy6" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 156.447, 126.712 )
-
-[node name="BasicEnemy7" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 143.068, 102.927 )
-
-[node name="BasicEnemy8" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 163.879, 81.2243 )
-
-[node name="BasicEnemy9" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 193.312, 77.954 )
-
-[node name="BasicEnemy10" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 212.34, 115.117 )
-
-[node name="BasicEnemy11" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 203.718, 91.9272 )
-
 [node name="BasicEnemy12" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 189.447, 130.874 )
 
@@ -596,6 +569,30 @@ position = Vector2( 75.3671, 24.7085 )
 [node name="KinematicBody2D" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 253.861, 66.3968 )
 
+[node name="KinematicBody2D2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 277.645, 111.587 )
+
+[node name="KinematicBody2D3" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 226.509, 106.235 )
+
+[node name="KinematicBody2D4" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 255.05, 175.804 )
+
+[node name="KinematicBody2D5" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 338.889, 157.966 )
+
+[node name="KinematicBody2D6" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 174.184, 156.777 )
+
+[node name="KinematicBody2D7" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 256.834, 153.209 )
+
+[node name="KinematicBody2D8" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 186.671, 206.129 )
+
+[node name="KinematicBody2D9" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 186.671, 206.129 )
+
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -2
 tile_set = SubResource( 10 )
@@ -606,3 +603,10 @@ tile_data = PoolIntArray( -2424872, 23, 0, -2424871, 23, 0, -2424870, 23, 0, -24
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.447059, 0.635294, 0.854902, 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 84.5219 )
+shape = SubResource( 11 )
