@@ -112,11 +112,13 @@ func set_stamina_regen_timer(current_stamina) -> void:
 		stamina_timer.wait_time = stamina_regen
 
 
+# warning-ignore:unsafe_method_access
 func apply_dash() -> void:
 	if dash.is_dashing():
 		velocity = (acceleration * 8) * get_input_direction()
 
 
+# warning-ignore:unsafe_method_access
 func activate_dash() -> void:
 	if Input.is_action_just_pressed("dash") && isOnControl:
 		stamina -= 1

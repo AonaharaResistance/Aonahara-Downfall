@@ -7,6 +7,7 @@ var res2 = preload("res://entities/characters/emuwaa/emuwaa.tscn").instance()
 var player
 var player_state
 var dash
+# warning-ignore:unsafe_method_access
 var overlay = load("res://ui/debug_overlay.tscn").instance()
 var title = preload("res://scenes/area_title/area_title.tscn").instance()
 
@@ -31,7 +32,7 @@ func set_debug_overlay():
 
 
 func _ready():
-	Party.connect("current_active_changed", self, "_on_party_changed")
+	var _singla = Party.connect("current_active_changed", self, "_on_party_changed")
 	print(Party.add_party_member(res))
 	print(Party.add_party_member(res2))
 	print(Party.party_members)
