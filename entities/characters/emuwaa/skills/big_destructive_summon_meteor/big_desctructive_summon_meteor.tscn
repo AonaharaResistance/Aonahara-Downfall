@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/characters/emuwaa/skills/big_destructive_summon_meteor/big_desctructive_summon_meteor.gd" type="Script" id=1]
+
+[node name="BigDestructiveSummonMeteor" type="Node2D"]
+script = ExtResource( 1 )

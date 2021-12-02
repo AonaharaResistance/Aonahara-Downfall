@@ -29,6 +29,8 @@ script = ExtResource( 3 )
 
 [node name="Skills" type="Node" parent="."]
 
+[node name="Passive" type="Node2D" parent="."]
+
 [node name="Weapon" type="Node2D" parent="."]
 visible = false
 z_index = 1
