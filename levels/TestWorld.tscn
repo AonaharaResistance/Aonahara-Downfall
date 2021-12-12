@@ -566,32 +566,71 @@ position = Vector2( 138.312, 83.6027 )
 [node name="BasicEnemy3" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 75.3671, 24.7085 )
 
+[node name="BasicEnemy14" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 372.766, 85.5168 )
+
+[node name="BasicEnemy15" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 321.631, 38.2455 )
+
+[node name="BasicEnemy4" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 258.686, -20.6487 )
+
+[node name="BasicEnemy16" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 367.726, 207.099 )
+
+[node name="BasicEnemy17" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 316.591, 159.828 )
+
+[node name="BasicEnemy5" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 253.646, 100.934 )
+
+[node name="BasicEnemy18" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 206.456, 271.355 )
+
+[node name="BasicEnemy19" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 155.321, 224.084 )
+
+[node name="BasicEnemy6" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 92.376, 165.19 )
+
+[node name="BasicEnemy20" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 289.611, 189.46 )
+
+[node name="BasicEnemy21" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 238.476, 142.189 )
+
+[node name="BasicEnemy7" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 175.531, 83.2948 )
+
+[node name="BasicEnemy22" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 472.929, 144.103 )
+
+[node name="BasicEnemy23" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 421.794, 96.8319 )
+
+[node name="BasicEnemy8" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 358.849, 37.9377 )
+
+[node name="BasicEnemy24" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 467.89, 265.686 )
+
+[node name="BasicEnemy25" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 416.755, 218.414 )
+
+[node name="BasicEnemy9" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 353.81, 159.52 )
+
+[node name="BasicEnemy26" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 306.62, 329.942 )
+
+[node name="BasicEnemy27" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 255.485, 282.67 )
+
+[node name="BasicEnemy10" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 192.54, 223.776 )
+
 [node name="KinematicBody2D" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 253.861, 66.3968 )
-
-[node name="KinematicBody2D2" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 277.645, 111.587 )
-
-[node name="KinematicBody2D3" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 226.509, 106.235 )
-
-[node name="KinematicBody2D4" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 255.05, 175.804 )
-
-[node name="KinematicBody2D5" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 338.889, 157.966 )
-
-[node name="KinematicBody2D6" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 174.184, 156.777 )
-
-[node name="KinematicBody2D7" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 256.834, 153.209 )
-
-[node name="KinematicBody2D8" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 186.671, 206.129 )
-
-[node name="KinematicBody2D9" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 186.671, 206.129 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -2

@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.gd" type="Script" id=1]
+[ext_resource path="res://assets/place_holder/1px/28.png" type="Texture" id=3]
 
 [node name="ItsRainingRocks" type="Node2D"]
+position = Vector2( 116.316, 48.4973 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.317647 )
+position = Vector2( 0, 100 )
+scale = Vector2( 6.17497, 4.76889 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.94902 )
+scale = Vector2( 7.44625, 6.54868 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.101
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
