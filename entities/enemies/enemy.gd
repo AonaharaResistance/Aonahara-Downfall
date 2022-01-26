@@ -46,6 +46,7 @@ func _process(delta):
 	velocity = move_and_slide(
 		velocity * int(ai.get_children().front().patrol_duration.is_stopped())
 	)
+	#)
 
 
 func seek_steering() -> Vector2:

@@ -14,17 +14,17 @@ onready var battle_timer: Timer = $BattleTimer
 onready var interaction_component: InteractionComponent = $InteractionComponent
 onready var skills = $Skills
 
-export(int) var acceleration: int
-export(int) var max_speed: int
-export(int) var hp: int
-export(int) var max_hp: int
-export(int) var stamina: int setget set_stamina
-export(int) var max_stamina: int
-export(int) var base_damage: int
-export(float) var attack_speed: float
-export(float) var stamina_regen: float
-export(float) var stamina_regen_rate: float
-export(float) var dash_duration: float = 0.2
+export var acceleration: int
+export var max_speed: int
+export var hp: int
+export var max_hp: int
+export var stamina: int setget set_stamina
+export var max_stamina: int
+export var base_damage: int
+export var attack_speed: float
+export var stamina_regen: float
+export var stamina_regen_rate: float
+export var dash_duration: float = 0.2
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
@@ -94,6 +94,7 @@ func get_mouse_direction() -> Vector2:
 func regenerate_stamina() -> void:
 	while stamina < max_stamina && stamina_timer.is_stopped():
 		stamina += 1
+		Hud.update_hud()
 		yield(get_tree().create_timer(stamina_regen_rate), "timeout")
 
 
@@ -113,6 +114,7 @@ func set_stamina_regen_timer(current_stamina) -> void:
 
 
 # warning-ignore:unsafe_method_access
+# Why the fuck is the actual dash function is on character??
 func apply_dash() -> void:
 	if dash.is_dashing():
 		velocity = (acceleration * 8) * get_input_direction()
@@ -174,6 +176,7 @@ func sprite_control() -> void:
 
 func _take_damage(damage: int) -> void:
 	hp -= damage
+	Hud.update_hud()
 	if hp < 0:
 		hp = 0
 	_die_check(hp)

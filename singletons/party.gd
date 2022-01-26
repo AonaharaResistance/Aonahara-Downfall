@@ -72,12 +72,13 @@ func current_character():
 
 
 func change_party_member(index):
-	var pos = current_character().global_position
-	tactical_character_hiding(current_character())
-	set_selected_member(index)
-	current_character().global_position = pos
-	tactical_character_showing(current_character())
-	emit_signal("current_active_changed")
+  var pos = current_character().global_position
+  tactical_character_hiding(current_character())
+  set_selected_member(index)
+  current_character().global_position = pos
+  tactical_character_showing(current_character())
+  emit_signal("current_active_changed")
+  Hud.update_hud()
 
 
 func tactical_character_hiding(character):

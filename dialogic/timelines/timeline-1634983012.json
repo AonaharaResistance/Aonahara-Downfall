@@ -56,10 +56,48 @@
 			"value": ""
 		},
 		{
-			"character": "character-1634983024.json",
-			"event_id": "dialogic_001",
+			"action": "join",
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_002",
+			"mirror": false,
 			"portrait": "",
-			"text": "cya"
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			}
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "Please understand that I'm doing this to protect you"
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "someone who have great understanding of it can be a great threat"
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "You clearly realize that your loom can produce a lot more destructive power than on the surface"
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "and if food were right and there's indeed someone who infiltrated the basement"
+		},
+		{
+			"character": "character-1634302643.json",
+			"event_id": "dialogic_001",
+			"portrait": "NomNomTF",
+			"text": "things can get really messy real quick"
 		},
 		{
 			"event_id": "dialogic_013"

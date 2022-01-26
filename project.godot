@@ -187,7 +187,6 @@ Options="*res://addons/GameTemplate/Autoload/Options.tscn"
 Game="*res://addons/GameTemplate/Autoload/Game.gd"
 ScreenFade="*res://addons/GameTemplate/Autoload/ScreenFade.tscn"
 PauseMenu="*res://addons/GameTemplate/Autoload/PauseMenu.tscn"
-Hud="*res://addons/GameTemplate/Autoload/Hud.tscn"
 MenuEvent="*res://addons/GameTemplate/Autoload/MenuEvent.gd"
 Music="*res://addons/GameTemplate/Autoload/Music.tscn"
 SfxManager="*res://addons/GameTemplate/Autoload/SfxManager.gd"
@@ -195,6 +194,8 @@ HtmlFocus="*res://addons/GameTemplate/Autoload/HtmlFocus.tscn"
 Shake="*res://singletons/shake.gd"
 Party="*res://singletons/party.tscn"
 GlobalCamera="*res://singletons/global_camera.tscn"
+Cursor="*res://singletons/cursor.gd"
+Hud="*res://ui/hud/Hud.tscn"
 
 [debug]
 
@@ -210,7 +211,6 @@ window/size/width=320
 window/size/height=180
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://assets/place_holder/ui (new)/crosshair_3.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

@@ -79,38 +79,41 @@ func set_mirror(value):
 
 
 func move_to_position(position_offset, time = 0.5):
+	var reference = get_viewport().get_visible_rect().size
+	
 	var positions = {
-		'left': Vector2(-400, 0),
-		'right': Vector2(+400, 0),
+		'left': Vector2(-2*(reference.x/7), 0),
+		'right': Vector2(2*(reference.x/7), 0),
 		'center': Vector2(0, 0),
-		'center_right': Vector2(200, 0),
-		'center_left': Vector2(-200, 0)}
+		'center_right': Vector2(-(reference.x/7), 0),
+		'center_left': Vector2(reference.x/7, 0)
+	  }
 	
 	direction = position_offset
 	modulate = Color(1,1,1,0)
 	tween_modulate(modulate, Color(1,1,1, 1), time)
 	rect_position = positions[position_offset]
-	
+	  
 	# Setting the scale of the portrait
 	var custom_scale = Vector2(1, 1)
 	if character_data.has('data'):
 		if character_data['data'].has('scale'):
 			custom_scale = Vector2(
-				float(character_data['data']['scale']) / 100,
-				float(character_data['data']['scale']) / 100
-			)
-			rect_scale = custom_scale
+				  float(character_data['data']['scale']) / 100,
+				  float(character_data['data']['scale']) / 100
+			  )
+		rect_scale = custom_scale
 		if character_data['data'].has('offset_x'):
-			rect_position += Vector2(
-				character_data['data']['offset_x'],
-				character_data['data']['offset_y']
-			)
+			  rect_position += Vector2(
+				  character_data['data']['offset_x'],
+				  character_data['data']['offset_y']
+			  )
 			
 	if $TextureRect.get('texture'):
 		rect_position -= Vector2(
-			$TextureRect.texture.get_width() * 0.5,
-			$TextureRect.texture.get_height()
-		) * custom_scale
+		  $TextureRect.texture.get_width() * 0.5,
+		  $TextureRect.texture.get_height()
+	  ) * custom_scale
 		
 	fade_in()
 

@@ -6,7 +6,7 @@ var skill_level: int = 1
 var isConditionMet: bool = true
 
 export var character_path: NodePath
-export var damage_bonus: int = 20
+export var damage_bonus: int = 2
 
 onready var character = get_node(character_path)
 onready var collision = $CollisionShape2D

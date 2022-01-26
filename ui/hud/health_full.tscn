@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/hud_elements/health_full.png" type="Texture" id=1]
+
+[node name="HealthFull" type="TextureRect"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

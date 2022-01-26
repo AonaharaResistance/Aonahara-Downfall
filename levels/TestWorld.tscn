@@ -600,7 +600,7 @@ position = Vector2( 289.611, 189.46 )
 position = Vector2( 238.476, 142.189 )
 
 [node name="BasicEnemy7" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 175.531, 83.2948 )
+position = Vector2( 200.729, 89.5944 )
 
 [node name="BasicEnemy22" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 472.929, 144.103 )

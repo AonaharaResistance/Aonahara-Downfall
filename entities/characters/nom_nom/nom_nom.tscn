@@ -54,6 +54,7 @@ script = ExtResource( 2 )
 acceleration = 50
 max_speed = 100
 hp = 4
+max_hp = 4
 stamina = 4
 max_stamina = 4
 base_damage = 4
@@ -64,7 +65,7 @@ stamina_regen_rate = 1.0
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="Weapon" parent="." index="3"]
+[node name="Weapon" parent="." index="4"]
 position = Vector2( 0.297298, -0.322042 )
 
 [node name="CumStainedSword" parent="Weapon" index="0" instance=ExtResource( 8 )]
@@ -75,27 +76,27 @@ position = Vector2( -0.832449, 8.38362 )
 [node name="DustBurst" parent="Dash" index="3"]
 position = Vector2( -0.523373, 2.30857 )
 
-[node name="ShadowSprite" parent="." index="5"]
+[node name="ShadowSprite" parent="." index="6"]
 modulate = Color( 1, 1, 1, 0.258824 )
 position = Vector2( -0.393724, 7.07961 )
 scale = Vector2( 0.611197, 0.285642 )
 texture = ExtResource( 5 )
 
-[node name="Sprite" parent="." index="6"]
+[node name="Sprite" parent="." index="7"]
 texture = ExtResource( 3 )
 hframes = 24
 
-[node name="CollisionShape2D" parent="." index="7"]
+[node name="CollisionShape2D" parent="." index="8"]
 shape = SubResource( 6 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 7 )
 
-[node name="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" parent="." index="10"]
 anims/idle = SubResource( 8 )
 anims/move = SubResource( 9 )
 
-[node name="Camera2D" parent="." index="12"]
+[node name="Camera2D" parent="." index="13"]
 scale = Vector2( 0.99061, 0.991114 )
 
 [editable path="Blinker"]

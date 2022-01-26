@@ -25,6 +25,5 @@ func _on_BlinkTimer_timeout() -> void:
 
 
 func _on_DurationTimer_timeout() -> void:
-	print("pog")
 	blink_timer.stop()
 	blink_object.modulate.a = 1

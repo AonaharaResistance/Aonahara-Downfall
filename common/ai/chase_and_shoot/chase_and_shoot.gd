@@ -15,14 +15,14 @@ var origin: Vector2 = Vector2.ZERO
 var patrol_location: Vector2 = Vector2.ZERO
 
 
-func _ready():
+func _ready() -> void:
 	randomize()
 
 
 # * Wander on predefined limit
 # * If the limit is reached
 # * Agent will wander  back to its original pos
-func wander():
+func wander() -> void:
 	_randomize_timers()
 	patrol_location = _randomize_patrol_range() + origin
 	patrol_duration.start()
@@ -32,7 +32,6 @@ func wander():
 		else:
 			agent_velocity = patrol_location
 	agent.set_target(patrol_location)
-	print(patrol_location)
 
 
 # * Alerted if player is detected
