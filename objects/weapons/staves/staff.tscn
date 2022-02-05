@@ -126,6 +126,7 @@ resource_name = "light_charge"
 [node name="Staff" type="Node2D"]
 position = Vector2( 11.3892, 0 )
 script = ExtResource( 1 )
+charged = true
 
 [node name="WeaponContainer" type="Node2D" parent="."]
 
@@ -133,6 +134,7 @@ script = ExtResource( 1 )
 
 [node name="ChargeParticle" type="Particles2D" parent="WeaponContainer"]
 emitting = false
+amount = 5
 
 [node name="ChargeLight" type="Light2D" parent="WeaponContainer"]
 enabled = false

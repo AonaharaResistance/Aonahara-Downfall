@@ -7,13 +7,14 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 gradient = SubResource( 8 )
 
 [resource]
+resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 8.0
 flag_disable_z = true
 gravity = Vector3( 0, -48, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 1.5
+scale = 3.0
 color = Color( 0.960784, 0.654902, 0.137255, 1 )
 color_ramp = SubResource( 9 )
 hue_variation = 0.42

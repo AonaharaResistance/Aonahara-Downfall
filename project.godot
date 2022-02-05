@@ -115,6 +115,16 @@ _global_script_classes=[ {
 "path": "res://addons/GameTemplate/Utility/SaveSettings.gd"
 }, {
 "base": "Node2D",
+"class": "Skill",
+"language": "GDScript",
+"path": "res://common/skill/skill.gd"
+}, {
+"base": "HBoxContainer",
+"class": "SkillHud",
+"language": "GDScript",
+"path": "res://ui/hud/skill/skills_hud.gd"
+}, {
+"base": "Node2D",
 "class": "Staff",
 "language": "GDScript",
 "path": "res://objects/weapons/staves/staff.gd"
@@ -156,6 +166,8 @@ _global_script_class_icons={
 "Piercing": "",
 "ResourceAsyncLoader": "",
 "SaveSettings": "",
+"Skill": "",
+"SkillHud": "",
 "Staff": "",
 "StateMachine": "",
 "Sword": "",
@@ -187,14 +199,15 @@ Options="*res://addons/GameTemplate/Autoload/Options.tscn"
 Game="*res://addons/GameTemplate/Autoload/Game.gd"
 ScreenFade="*res://addons/GameTemplate/Autoload/ScreenFade.tscn"
 PauseMenu="*res://addons/GameTemplate/Autoload/PauseMenu.tscn"
-Hud="*res://addons/GameTemplate/Autoload/Hud.tscn"
 MenuEvent="*res://addons/GameTemplate/Autoload/MenuEvent.gd"
 Music="*res://addons/GameTemplate/Autoload/Music.tscn"
+Hud="*res://ui/hud/Hud.tscn"
 SfxManager="*res://addons/GameTemplate/Autoload/SfxManager.gd"
 HtmlFocus="*res://addons/GameTemplate/Autoload/HtmlFocus.tscn"
 Shake="*res://singletons/shake.gd"
 Party="*res://singletons/party.tscn"
 GlobalCamera="*res://singletons/global_camera.tscn"
+Cursor="*res://singletons/cursor.gd"
 
 [debug]
 
@@ -210,7 +223,6 @@ window/size/width=320
 window/size/height=180
 window/size/test_width=1280
 window/size/test_height=720
-mouse_cursor/custom_image="res://assets/place_holder/ui (new)/crosshair_3.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -221,6 +233,30 @@ enabled=PoolStringArray( "res://addons/GameTemplate/plugin.cfg", "res://addons/d
 [gui]
 
 theme/custom_font="res://assets/fonts/pixellocale_8.tres"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 
@@ -286,12 +322,12 @@ interact={
 }
 second_skill={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 first_skill={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 party1={
@@ -313,6 +349,17 @@ party3={
 party4={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cancel_skill={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cast_skill={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

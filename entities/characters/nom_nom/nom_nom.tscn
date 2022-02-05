@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/nom_nom/nom_nom.gd" type="Script" id=2]
-[ext_resource path="res://assets/place_holder/DinoSprites - tard.png" type="Texture" id=3]
+[ext_resource path="res://assets/unknown (1).png" type="Texture" id=3]
 [ext_resource path="res://entities/characters/nom_nom/nom_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://assets/place_holder/effects (new)/explosion_anim_f1.png" type="Texture" id=5]
+[ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/weapons/swords/cum_stained_sword/cum_stained_sword.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=6]
@@ -15,8 +16,28 @@ height = 6.22077
 radius = 5.24396
 height = 6.22077
 
+[sub_resource type="Animation" id=11]
+resource_name = "New Anim"
+length = 0.7
+loop = true
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
 [sub_resource type="Animation" id=8]
-length = 0.4
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -25,10 +46,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -41,10 +62,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 5, 6, 7, 8, 9 ]
+"values": [ 9, 10, 11, 12, 13, 14, 15 ]
 }
 
 [node name="NomNom" instance=ExtResource( 1 )]
@@ -52,8 +73,9 @@ scale = Vector2( 1, 0.923192 )
 collision_mask = 17
 script = ExtResource( 2 )
 acceleration = 50
-max_speed = 100
+max_speed = 80
 hp = 4
+max_hp = 4
 stamina = 4
 max_stamina = 4
 base_damage = 4
@@ -64,7 +86,12 @@ stamina_regen_rate = 1.0
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="Weapon" parent="." index="3"]
+[node name="ItsRainingRock" parent="Skills" index="0" instance=ExtResource( 6 )]
+
+[node name="ItsRainingRock2" parent="Skills" index="1" instance=ExtResource( 6 )]
+
+[node name="Weapon" parent="." index="4"]
+visible = true
 position = Vector2( 0.297298, -0.322042 )
 
 [node name="CumStainedSword" parent="Weapon" index="0" instance=ExtResource( 8 )]
@@ -75,27 +102,33 @@ position = Vector2( -0.832449, 8.38362 )
 [node name="DustBurst" parent="Dash" index="3"]
 position = Vector2( -0.523373, 2.30857 )
 
-[node name="ShadowSprite" parent="." index="5"]
+[node name="ShadowSprite" parent="." index="6"]
 modulate = Color( 1, 1, 1, 0.258824 )
 position = Vector2( -0.393724, 7.07961 )
 scale = Vector2( 0.611197, 0.285642 )
 texture = ExtResource( 5 )
 
-[node name="Sprite" parent="." index="6"]
+[node name="Sprite" parent="." index="7"]
+visible = true
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
-hframes = 24
+hframes = 8
+vframes = 2
 
-[node name="CollisionShape2D" parent="." index="7"]
+[node name="CollisionShape2D" parent="." index="8"]
 shape = SubResource( 6 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 7 )
 
-[node name="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" parent="." index="10"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 11 )
+anims/RESET = SubResource( 10 )
 anims/idle = SubResource( 8 )
 anims/move = SubResource( 9 )
 
-[node name="Camera2D" parent="." index="12"]
+[node name="Camera2D" parent="." index="13"]
 scale = Vector2( 0.99061, 0.991114 )
 
 [editable path="Blinker"]

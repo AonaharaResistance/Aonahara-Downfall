@@ -34,6 +34,7 @@ func get_can_dash() -> bool:
 
 
 func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -> void:
+	Hud.update_hud()
 	Shake.shake(1, 0.1)
 	set_can_dash(false)
 

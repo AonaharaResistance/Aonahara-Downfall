@@ -7,26 +7,26 @@ var character: Character
 
 
 func _ready():
-	character = get_node("../../")
-	# ! a fucked up way of getting the player, might have to change
-	animation.set_speed_scale(character.attack_speed)
+    character = get_node("../../")
+    # ! a fucked up way of getting the player, might have to change
+    animation.set_speed_scale(character.attack_speed)
 
 
 func light_attack():
-	character.set_is_on_battle(true)
-	character.battle_timer.start()
-	animation.play("attack")
+    character.set_is_on_battle(true)
+    character.battle_timer.start()
+    animation.play("attack")
 
 
 func light_attack_release():
-	pass
+    pass
 
 
 func heavy_attack():
-	character.set_is_on_battle(true)
-	character.battle_timer.start()
-	animation.play("spin")
+    character.set_is_on_battle(true)
+    character.battle_timer.start()
+    animation.play("spin")
 
 
 func heavy_attack_release():
-	pass
+    pass

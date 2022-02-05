@@ -1,24 +1,28 @@
 {
-	"color": "#ff655cff",
+	"color": "#ffff2f3d",
 	"description": "",
 	"display_name": "",
 	"display_name_bool": false,
 	"id": "character-1634302643.json",
 	"mirror_portraits": false,
-	"name": "Nom Nom",
+	"name": "Nitsu",
 	"nickname": "",
 	"nickname_bool": false,
-	"offset_x": 350,
-	"offset_y": -30,
+	"offset_x": 0,
+	"offset_y": -10,
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://assets/place_holder/nomnom/NomNomPog.png"
+			"path": "res://assets/place_holder/nitsub.png"
 		},
 		{
 			"name": "NomNomTF",
-			"path": "res://assets/place_holder/nomnom/NomNomTF.png"
+			"path": "res://assets/place_holder/nitsuH.png"
+		},
+		{
+			"name": "mado",
+			"path": "res://assets/place_holder/Nitsu test.png"
 		}
 	],
-	"scale": 10
+	"scale": 30
 }

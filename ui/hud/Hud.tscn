@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/hud/skill/skills_hud.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/hud/Hud.gd" type="Script" id=2]
+[ext_resource path="res://ui/hud/stamina/stamina_end.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/hud/stamina/stamina_start.tscn" type="PackedScene" id=4]
+
+[node name="Hud" type="Node"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBackground" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 306.0
+margin_bottom = 166.0
+mouse_filter = 2
+
+[node name="HealthEmpty" type="HBoxContainer" parent="CanvasLayer/GUI/MarginContainer/TopBackground"]
+margin_right = 302.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+alignment = 2
+
+[node name="StaminaFill" type="HBoxContainer" parent="CanvasLayer/GUI/MarginContainer/TopBackground"]
+margin_top = 20.0
+margin_right = 302.0
+margin_bottom = 20.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="Top" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 306.0
+margin_bottom = 166.0
+mouse_filter = 2
+
+[node name="Health" type="HBoxContainer" parent="CanvasLayer/GUI/MarginContainer/Top"]
+margin_right = 302.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+alignment = 2
+
+[node name="Stamina" type="HBoxContainer" parent="CanvasLayer/GUI/MarginContainer/Top"]
+margin_top = 12.0
+margin_right = 302.0
+margin_bottom = 28.0
+custom_constants/separation = 0
+alignment = 2
+
+[node name="StaminaStart" parent="CanvasLayer/GUI/MarginContainer/Top/Stamina" instance=ExtResource( 4 )]
+margin_left = 282.0
+margin_right = 298.0
+rect_scale = Vector2( 1, 1 )
+
+[node name="StaminaEnd" parent="CanvasLayer/GUI/MarginContainer/Top/Stamina" instance=ExtResource( 3 )]
+margin_left = 298.0
+margin_right = 302.0
+
+[node name="Bottom" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 306.0
+margin_bottom = 166.0
+alignment = 2
+
+[node name="SkillsHud" parent="CanvasLayer/GUI/MarginContainer/Bottom" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 138.0
+margin_right = 302.0
+margin_bottom = 162.0
