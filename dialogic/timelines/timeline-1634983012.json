@@ -30,13 +30,7 @@
 			"question": "Are you going to Aonahara for vacation"
 		},
 		{
-			"character": "",
-			"event_id": "dialogic_001",
-			"portrait": "",
-			"text": "?"
-		},
-		{
-			"choice": "Why?",
+			"choice": "Why",
 			"condition": "",
 			"definition": "",
 			"event_id": "dialogic_011",
@@ -46,14 +40,10 @@
 			"character": "character-1634983024.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Nah nothing, i just think that it's not really a great place to live in, at least for now"
+			"text": "Ya nda tahu kok tanya saya"
 		},
 		{
-			"choice": "sure...",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
+			"event_id": "dialogic_013"
 		},
 		{
 			"action": "join",
@@ -62,11 +52,11 @@
 			"mirror": false,
 			"portrait": "",
 			"position": {
-				"0": false,
+				"0": true,
 				"1": false,
 				"2": false,
 				"3": false,
-				"4": true
+				"4": false
 			}
 		},
 		{
@@ -98,9 +88,6 @@
 			"event_id": "dialogic_001",
 			"portrait": "NomNomTF",
 			"text": "things can get really messy real quick"
-		},
-		{
-			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {

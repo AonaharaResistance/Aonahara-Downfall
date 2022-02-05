@@ -1,42 +1,155 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.gd" type="Script" id=1]
-[ext_resource path="res://assets/place_holder/light.png" type="Texture" id=2]
-[ext_resource path="res://assets/place_holder/1px/28.png" type="Texture" id=3]
+[ext_resource path="res://common/skill/skill.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui_elements/AoE_circle.png" type="Texture" id=2]
+[ext_resource path="res://assets/skill_icons/emu/its_raining_rocks.png" type="Texture" id=4]
+[ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.gd" type="Script" id=5]
 
-[node name="ItsRainingRocks" type="Node2D"]
-position = Vector2( 116.316, 48.4973 )
-z_index = 5
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpawningCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.94902 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.517647 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpawningCircle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shadow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
-[node name="YSort" type="YSort" parent="."]
+[sub_resource type="Animation" id=2]
+resource_name = "end"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpawningCircle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.94902 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.94902 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.517647 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.517647 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpawningCircle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shadow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[node name="Sprite2" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 0.317647 )
-position = Vector2( 0, 100 )
-scale = Vector2( 6.17497, 4.76889 )
-texture = ExtResource( 3 )
+[node name="ItsRainingRock" instance=ExtResource( 1 )]
+z_index = 5
+script = ExtResource( 5 )
+skill_name = "It's Raining Rocks"
+skill_description = "Rock that rains"
+skill_icon = ExtResource( 4 )
+cooldown_duration = 20.0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="CooldownTimer" parent="." index="0"]
+one_shot = true
+
+[node name="YSort" type="YSort" parent="." index="1"]
+
+[node name="SpawningCircle" type="Sprite" parent="." index="2"]
 visible = false
 modulate = Color( 1, 1, 1, 0.94902 )
-scale = Vector2( 7.44625, 6.54868 )
-texture = ExtResource( 3 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Shadow" type="Sprite" parent="." index="3"]
+visible = false
+modulate = Color( 0, 0, 0, 0.517647 )
+position = Vector2( 0, 100 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="." index="4"]
 wait_time = 0.101
 
-[node name="DurationTimer" type="Timer" parent="."]
+[node name="DurationTimer" type="Timer" parent="." index="5"]
 wait_time = 5.0
 one_shot = true
 
-[node name="AoE" type="Sprite" parent="."]
+[node name="AoE" type="Sprite" parent="." index="6"]
 visible = false
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/RESET = SubResource( 1 )
+anims/end = SubResource( 2 )
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="DurationTimer" to="." method="_on_DurationTimer_timeout"]

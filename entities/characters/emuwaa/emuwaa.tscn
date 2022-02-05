@@ -1,15 +1,33 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/place_holder/DinoSprites - vita.png" type="Texture" id=2]
-[ext_resource path="res://assets/miscs/YUKAREIII HOLY SHEET T HNNGNGGHGN HELP AM DYUINGNGN IM DUINGG AAHHH TOO MUCH SUGAR INTAKE HOLY SHIIT YUKARI CALM DOWNN AAAAA.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/emuwaa/emu_sprite.png" type="Texture" id=2]
+[ext_resource path="res://assets/place_holder/effects (new)/explosion_anim_f1.png" type="Texture" id=3]
 [ext_resource path="res://entities/characters/emuwaa/emu_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/parseids_staff.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/characters/emuwaa/skills/passive/mass_murderer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.tscn" type="PackedScene" id=7]
 
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+resource_local_to_scene = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_disable_z = true
+gravity = Vector3( 0, -48, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.960784, 0.654902, 0.137255, 1 )
+color_ramp = SubResource( 9 )
+hue_variation = 0.42
+hue_variation_random = 0.46
+
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.50887, 7.8125 )
+extents = Vector2( 3.11191, 4.24022 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.3244, 5.36765 )
@@ -43,7 +61,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "idle"
-length = 0.4
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -52,17 +70,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "move"
 length = 0.6
 loop = true
-step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -70,10 +87,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 5, 6, 7, 8, 9 ]
+"values": [ 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Weapon:position")
@@ -82,13 +99,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.09, 0.1, 0.19, 0.2, 0.3, 0.39, 0.4, 0.49, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+"values": [  ]
 }
 
 [node name="Emuwaa" instance=ExtResource( 1 )]
+collision_mask = 1
 acceleration = 50
 max_speed = 100
 hp = 2
@@ -100,32 +118,42 @@ attack_speed = 1.0
 stamina_regen = 3.0
 stamina_regen_rate = 1.0
 
-[node name="Sprite2" type="Sprite" parent="." index="0"]
-visible = false
-texture = ExtResource( 3 )
-
-[node name="StateMachine" parent="." index="1"]
+[node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
 
-[node name="ItsRainingRocks" parent="Skills" index="0" instance=ExtResource( 7 )]
+[node name="ItsRainingRock" parent="Skills" index="0" instance=ExtResource( 7 )]
 
-[node name="MassMurderer" parent="Passive" index="0" instance=ExtResource( 6 )]
-character_path = NodePath("../..")
+[node name="ItsRainingRock2" parent="Skills" index="1" instance=ExtResource( 7 )]
+
+[node name="Weapon" parent="." index="4"]
+visible = true
 
 [node name="ParseidsStaff" parent="Weapon" index="0" instance=ExtResource( 5 )]
 
-[node name="Sprite" parent="." index="8"]
-texture = ExtResource( 2 )
-hframes = 24
+[node name="ChargeParticle" parent="Weapon/ParseidsStaff/WeaponContainer" index="1"]
+process_material = SubResource( 10 )
 
-[node name="CollisionShape2D" parent="." index="9"]
-position = Vector2( -0.529672, 0.4375 )
+[node name="ShadowSprite" parent="." index="6"]
+visible = true
+modulate = Color( 1, 1, 1, 0.333333 )
+position = Vector2( -1.19209e-07, 11.0249 )
+scale = Vector2( 0.729361, 0.260693 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="7"]
+visible = true
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 2
+
+[node name="CollisionShape2D" parent="." index="8"]
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" parent="." index="11"]
+[node name="AnimationPlayer" parent="." index="10"]
 anims/RESET = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/move = SubResource( 5 )
