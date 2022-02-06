@@ -1,29 +1,28 @@
 tool
 extends HBoxContainer
 
-# customization options for the event 
+# customization options for the event
 
 # This is the default data that is going to be saved to json
-export(String) var event_name : String
-export (Dictionary) var event_data: Dictionary = {'event_id':'dialogic_000'}
-export(Texture) var event_icon : Texture
-export(StyleBoxFlat) var event_style : StyleBoxFlat
+export(String) var event_name: String
+export(Dictionary) var event_data: Dictionary = {"event_id": "dialogic_000"}
+export(Texture) var event_icon: Texture
+export(StyleBoxFlat) var event_style: StyleBoxFlat
 
-export(PackedScene) var header_scene : PackedScene
-export(PackedScene) var body_scene : PackedScene
+export(PackedScene) var header_scene: PackedScene
+export(PackedScene) var body_scene: PackedScene
 
-export (bool) var expand_on_default := false
-export (bool) var needs_indentation := false
-export (String) var help_page_path := ""
+export(bool) var expand_on_default := false
+export(bool) var needs_indentation := false
+export(String) var help_page_path := ""
 signal option_action(action_name)
-
 
 ### internal node eferences
 onready var panel = $PanelContainer
 onready var selected_style = $PanelContainer/SelectedStyle
 onready var warning = $PanelContainer/MarginContainer/VBoxContainer/Header/Warning
 onready var title_label = $PanelContainer/MarginContainer/VBoxContainer/Header/TitleLabel
-onready var icon_texture  = $PanelContainer/MarginContainer/VBoxContainer/Header/IconTexture
+onready var icon_texture = $PanelContainer/MarginContainer/VBoxContainer/Header/IconTexture
 onready var expand_control = $PanelContainer/MarginContainer/VBoxContainer/Header/ExpandControl
 onready var options_control = $PanelContainer/MarginContainer/VBoxContainer/Header/OptionsControl
 onready var header_content_container = $PanelContainer/MarginContainer/VBoxContainer/Header/Content
@@ -48,6 +47,7 @@ var ignore_save = false
 ##								PUBLIC METHODS
 ## *****************************************************************************
 
+
 func visual_select():
 	selected_style.show()
 
@@ -57,12 +57,12 @@ func visual_deselect():
 
 
 func set_event_style(style: StyleBoxFlat):
-	panel.set('custom_styles/panel', style)
+	panel.set("custom_styles/panel", style)
 
 
 func get_event_style():
-	return panel.get('custom_styles/panel')
-	
+	return panel.get("custom_styles/panel")
+
 
 # called by the timeline before adding it to the tree
 func load_data(data):
@@ -82,8 +82,8 @@ func set_warning(text):
 	warning.hint_tooltip = text
 
 
-func remove_warning(text = ''):
-	if warning.hint_tooltip == text or text == '':
+func remove_warning(text = ""):
+	if warning.hint_tooltip == text or text == "":
 		warning.texture = null
 
 
@@ -103,6 +103,7 @@ func set_expanded(expanded: bool):
 ## *****************************************************************************
 ##								PRIVATE METHODS
 ## *****************************************************************************
+
 
 func _set_event_icon(icon: Texture):
 	icon_texture.texture = icon
@@ -174,7 +175,7 @@ func _on_Indent_visibility_changed():
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
-		grab_focus() # Grab focus to avoid copy pasting text or events
+		grab_focus()  # Grab focus to avoid copy pasting text or events
 		if event.doubleclick and expand_control.enabled:
 			expand_control.set_expanded(not expand_control.expanded)
 
@@ -182,7 +183,7 @@ func _on_gui_input(event):
 # called when the data of the header is changed
 func _on_Header_data_changed(new_event_data):
 	event_data = new_event_data
-	
+
 	# update the body in case it has to
 	if get_body():
 		get_body().load_data(event_data)
@@ -191,49 +192,52 @@ func _on_Header_data_changed(new_event_data):
 # called when the data of the body is changed
 func _on_Body_data_changed(new_event_data):
 	event_data = new_event_data
-	
+
 	# update the header in case it has to
 	if get_header():
 		get_header().load_data(event_data)
 
-func _request_set_body_enabled(enabled:bool):
+
+func _request_set_body_enabled(enabled: bool):
 	expand_control.set_enabled(enabled)
-	
+
 	if get_body():
 		get_body().visible = enabled
-	
+
+
 func _request_selection():
-	var timeline_editor = editor_reference.get_node_or_null('MainPanel/TimelineEditor')
-	if (timeline_editor != null):
+	var timeline_editor = editor_reference.get_node_or_null("MainPanel/TimelineEditor")
+	if timeline_editor != null:
 		# @todo select item and clear selection is marked as "private" in TimelineEditor.gd
 		# consider to make it "public" or add a public helper function
 		timeline_editor.select_item(self)
+
 
 ## *****************************************************************************
 ##								OVERRIDES
 ## *****************************************************************************
 
+
 func _ready():
 	event_name = DTS.translate(event_name)
-	
+
 	## DO SOME STYLING
 	$PanelContainer/SelectedStyle.modulate = get_color("accent_color", "Editor")
-	
-	
+
 	_setup_event()
-	
-	set_focus_mode(1) # Allowing this node to grab focus
-	
+
+	set_focus_mode(1)  # Allowing this node to grab focus
+
 	# signals
-	panel.connect("gui_input", self, '_on_gui_input')
+	panel.connect("gui_input", self, "_on_gui_input")
 	expand_control.connect("state_changed", self, "_on_ExpandControl_state_changed")
 	options_control.connect("action", self, "_on_OptionsControl_action")
-	
+
 	# load icons
 	if help_page_path != "":
 		help_button.icon = get_icon("HelpSearch", "EditorIcons")
 		help_button.show()
-	
+
 	# when it enters the tree, load the data into the header/body
 	# If there is any external data, it will be set already BEFORE the event is added to tree
 	# if you have a header
@@ -256,14 +260,16 @@ func _ready():
 		get_body().connect("set_warning", self, "set_warning")
 		get_body().connect("remove_warning", self, "remove_warning")
 		get_body().load_data(event_data)
-	
+
 	if get_body():
 		set_expanded(expand_on_default)
-	
+
 	_on_Indent_visibility_changed()
 
 
 func _on_HelpButton_pressed():
 	if help_page_path:
-		var master_tree = editor_reference.get_node_or_null('MainPanel/MasterTreeContainer/MasterTree')
+		var master_tree = editor_reference.get_node_or_null(
+			"MainPanel/MasterTreeContainer/MasterTree"
+		)
 		master_tree.select_documentation_item(help_page_path)

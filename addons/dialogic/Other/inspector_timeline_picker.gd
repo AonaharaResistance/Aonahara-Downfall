@@ -27,8 +27,8 @@ func parse_property(object, type, path, hint, hint_text, usage):
 
 
 func switch_to_dialogic_timeline(timeline: String):
-	if (dialogic_editor_plugin != null):
-		var master_tree = dialogic_editor_view.get_node('MainPanel/MasterTreeContainer/MasterTree')
+	if dialogic_editor_plugin != null:
+		var master_tree = dialogic_editor_view.get_node("MainPanel/MasterTreeContainer/MasterTree")
 		dialogic_editor_plugin.get_editor_interface().set_main_screen_editor("Dialogic")
 
 		master_tree.timeline_editor.batches.clear()

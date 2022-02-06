@@ -29,7 +29,7 @@ func _on_InteractionComponent_body_entered(body) -> void:
 	emit_signal("on_interactable_changed", interaction_target)
 
 
-func _on_InteractionComponent_body_exited(body)->void:
+func _on_InteractionComponent_body_exited(body) -> void:
 	body = body.interaction
 	if body.has_method("hide_ui"):
 		body.hide_ui()

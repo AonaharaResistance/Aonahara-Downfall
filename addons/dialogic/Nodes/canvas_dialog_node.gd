@@ -14,7 +14,6 @@ signal text_complete(text_event)
 # Custom user signal
 signal dialogic_signal(value)
 
-
 var _dialog_node_scene = load("res://addons/dialogic/Nodes/DialogNode.tscn")
 var dialog_node = null
 
@@ -22,12 +21,12 @@ var dialog_node = null
 func set_dialog_node_scene(scene) -> void:
 	_dialog_node_scene = scene
 	dialog_node = _dialog_node_scene.instance()
-  
 
-func _enter_tree() -> void:  
+
+func _enter_tree() -> void:
 	if dialog_node:
 		add_child(dialog_node)
-		dialog_node.connect('tree_exited', self, 'dialog_finished')
+		dialog_node.connect("tree_exited", self, "dialog_finished")
 
 
 func dialog_finished():
@@ -40,10 +39,10 @@ func set_dialog_script(value):
 
 func _ready() -> void:
 	# change the canvas layer
-	var config = DialogicResources.get_settings_config()	
+	var config = DialogicResources.get_settings_config()
 	layer = int(config.get_value("theme", "canvas_layer", 1))
-	
-	var _err:int
+
+	var _err: int
 	if dialog_node:
 		_err = dialog_node.connect("event_start", self, "_on_event_start")
 		assert(_err == OK)
