@@ -32,16 +32,16 @@ func set_debug_overlay():
 
 
 func _ready():
-  Hud.visible = true
-  var _singla = Party.connect("current_active_changed", self, "_on_party_changed")
-  print(Party.add_party_member(res))
-  print(Party.add_party_member(res2))
-  print(Party.party_members)
-  player = Party.party_members[Party.selected_member]
-  Party.spawn_party(self)
+	Hud.visible = true
+	var _singla = Party.connect("current_active_changed", self, "_on_party_changed")
+	print(Party.add_party_member(res))
+	print(Party.add_party_member(res2))
+	print(Party.party_members)
+	player = Party.party_members[Party.selected_member]
+	Party.spawn_party(self)
 
-  var dialog = Dialogic.start("sexooooooo")
-  add_child(dialog)
+	var dialog = Dialogic.start("sexooooooo")
+	add_child(dialog)
 
-  add_child(overlay)
-  add_child(title)
+	add_child(overlay)
+	add_child(title)

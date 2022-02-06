@@ -11,10 +11,12 @@ onready var cooldown_timer: Timer = $CooldownTimer
 var cooldown_indicator: float = cooldown_duration * 60
 var current_cooldown_indicator: float = cooldown_duration * 60
 
+
 func _ready():
-  cooldown_indicator = cooldown_duration * 60
-  current_cooldown_indicator = cooldown_duration * 60
-  cooldown_timer.set_wait_time(cooldown_duration)
+	cooldown_indicator = cooldown_duration * 60
+	current_cooldown_indicator = cooldown_duration * 60
+	cooldown_timer.set_wait_time(cooldown_duration)
+
 
 func activate_skill():
-  print("skill activated")
+	print("skill activated")

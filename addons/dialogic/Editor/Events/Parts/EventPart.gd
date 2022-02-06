@@ -21,24 +21,24 @@ signal request_selection
 
 # emit this if you want a warning to be displayed/hidden
 signal set_warning(text)
-signal remove_warning()
+signal remove_warning
 
 
 # when the node is ready
 func _ready():
 	pass
 
+
 # to be overwritten by the subclasses
-func load_data(data:Dictionary):
+func load_data(data: Dictionary):
 	event_data = data
 
 
 # to be overwritten by body-parts that provide a preview
 func get_preview_text():
-	return ''
+	return ""
 
 
 # has to be called everytime the data got changed
 func data_changed():
 	emit_signal("data_changed", event_data)
-

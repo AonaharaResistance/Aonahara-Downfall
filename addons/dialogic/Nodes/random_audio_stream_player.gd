@@ -30,12 +30,13 @@ export(float, 0, 80) var random_volume_range = 0
 onready var base_pitch = pitch_scale
 export(float, 0, 4) var random_pitch_range = 0
 
-var playing_sample_nb : int = -1
-var last_played_sample_nb : int = -1 # only used if random_strategy = 1
-var to_play = [] # only used if random_strategy = 2
+var playing_sample_nb: int = -1
+var last_played_sample_nb: int = -1  # only used if random_strategy = 1
+var to_play = []  # only used if random_strategy = 2
+
 
 # You can use playing_sample_nb to choose what sample to use
-func play(from_position=0.0, playing_sample_nb=-1):
+func play(from_position = 0.0, playing_sample_nb = -1):
 	var number_of_samples = len(samples)
 	if number_of_samples > 0:
 		if playing_sample_nb < 0:
@@ -65,13 +66,16 @@ func play(from_position=0.0, playing_sample_nb=-1):
 		set_stream(samples[playing_sample_nb])
 		.play(from_position)
 
+
 func set_volume_db(new_volume_db):
 	.set_volume_db(new_volume_db)
 	base_volume = new_volume_db
 
+
 func set_pitch_scale(new_pitch):
 	.set_pitch_scale(max(0.0001, new_pitch))
 	base_pitch = new_pitch
+
 
 func load_samples_from_folder(path):
 	if path != "":
@@ -82,7 +86,11 @@ func load_samples_from_folder(path):
 			var file_name = dir.get_next()
 			while file_name != "":
 				if not dir.current_is_dir() and file_name.ends_with(".import"):
-					var resource_path = dir.get_current_dir() + "/" + file_name.replace('.import', '')
+					var resource_path = (
+						dir.get_current_dir()
+						+ "/"
+						+ file_name.replace(".import", "")
+					)
 					if resource_path.get_extension().to_lower() in ["wav", "ogg"]:
 						var resource = load(resource_path)
 						if resource != null:
