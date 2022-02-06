@@ -28,3 +28,20 @@ jobs:
         with:
           name: Client - ${{ matrix.platform }}
           path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+
+      - name: Set up Netlify deploy
+        if: matrix.platform == "HTML5"
+        run: |
+          mkdir -p /home/runner/work/_temp/_github_home/build;
+          mv ${{ github.workspace }}/${{ steps.build.outputs.build }}/downfall \
+             ${{ github.workspace }}/${{ steps.build.outputs.build }}/index.html;
+          cp -rv ${{ github.workspace }}/${{ steps.build.outputs.build }}/* \
+                 /home/runner/work/_temp/_github_home/build/;
+
+      - name: Deploy to Netlify
+        uses: danakim/gh-action-deploy-netlify@master
+        if: matrix.platform == "HTML5"
+        with:
+          AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEPLOY_PROD: false
