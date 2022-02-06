@@ -11,5 +11,5 @@ dest_files=[ "res://.import/on the behalf of humanity i must ask this.mp3-794f4e
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

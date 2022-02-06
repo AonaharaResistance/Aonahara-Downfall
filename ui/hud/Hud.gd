@@ -5,16 +5,14 @@ onready var health_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/T
 onready var empty_health_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/TopBackground/HealthEmpty
 onready var stamina_fill: HBoxContainer = $CanvasLayer/GUI/MarginContainer/Top/Stamina
 onready var stamina_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/TopBackground/StaminaFill
-onready var skill: SkillHud = $CanvasLayer/GUI/MarginContainer/Bottom/SkillsHud/
+onready var skill: SkillHud = $CanvasLayer/GUI/MarginContainer2/Bottom/SkillsHud/
 
 var health_full = preload("res://ui/hud/health/health_full.tscn")
 var health_empty = preload("res://ui/hud/health/health_empty.tscn")
-var stamina_start = preload("res://ui/hud/stamina/stamina_start.tscn")
 var stamina_bar = preload("res://ui/hud/stamina/stamina_bar.tscn")
 var stamina_bar_empty = preload("res://ui/hud/stamina/stamina_bar_empty.tscn")
 var stamina_bar_filled = preload("res://ui/hud/stamina/stamina_bar_filled.tscn")
 var stamina_point = preload("res://ui/hud/stamina/stamina_fill.tscn")
-var stamina_end = preload("res://ui/hud/stamina/stamina_end.tscn")
 
 var visible := false setget set_visible
 
@@ -45,14 +43,11 @@ func _update_stamina() -> void:
     stamina_container.remove_child(i)
   for i in stamina_fill.get_children():
     stamina_fill.remove_child(i)
-  stamina_container.add_child(stamina_start.instance())
 
   for i in Party.current_character().stamina:
     stamina_fill.add_child(stamina_bar_filled.instance())
   for i in Party.current_character().max_stamina:
     stamina_container.add_child(stamina_bar_empty.instance())
-  stamina_container.add_child(stamina_end.instance())
-  stamina_fill.add_child(stamina_end.instance())
 
 func set_visible(value: bool) -> void:
   visible = value

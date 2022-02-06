@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/ui_elements/Rock.png" type="Texture" id=1]
+[ext_resource path="res://objects/weapons/staves/parseids_staff/sprites/rock_shard_1.png" type="Texture" id=1]
 [ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/rock_droplet.gd" type="Script" id=2]
 [ext_resource path="res://assets/place_holder/effects (new)/hit_effect_anim_f0.png" type="Texture" id=3]
 
@@ -62,6 +62,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "test"
@@ -113,13 +125,26 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 1.46, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 100 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1.36, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.52, 0.52 ) ]
+}
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 24.1039
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 7.14922
+height = 8.83376
 
 [node name="Node2D" type="Area2D"]
 collision_layer = 8
@@ -145,4 +170,4 @@ anims/RESET = SubResource( 2 )
 anims/test = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 11 )

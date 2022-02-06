@@ -1,0 +1,49 @@
+extends StateMachine
+
+onready var animation = parent.get_node("AnimationPlayer")
+
+
+func _ready() -> void:
+  _add_state("idle")
+  _add_state("move")
+  _add_state("melee")
+  _add_state("shoot")
+  set_state(states.move)
+
+
+func _state_logic(_delta) -> void:
+  match state:
+    states.idle:
+      pass
+    states.move:
+      parent.move()
+      pass
+    states.melee:
+      pass
+    states.shoot:
+      pass
+
+
+func _enter_state(_previous_state: int, new_state: int) -> void:
+  match new_state:
+    states.idle:
+      animation.play("idle")
+    states.move:
+      animation.play("move")
+    states.melee:
+      animation.play("melee")
+    states.shoot:
+      animation.play("shoot")
+
+func _get_transition() -> int:
+  match state:
+    states.idle:
+      pass
+    states.move:
+      if parent.global_position.length() - Party.current_character().position < Vector2(1,1):
+        return states.melee
+    states.melee:
+      if parent.global_position.length() - Party.current_character().position > Vector2(1,1):
+        return states.move
+
+  return -1
