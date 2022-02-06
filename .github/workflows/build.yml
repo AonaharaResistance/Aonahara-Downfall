@@ -29,7 +29,7 @@ jobs:
           name: Client - ${{ matrix.platform }}
           path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
 
-      - name: Set up Netlify deploy
+      - name: Set up deployment
         if: ${{ matrix.platform == 'HTML5' }}
         run: |
           cp -rv ${{ github.workspace }}/${{ steps.build.outputs.build }} \
@@ -37,10 +37,10 @@ jobs:
           mv /home/runner/work/_temp/_github_home/build/downfall \
              /home/runner/work/_temp/_github_home/build/index.html;
 
-      - name: Deploy to Netlify
-        uses: danakim/gh-action-deploy-netlify@master
-        if: ${{ matrix.platform == 'HTML5' }}
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
-          AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          DEPLOY_PROD: false
+          branch: gh-pages
+          folder: /home/runner/work/_temp/_github_home/build/
+          single-commit: true
+          clean: true
