@@ -32,11 +32,10 @@ jobs:
       - name: Set up Netlify deploy
         if: ${{ matrix.platform == 'HTML5' }}
         run: |
-          mkdir -p /home/runner/work/_temp/_github_home/build;
-          mv ${{ github.workspace }}/${{ steps.build.outputs.build }}/downfall \
-             ${{ github.workspace }}/${{ steps.build.outputs.build }}/index.html;
-          cp -rv ${{ github.workspace }}/${{ steps.build.outputs.build }}/* \
-                 /home/runner/work/_temp/_github_home/build/;
+          cp -rv ${{ github.workspace }}/${{ steps.build.outputs.build }} \
+                 /home/runner/work/_temp/_github_home/build;
+          mv /home/runner/work/_temp/_github_home/build/downfall \
+             /home/runner/work/_temp/_github_home/build/index.html;
 
       - name: Deploy to Netlify
         uses: danakim/gh-action-deploy-netlify@master
