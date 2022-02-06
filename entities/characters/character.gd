@@ -16,6 +16,8 @@ onready var skills: Node = $Skills
 onready var skill_one: Skill = $Skills.get_child(0)
 onready var skill_two: Skill = $Skills.get_child(1)
 
+export var character_name: String
+export var character_icon: Resource
 export var acceleration: int
 export var max_speed: int
 export var hp: int
@@ -23,17 +25,20 @@ export var max_hp: int
 export var stamina: int setget set_stamina
 export var max_stamina: int
 export var base_damage: int
-export var attack_speed: float
 export var stamina_regen: float
 export var stamina_regen_rate: float
 export var dash_duration: float = 0.2
 export var receives_knockback: bool = true
+export var mirrored_sprite: bool = true
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
 var isOnControl: bool = true
+var is_facing_left: bool = false setget set_is_facing_left, get_is_facing_left
 var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
+
+signal battle_state_changed
 
 
 func _ready() -> void:
@@ -50,8 +55,12 @@ func equiped_weapon():
 
 
 func listen_to_attacks() -> void:
-  if Input.is_action_just_pressed("light_attack") && isOnControl:
-    equiped_weapon().light_attack()
+  if equiped_weapon().holdable_light:
+    if Input.is_action_pressed("light_attack") && isOnControl:
+      equiped_weapon().light_attack()
+  else:
+    if Input.is_action_just_pressed("light_attack") && isOnControl:
+      equiped_weapon().light_attack()
   if Input.is_action_just_released("light_attack") && isOnControl:
     equiped_weapon().light_attack_release()
   if Input.is_action_just_pressed("heavy_attack") && isOnControl:
@@ -83,6 +92,7 @@ func set_is_on_battle(new_state) -> void:
   if new_state == true:
     battle_timer.start()
   is_on_battle = new_state
+  emit_signal("battle_state_changed")
 
 
 func get_is_on_battle() -> bool:
@@ -147,6 +157,12 @@ func get_input_direction() -> Vector2:
   else:
     return Vector2.ZERO
 
+func get_is_facing_left() -> bool:
+  return is_facing_left
+  
+func set_is_facing_left(new_value: bool) -> void:
+  is_facing_left = new_value
+
 
 func sprite_control() -> void:
   # ? Pretty sure there's a better way of doing this
@@ -159,10 +175,12 @@ func sprite_control() -> void:
     interaction_component.scale.x *= -1
 
   # Character control
-  if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
-    sprite.scale.x *= -1
-  elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
-    sprite.scale.x *= -1
+  if mirrored_sprite:
+    if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
+      sprite.scale.x *= -1
+    elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
+      sprite.scale.x *= -1
+
 
   # Weapon control
   weapon.rotation = mouse_direction.angle()

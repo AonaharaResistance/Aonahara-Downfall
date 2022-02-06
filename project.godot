@@ -99,10 +99,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/interactions/InteractionComponentUI.gd"
 }, {
-"base": "Node2D",
+"base": "Area2D",
 "class": "Piercing",
 "language": "GDScript",
 "path": "res://objects/projectiles/piercings/piercing.gd"
+}, {
+"base": "WeaponHitBox",
+"class": "PiercingHitBox",
+"language": "GDScript",
+"path": "res://objects/projectiles/piercings/piercing_hit_box.gd"
 }, {
 "base": "Reference",
 "class": "ResourceAsyncLoader",
@@ -164,6 +169,7 @@ _global_script_class_icons={
 "InteractionComponent": "",
 "InteractionComponentUI": "",
 "Piercing": "",
+"PiercingHitBox": "",
 "ResourceAsyncLoader": "",
 "SaveSettings": "",
 "Skill": "",

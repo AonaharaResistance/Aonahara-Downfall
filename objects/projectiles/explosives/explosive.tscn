@@ -17,6 +17,8 @@ script = ExtResource( 1 )
 wait_time = 20.0
 autostart = true
 
+[node name="Particles2D" type="Particles2D" parent="."]
+
 [node name="ExplosionHitBox" parent="." instance=ExtResource( 2 )]
 detonator_path = NodePath("..")
 

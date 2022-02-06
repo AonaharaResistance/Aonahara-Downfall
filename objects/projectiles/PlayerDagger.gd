@@ -2,6 +2,7 @@ extends Area2D
 
 # ! Experimental, might be changed compeltely inn the future
 export(int) var SPEED: int = 500
+var damage = 1
 
 
 func _physics_process(delta):

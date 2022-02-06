@@ -1,7 +1,6 @@
-extends Area2D
+extends HitBox
 
 export(int) var SPEED: int = 100
-
 
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
