@@ -149,8 +149,10 @@ flip_v = true
 
 [node name="HitBox" parent="WeaponContainer" index="1"]
 scale = Vector2( 1.30897, 0.883502 )
+collision_layer = 2
 script = ExtResource( 3 )
 damage = 2
+knockback_strength = 50.0
 
 [node name="CollisionShape2D" parent="WeaponContainer/HitBox" index="0"]
 position = Vector2( 5.43952, -9.99062 )

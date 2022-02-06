@@ -27,50 +27,52 @@ enum { LIGHT, HEAVY }
 # which is uuh?
 # but yeah, even if the animation is empty it's fine
 
+
 func _ready():
-  # ! Very dangerous and unsage but i like it :HenryMatsuri:
-  character = get_node("../../")
-  heavy_cooldown_timer.set_wait_time(heavy_cooldown_time)
+	# ! Very dangerous and unsage but i like it :HenryMatsuri:
+	character = get_node("../../")
+	heavy_cooldown_timer.set_wait_time(heavy_cooldown_time)
 
 
 func light_attack():
-  character.set_is_on_battle(true)
-  if chargable_light and light_cooldown_timer.is_stopped():
-    animation.play("light_charge")
-  elif !chargable_light and light_cooldown_timer.is_stopped():
-    animation.play("light_attack")
-    light_cooldown_timer.start()
+	character.set_is_on_battle(true)
+	if chargable_light and light_cooldown_timer.is_stopped():
+		animation.play("light_charge")
+	elif !chargable_light and light_cooldown_timer.is_stopped():
+		animation.play("light_attack")
+		light_cooldown_timer.start()
 
 
 func light_attack_release():
-  animation.stop()
-  if chargable_light:
-    character.set_is_on_battle(true)
-    animation.play("light_attack")
+	animation.stop()
+	if chargable_light:
+		character.set_is_on_battle(true)
+		animation.play("light_attack")
 
 
 func heavy_attack():
-  character.set_is_on_battle(true)
-  if chargable_heavy:
-    animation.play("heavy_charge")
-  else:
-    animation.play("heavy_attack")
+	character.set_is_on_battle(true)
+	if chargable_heavy:
+		animation.play("heavy_charge")
+	else:
+		animation.play("heavy_attack")
 
 
 func heavy_attack_release():
-  animation.play("RESET")
-  if chargable_heavy && heavy_cooldown_timer.is_stopped() && heavy_charged:
-    heavy_charged = false
-    animation.play("heavy_attack")
-    heavy_cooldown_timer.start()
+	animation.play("RESET")
+	if chargable_heavy && heavy_cooldown_timer.is_stopped() && heavy_charged:
+		heavy_charged = false
+		animation.play("heavy_attack")
+		heavy_cooldown_timer.start()
+
 
 # A convinient template if the weapon attacks is just spawning projectiles
 func _spawn_projectile(projectile_type):
-  var active_projectile
-  if projectile_type == LIGHT:
-    active_projectile = light_projectile.instance()
-  if projectile_type == HEAVY:
-    active_projectile = heavy_projectile.instance()
-  get_tree().get_current_scene().add_child(active_projectile)
-  active_projectile.direction = character.get_mouse_direction()
-  active_projectile.global_position = self.global_position
+	var active_projectile
+	if projectile_type == LIGHT:
+		active_projectile = light_projectile.instance()
+	if projectile_type == HEAVY:
+		active_projectile = heavy_projectile.instance()
+	get_tree().get_current_scene().add_child(active_projectile)
+	active_projectile.direction = character.get_mouse_direction()
+	active_projectile.global_position = self.global_position

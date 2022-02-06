@@ -12,25 +12,25 @@ var character: Character
 
 
 func _ready():
-    # ? Again is this even safe? seems reliable so far
-    character = get_node("../../")
+	# ? Again is this even safe? seems reliable so far
+	character = get_node("../../")
 
 
 func light_attack():
-    character.set_is_on_battle(true)
-    character.battle_timer.start()
-    animation.play("attack")
+	character.set_is_on_battle(true)
+	character.battle_timer.start()
+	animation.play("attack")
 
 
 func light_attack_release():
-    pass
+	pass
 
 
 func heavy_attack():
-    character.set_is_on_battle(true)
-    character.battle_timer.start()
-    animation.play("spin")
+	character.set_is_on_battle(true)
+	character.battle_timer.start()
+	animation.play("spin")
 
 
 func heavy_attack_release():
-    pass
+	pass

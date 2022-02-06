@@ -1,4 +1,3 @@
-
 extends Node2D
 
 # * This thing is purposely messy for testing
@@ -14,36 +13,35 @@ var title = preload("res://scenes/area_title/area_title.tscn").instance()
 
 
 func _on_party_changed():
-    player = Party.party_members[Party.selected_member]
-    dash = player.get_node("Dash")
-    player_state = player.get_node("StateMachine")
-    overlay.stats.clear()
-    set_debug_overlay()
+	player = Party.party_members[Party.selected_member]
+	dash = player.get_node("Dash")
+	player_state = player.get_node("StateMachine")
+	overlay.stats.clear()
+	set_debug_overlay()
 
 
 func set_debug_overlay():
-    overlay.add_stat("player speed", player, "velocity", false)
-    overlay.add_stat("movement state", player_state, "_get_state_name", true)
-    overlay.add_stat("is on battle: ", player, "get_is_on_battle", true)
-    overlay.add_stat("can dash: ", dash, "can_dash", false)
-    overlay.add_stat("dash cooldown: ", dash, "get_cooldown_timer", true)
-    overlay.add_stat("stamina: ", player, "stamina", false)
-    overlay.add_stat("stamina regen timer: ", player, "get_stamina_timer", true)
-    overlay.add_stat("hp: ", player, "hp", false)
+	overlay.add_stat("player speed", player, "velocity", false)
+	overlay.add_stat("movement state", player_state, "_get_state_name", true)
+	overlay.add_stat("is on battle: ", player, "get_is_on_battle", true)
+	overlay.add_stat("can dash: ", dash, "can_dash", false)
+	overlay.add_stat("dash cooldown: ", dash, "get_cooldown_timer", true)
+	overlay.add_stat("stamina: ", player, "stamina", false)
+	overlay.add_stat("stamina regen timer: ", player, "get_stamina_timer", true)
+	overlay.add_stat("hp: ", player, "hp", false)
 
 
 func _ready():
-  Hud.visible = true
-  var _singla = Party.connect("current_active_changed", self, "_on_party_changed")
-  print(Party.add_party_member(res))
-  print(Party.add_party_member(res2))
-  print(Party.party_members)
-  player = Party.party_members[Party.selected_member]
-  Party.spawn_party(self)
+	Hud.visible = true
+	var _singla = Party.connect("current_active_changed", self, "_on_party_changed")
+	print(Party.add_party_member(res))
+	print(Party.add_party_member(res2))
+	print(Party.party_members)
+	player = Party.party_members[Party.selected_member]
+	Party.spawn_party(self)
 
-  var dialog = Dialogic.start("sexooooooo")
-  add_child(dialog)
+	var dialog = Dialogic.start("sexooooooo")
+	add_child(dialog)
 
-  add_child(overlay)
-  add_child(title)
-
+	add_child(overlay)
+	add_child(title)
