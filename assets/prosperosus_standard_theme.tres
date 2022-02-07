@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=15 format=2]
 
-[ext_resource path="res://assets/fonts/pixellocale_8.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/mx5x7.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/place_holder/GUI.png" type="Texture" id=2]
 [ext_resource path="res://assets/place_holder/effects (new)/enemy_afterdead_explosion_anim_f1.png" type="Texture" id=3]
 [ext_resource path="res://assets/place_holder/effects (new)/enemy_afterdead_explosion_anim_f0.png" type="Texture" id=4]

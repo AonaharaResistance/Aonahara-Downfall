@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://assets/train.png" type="Texture" id=1]
+[ext_resource path="res://assets/place_holder/train.png" type="Texture" id=1]
 [ext_resource path="res://levels/train_test.gd" type="Script" id=2]
 [ext_resource path="res://assets/place_holder/light.png" type="Texture" id=3]
 

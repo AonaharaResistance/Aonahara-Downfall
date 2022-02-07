@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/fonts/pixellocale_8.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/mx5x7.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/license_and_agreement/license_and_agreement.gd" type="Script" id=2]
 
 [node name="Control" type="Control"]

@@ -4,7 +4,7 @@ class_name Enemy
 export var hp: int setget set_hp, get_hp
 export var effect_hit: PackedScene = null
 export var effect_died: PackedScene = null
-export var indicator_damage: PackedScene = preload("res://ui/damage_indicator.tscn")
+export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
 export var projectile: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
 export var receives_knockback: bool = true
 export var max_speed: int = 100

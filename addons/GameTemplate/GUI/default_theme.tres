@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=9 format=2]
 
-[ext_resource path="res://addons/GameTemplate/Assets/Fonts/pixellocale_8.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/mx5x7.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/GameTemplate/Assets/Fonts/pixellocale-v-1-4.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://addons/GameTemplate/GUI/ReBindSection/AddActionStyle_Normal.tres" type="StyleBox" id=3]
 

@@ -8,8 +8,8 @@ var player
 var player_state
 var dash
 # warning-ignore:unsafe_method_access
-var overlay = load("res://ui/debug_overlay.tscn").instance()
-var title = preload("res://scenes/area_title/area_title.tscn").instance()
+var overlay = load("res://ui/debug_overlay/debug_overlay.tscn").instance()
+var title = preload("res://ui/area_title/area_title.tscn").instance()
 
 
 func _on_party_changed():

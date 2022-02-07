@@ -9,10 +9,8 @@ onready var skill: SkillHud = $CanvasLayer/GUI/MarginContainer2/Bottom/SkillsHud
 
 var health_full = preload("res://ui/hud/health/health_full.tscn")
 var health_empty = preload("res://ui/hud/health/health_empty.tscn")
-var stamina_bar = preload("res://ui/hud/stamina/stamina_bar.tscn")
 var stamina_bar_empty = preload("res://ui/hud/stamina/stamina_bar_empty.tscn")
 var stamina_bar_filled = preload("res://ui/hud/stamina/stamina_bar_filled.tscn")
-var stamina_point = preload("res://ui/hud/stamina/stamina_fill.tscn")
 
 var visible := false setget set_visible
 

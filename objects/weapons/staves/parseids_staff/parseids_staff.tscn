@@ -6,9 +6,9 @@
 [ext_resource path="res://objects/weapons/staves/parseids_staff/parseids_staff.gd" type="Script" id=4]
 [ext_resource path="res://assets/characters/hand.png" type="Texture" id=5]
 [ext_resource path="res://assets/place_holder/light.png" type="Texture" id=6]
-[ext_resource path="res://objects/projectiles/explosives/hot_ballz/hot_ballz.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/weapons/staves/parseids_staff/shart/shart.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/rock_pillar/rock_pillar.tscn" type="PackedScene" id=8]
-[ext_resource path="res://objects/weapons/staves/parseids_staff/RockShard.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/weapons/staves/parseids_staff/rock_shard/RockShard.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )

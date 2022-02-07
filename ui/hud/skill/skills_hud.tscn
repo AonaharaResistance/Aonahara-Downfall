@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/hud_elements/skill/skill_empty.png" type="Texture" id=1]
-[ext_resource path="res://assets/hud_elements/skill/skill_cooldown.png" type="Texture" id=2]
-[ext_resource path="res://assets/hud_elements/skill/skill_cooldown_base.png" type="Texture" id=3]
+[ext_resource path="res://ui/hud/skill/skill_empty.png" type="Texture" id=1]
+[ext_resource path="res://ui/hud/skill/skill_cooldown.png" type="Texture" id=2]
+[ext_resource path="res://ui/hud/skill/skill_cooldown_base.png" type="Texture" id=3]
 [ext_resource path="res://ui/hud/skill/skills_hud.gd" type="Script" id=4]
 
 [node name="SkillsHud" type="HBoxContainer"]
