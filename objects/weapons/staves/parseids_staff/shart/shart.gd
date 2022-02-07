@@ -13,6 +13,12 @@ func disable():
 	explosion_collision.free()
 
 
+func _ready():
+	var mouse_direction = (get_global_mouse_position() - global_position).normalized()
+	if mouse_direction.x < 0:
+		sprite.scale.y *= -1
+
+
 func _process(delta):
 	global_position += speed * direction * delta
 

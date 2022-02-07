@@ -18,3 +18,7 @@ func disable():
 
 func _on_LifeTime_timeout():
 	disable()
+
+
+func _on_Lifetime_timeout():
+	queue_free()

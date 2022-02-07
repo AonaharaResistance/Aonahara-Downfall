@@ -18,3 +18,5 @@ autostart = true
 [node name="Particles2D" type="Particles2D" parent="."]
 
 [node name="PiercingHitBox" parent="." instance=ExtResource( 2 )]
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

@@ -76,3 +76,5 @@ func _spawn_projectile(projectile_type):
 	get_tree().get_current_scene().add_child(active_projectile)
 	active_projectile.direction = character.get_mouse_direction()
 	active_projectile.global_position = self.global_position
+	var angle_to_mouse = ((get_global_mouse_position() - active_projectile.global_position).normalized()).angle()
+	active_projectile.rotate(angle_to_mouse)
