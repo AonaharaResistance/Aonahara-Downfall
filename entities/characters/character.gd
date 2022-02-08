@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Character
 
 onready var animation: AnimationPlayer = $AnimationPlayer
+onready var animation_tree: AnimationTree = $AnimationTree
+onready var animation_mode = animation_tree.get("paramaters/playback")
 onready var sprite: Sprite = $Sprite
 onready var weapon: Node2D = $Weapon
 onready var dash := $Dash
