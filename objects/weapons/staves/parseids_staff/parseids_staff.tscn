@@ -190,8 +190,6 @@ light_projectile = ExtResource( 10 )
 heavy_projectile = ExtResource( 7 )
 chargable_heavy = true
 holdable_light = true
-mirrorable_heavy = false
-mirrorable_light = null
 pillar = ExtResource( 8 )
 
 [node name="Sprite" parent="WeaponContainer" index="0"]
