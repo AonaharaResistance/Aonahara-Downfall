@@ -8,11 +8,11 @@ onready var spawning_circle: Sprite = $SpawningCircle
 onready var particle: Particles2D = $SpawningCircle/SpawningParticle
 onready var animation: AnimationPlayer = $AnimationPlayer
 onready var cast_timer: Timer = $CastTimer
-var state: String
+var casting: bool = false
 
 
 func _unhandled_input(event):
-	if state == "Casting":
+	if casting:
 		if event.is_action_pressed("cast_skill"):
 			cast_skill()
 		if event.is_action_pressed("cancel_skill"):
@@ -21,7 +21,7 @@ func _unhandled_input(event):
 
 func activate_skill() -> void:
 	if cooldown_timer.is_stopped():
-		state = "Casting"
+		casting = true
 		spawning_circle.set_visible(true)
 		Cursor.set_default_cursor(Cursor.target, Vector2(16, 16))
 
@@ -32,7 +32,7 @@ func _start_timers() -> void:
 
 
 func cast_skill() -> void:
-	state = "Not Casting"
+	casting = false
 	particle.set_visible(true)
 	_start_timers()
 	Hud.start_channeling(cast_timer.get_wait_time() * 60)
@@ -40,7 +40,7 @@ func cast_skill() -> void:
 
 
 func cancel_cast() -> void:
-	state = "Not Casting"
+	casting = false
 	spawning_circle.set_visible(false)
 	Cursor.set_default_cursor(Cursor.default, Vector2(16, 16))
 
@@ -49,7 +49,7 @@ func _process(delta) -> void:
 	_spin(delta)
 	if !cooldown_timer.is_stopped():
 		current_cooldown_indicator -= 60 * delta
-	if state == "Casting":
+	if casting:
 		spawning_circle.global_position = get_global_mouse_position()
 
 

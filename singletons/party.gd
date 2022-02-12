@@ -58,15 +58,9 @@ func current_character():
 func change_party_member(index):
 	var pos = current_character().global_position
 	tactical_character_hiding(current_character())
-	var k_up = current_character().k_up
-	var k_down = current_character().k_down
-	var k_left = current_character().k_left
-	var k_right = current_character().k_right
+	var movement_key = current_character().movement_key
 	set_selected_member(index)
-	current_character().k_up = k_up
-	current_character().k_down = k_down
-	current_character().k_left = k_left
-	current_character().k_right = k_right
+	current_character().movement_key = movement_key
 	current_character().global_position = pos
 	tactical_character_showing(current_character())
 	emit_signal("current_active_changed")
@@ -81,7 +75,7 @@ func tactical_character_hiding(character):
 		character.get_node("Weapon")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(true)
-	character.is_on_control = false
+	character.is_in_control = false
 	for sprite in sprites:
 		sprite.set_visible(false)
 
@@ -94,6 +88,6 @@ func tactical_character_showing(character):
 		character.get_node("Weapon")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(false)
-	character.is_on_control = true
+	character.is_in_control = true
 	for sprite in sprites:
 		sprite.set_visible(true)

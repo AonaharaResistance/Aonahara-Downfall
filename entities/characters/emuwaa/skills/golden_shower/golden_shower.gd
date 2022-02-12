@@ -10,19 +10,19 @@ onready var animation: AnimationPlayer = $AnimationPlayer
 onready var aoe_animation: AnimationPlayer = $AoeAnimation
 
 var rocks = preload("res://entities/characters/emuwaa/skills/golden_shower/rock_droplet.tscn")
-var state: String
+var casting: bool = false
 
 
 func _process(delta) -> void:
 	_spin(delta)
 	if !cooldown_timer.is_stopped():
 		current_cooldown_indicator -= 60 * delta
-	if state == "Casting":
+	if casting:
 		aoe.global_position = get_global_mouse_position()
 
 
 func _unhandled_input(event):
-	if state == "Casting":
+	if casting:
 		if event.is_action_pressed("cast_skill"):
 			cast_skill()
 		if event.is_action_pressed("cancel_skill"):
@@ -43,14 +43,14 @@ func _start_timers() -> void:
 
 func activate_skill() -> void:
 	if cooldown_timer.is_stopped():
-		state = "Casting"
+		casting = true
 		aoe.set_visible(true)
 		Cursor.set_default_cursor(Cursor.target, Vector2(16, 16))
 
 
 func cast_skill() -> void:
 	animation.play("fade_in")
-	state = "Not Casting"
+	casting = false
 	_start_timers()
 	Cursor.set_default_cursor(Cursor.default, Vector2(16, 16))
 	shadow.global_position = get_global_mouse_position()
@@ -63,7 +63,7 @@ func cast_skill() -> void:
 
 
 func cancel_cast() -> void:
-	state = "Not Casting"
+	casting = false
 	aoe.set_visible(false)
 	Cursor.set_default_cursor(Cursor.default, Vector2(16, 16))
 

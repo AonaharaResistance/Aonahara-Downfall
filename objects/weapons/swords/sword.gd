@@ -17,7 +17,7 @@ func _ready():
 
 
 func light_attack():
-	character.set_is_on_battle(true)
+	character.set_is_in_battle(true)
 	character.battle_timer.start()
 	animation.play("attack")
 
@@ -27,7 +27,7 @@ func light_attack_release():
 
 
 func heavy_attack():
-	character.set_is_on_battle(true)
+	character.set_is_in_battle(true)
 	character.battle_timer.start()
 	animation.play("spin")
 

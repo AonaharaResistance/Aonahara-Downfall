@@ -36,12 +36,9 @@ export var mirrored_sprite: bool = true
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
-var is_on_control: bool = true
-var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
-var k_up: bool = false
-var k_down: bool = false
-var k_left: bool = false
-var k_right: bool = false
+var is_in_control: bool = true
+var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
+var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
 
 signal battle_state_changed
 
@@ -52,7 +49,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event):
-	if is_on_control:
+	if is_in_control:
 		listen_to_skills(event)
 		listen_to_attacks(event)
 		listen_to_party_change(event)
@@ -98,21 +95,21 @@ func listen_to_party_change(event) -> void:
 
 func listen_to_input_direction(event) -> void:
 	if event.is_action_pressed("up"):
-		k_up = true
+		movement_key["up"] = true
 	if event.is_action_pressed("down"):
-		k_down = true
+		movement_key["down"] = true
 	if event.is_action_pressed("left"):
-		k_left = true
+		movement_key["left"] = true
 	if event.is_action_pressed("right"):
-		k_right = true
+		movement_key["right"] = true
 	if event.is_action_released("up"):
-		k_up = false
+		movement_key["up"] = false
 	if event.is_action_released("down"):
-		k_down = false
+		movement_key["down"] = false
 	if event.is_action_released("left"):
-		k_left = false
+		movement_key["left"] = false
 	if event.is_action_released("right"):
-		k_right = false
+		movement_key["right"] = false
 
 
 func set_stamina(new_value) -> void:
@@ -129,15 +126,15 @@ func move(delta: float) -> void:
 	velocity = velocity.clamped(max_speed)
 
 
-func set_is_on_battle(new_state) -> void:
+func set_is_in_battle(new_state) -> void:
 	if new_state == true:
 		battle_timer.start()
-	is_on_battle = new_state
+	is_in_battle = new_state
 	emit_signal("battle_state_changed")
 
 
-func get_is_on_battle() -> bool:
-	return is_on_battle
+func get_is_in_battle() -> bool:
+	return is_in_battle
 
 
 func get_mouse_direction() -> Vector2:
@@ -175,7 +172,7 @@ func apply_dash() -> void:
 
 # warning-ignore:unsafe_method_access
 func activate_dash() -> void:
-	if Input.is_action_just_pressed("dash") && is_on_control:
+	if Input.is_action_just_pressed("dash") && is_in_control:
 		stamina -= 1
 		set_stamina_regen_timer(stamina)
 		stamina_timer.start()
@@ -184,10 +181,10 @@ func activate_dash() -> void:
 
 func get_input_direction() -> Vector2:
 	var input_direction: Vector2 = Vector2.ZERO
-	input_direction.x = (int(k_right) - int(k_left))
-	input_direction.y = (int(k_down) - int(k_up))
+	input_direction.x = (int(movement_key["right"]) - int(movement_key["left"]))
+	input_direction.y = (int(movement_key["down"]) - int(movement_key["up"]))
 	input_direction = input_direction.normalized()
-	if is_on_control:
+	if is_in_control:
 		return input_direction
 	else:
 		return Vector2.ZERO
@@ -241,7 +238,7 @@ func apply_knockback(direction, strength) -> void:
 
 
 func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
-	set_is_on_battle(false)
+	set_is_in_battle(false)
 	blinker.start_blinking(sprite, 1.0)
 	_whiten_sprite(0.3)
 	_take_damage(hitbox.damage)
@@ -271,4 +268,4 @@ func die() -> void:
 
 
 func _on_BattleTimer_timeout():
-	set_is_on_battle(false)
+	set_is_in_battle(false)
