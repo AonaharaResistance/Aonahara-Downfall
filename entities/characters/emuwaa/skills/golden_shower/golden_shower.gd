@@ -19,9 +19,13 @@ func _process(delta) -> void:
 		current_cooldown_indicator -= 60 * delta
 	if state == "Casting":
 		aoe.global_position = get_global_mouse_position()
-		if Input.is_action_just_pressed("cast_skill"):
+
+
+func _unhandled_input(event):
+	if state == "Casting":
+		if event.is_action_pressed("cast_skill"):
 			cast_skill()
-		if Input.is_action_just_pressed("cancel_skill"):
+		if event.is_action_pressed("cancel_skill"):
 			cancel_cast()
 
 

@@ -15,8 +15,6 @@ func _state_logic(delta) -> void:
 	parent.apply_dash()
 	parent.sprite_control()
 	parent.listen_knockback(delta)
-	parent.listen_to_skills()
-	parent.listen_to_attacks()
 
 	if state != states.idle && parent.velocity.length() > 20 && parent.dash.can_dash:
 		parent.activate_dash()

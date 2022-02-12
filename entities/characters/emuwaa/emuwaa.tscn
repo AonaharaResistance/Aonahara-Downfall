@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/emuwaa/sprites/emu_spritesheet.png" type="Texture" id=2]
@@ -41,6 +41,23 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "casting"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -111,83 +128,62 @@ tracks/0/keys = {
 "values": [ 25, 26, 27, 28, 29, 30, 30 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=17]
-animation = "idle_left"
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "casting"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "casting"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=39]
+blend_point_0/node = SubResource( 37 )
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource( 38 )
+blend_point_1/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id=42]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=43]
 animation = "idle_left"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
-animation = "idle_left"
+[sub_resource type="AnimationNodeBlendSpace1D" id=44]
+blend_point_0/node = SubResource( 42 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 43 )
+blend_point_1/pos = -0.1
 
-[sub_resource type="AnimationNodeAnimation" id=29]
-animation = "idle_left"
-
-[sub_resource type="AnimationNodeAnimation" id=30]
-animation = "idle_left"
-
-[sub_resource type="AnimationNodeAnimation" id=31]
-animation = "idle"
-
-[sub_resource type="AnimationNodeAnimation" id=32]
-animation = "idle"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=21]
-blend_point_0/node = SubResource( 17 )
-blend_point_0/pos = Vector2( -0.2, 0 )
-blend_point_1/node = SubResource( 18 )
-blend_point_1/pos = Vector2( 0.2, 0 )
-blend_point_2/node = SubResource( 19 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 20 )
-blend_point_3/pos = Vector2( 0, 1 )
-blend_point_4/node = SubResource( 29 )
-blend_point_4/pos = Vector2( -0.1, 0.8 )
-blend_point_5/node = SubResource( 30 )
-blend_point_5/pos = Vector2( -0.1, -0.8 )
-blend_point_6/node = SubResource( 31 )
-blend_point_6/pos = Vector2( 0.1, -0.8 )
-blend_point_7/node = SubResource( 32 )
-blend_point_7/pos = Vector2( 0.1, 0.8 )
-blend_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id=23]
-animation = "move_left"
-
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=53]
 animation = "move"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=54]
 animation = "move_left"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
-animation = "move_left"
+[sub_resource type="AnimationNodeBlendSpace1D" id=49]
+blend_point_0/node = SubResource( 53 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 54 )
+blend_point_1/pos = -0.1
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=22]
-blend_point_0/node = SubResource( 23 )
-blend_point_0/pos = Vector2( -0.2, 0 )
-blend_point_1/node = SubResource( 24 )
-blend_point_1/pos = Vector2( 0.2, 0 )
-blend_point_2/node = SubResource( 25 )
-blend_point_2/pos = Vector2( 0, 1 )
-blend_point_3/node = SubResource( 26 )
-blend_point_3/pos = Vector2( 0, -1 )
-blend_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
 [sub_resource type="AnimationNodeStateMachine" id=16]
-states/idle/node = SubResource( 21 )
-states/idle/position = Vector2( 283, 116 )
-states/walk/node = SubResource( 22 )
-states/walk/position = Vector2( 454, 116 )
-transitions = [ "idle", "walk", SubResource( 27 ), "walk", "idle", SubResource( 28 ) ]
+states/casting/node = SubResource( 39 )
+states/casting/position = Vector2( 393.806, 213.32 )
+states/idle/node = SubResource( 44 )
+states/idle/position = Vector2( 300.806, 116 )
+states/walk/node = SubResource( 49 )
+states/walk/position = Vector2( 467.806, 116 )
+transitions = [ "idle", "casting", SubResource( 47 ), "casting", "idle", SubResource( 48 ), "idle", "walk", SubResource( 50 ), "walk", "idle", SubResource( 51 ), "walk", "casting", SubResource( 52 ) ]
 start_node = "idle"
+graph_offset = Vector2( -21.1938, 64.32 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
@@ -210,8 +206,10 @@ mirrored_sprite = false
 script = ExtResource( 4 )
 
 [node name="ItsRainingRock" parent="Skills" index="0" instance=ExtResource( 7 )]
+position = Vector2( 9.45283, -0.420448 )
 
 [node name="BigDestructiveSummonMeteor" parent="Skills" index="1" instance=ExtResource( 8 )]
+character_path = NodePath("../..")
 
 [node name="DevilBlessing" parent="Blessing" index="0" instance=ExtResource( 9 )]
 position = Vector2( 0.997029, 0 )
@@ -234,7 +232,7 @@ visible = true
 scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 hframes = 8
-vframes = 4
+vframes = 5
 
 [node name="CollisionShape2D" parent="." index="9"]
 position = Vector2( -0.331211, 9.14386 )
@@ -246,6 +244,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="11"]
 anims/RESET = SubResource( 3 )
+anims/casting = SubResource( 36 )
 anims/idle = SubResource( 4 )
 anims/idle_left = SubResource( 12 )
 anims/move = SubResource( 5 )
@@ -256,8 +255,9 @@ tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 15 )
-parameters/idle/blend_position = Vector2( 0.0128205, 0.775862 )
-parameters/walk/blend_position = Vector2( 0, 0 )
+parameters/casting/blend_position = -0.768961
+parameters/idle/blend_position = 0.127188
+parameters/walk/blend_position = -0.0198367
 
 [editable path="Blinker"]
 [editable path="Dash"]

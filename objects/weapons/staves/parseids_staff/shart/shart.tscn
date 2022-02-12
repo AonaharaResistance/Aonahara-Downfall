@@ -261,9 +261,9 @@ knockback_strength = 150.0
 detonator_path = NodePath("..")
 
 [node name="Sprite" type="Sprite" parent="ExplosionHitBox"]
+visible = false
 texture = ExtResource( 6 )
 hframes = 12
-frame = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitBox"]
 modulate = Color( 0.25098, 1, 0.541176, 1 )

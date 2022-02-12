@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BDSM.png-af0cd84be70afec30fcbebf77a893681.stex"
+path="res://.import/BDSM.png-d88103c229720b27a4ec8b2cb2c1ab9b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/skill_icons/emu/BDSM.png"
-dest_files=[ "res://.import/BDSM.png-af0cd84be70afec30fcbebf77a893681.stex" ]
+source_file="res://entities/characters/emuwaa/skills/big_destructive_summon_meteor/BDSM.png"
+dest_files=[ "res://.import/BDSM.png-d88103c229720b27a4ec8b2cb2c1ab9b.stex" ]
 
 [params]
 

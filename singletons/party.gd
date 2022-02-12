@@ -7,22 +7,6 @@ const PARTY_MAX: int = 4
 var selected_member: int = 0 setget set_selected_member, get_selected_member_index
 
 
-func _process(_delta):
-	swap_control()
-
-
-func swap_control() -> void:
-	# TODO: Handle else
-	if Input.is_action_just_pressed("party1") && party_members.size() >= 1:
-		change_party_member(0)
-	if Input.is_action_just_pressed("party2") && party_members.size() >= 2:
-		change_party_member(1)
-	if Input.is_action_just_pressed("party3") && party_members.size() >= 3:
-		change_party_member(2)
-	if Input.is_action_just_pressed("party4") && party_members.size() >= 4:
-		change_party_member(3)
-
-
 func current_scene() -> Node:
 	return get_tree().get_current_scene()
 
@@ -74,7 +58,15 @@ func current_character():
 func change_party_member(index):
 	var pos = current_character().global_position
 	tactical_character_hiding(current_character())
+	var k_up = current_character().k_up
+	var k_down = current_character().k_down
+	var k_left = current_character().k_left
+	var k_right = current_character().k_right
 	set_selected_member(index)
+	current_character().k_up = k_up
+	current_character().k_down = k_down
+	current_character().k_left = k_left
+	current_character().k_right = k_right
 	current_character().global_position = pos
 	tactical_character_showing(current_character())
 	emit_signal("current_active_changed")
@@ -89,7 +81,7 @@ func tactical_character_hiding(character):
 		character.get_node("Weapon")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(true)
-	character.isOnControl = false
+	character.is_on_control = false
 	for sprite in sprites:
 		sprite.set_visible(false)
 
@@ -102,6 +94,6 @@ func tactical_character_showing(character):
 		character.get_node("Weapon")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(false)
-	character.isOnControl = true
+	character.is_on_control = true
 	for sprite in sprites:
 		sprite.set_visible(true)

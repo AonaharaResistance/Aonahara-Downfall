@@ -7,6 +7,7 @@ onready var skill_one_time_left: Label = $Skill1/CooldownLabel
 onready var skill_two_time_left: Label = $Skill2/CooldownLabel
 onready var skill_one_cooldown_progress: TextureProgress = $Skill1/CooldownIndicator
 onready var skill_two_cooldown_progress: TextureProgress = $Skill2/CooldownIndicator
+onready var desc: Label = $Skill1/Label
 
 var skill_one_timer: Timer
 var skill_two_timer: Timer
@@ -72,3 +73,13 @@ func _set_skills_timer() -> void:
 func _set_skills_cooldown_indicator() -> void:
 	skill_one_cooldown_progress.max_value = Party.current_character().skill_one.cooldown_indicator
 	skill_two_cooldown_progress.max_value = Party.current_character().skill_two.cooldown_indicator
+
+
+func _on_Skill1_gui_input(event):
+	if event.is_action_pressed("left_click"):
+		Party.current_character().skill_one.activate_skill()
+
+
+func _on_Skill2_gui_input(event: InputEvent):
+	if event.is_action_pressed("left_click"):
+		Party.current_character().skill_two.activate_skill()
