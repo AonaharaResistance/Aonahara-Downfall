@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/emuwaa/sprites/emu_spritesheet.png" type="Texture" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://entities/characters/emuwaa/emu_state_machine.gd" type="Script" id=4]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/parseids_staff.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/characters/emuwaa/sprites/emu_head.png" type="Texture" id=6]
-[ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/its_raining_rocks.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/characters/emuwaa/skills/golden_shower/golden_shower.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/characters/emuwaa/skills/big_destructive_summon_meteor/big_destructive_summon_meteor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://common/blessings/devil_blessing/devil_blessing.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.58169, 3.04918 )
@@ -39,6 +41,23 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "casting"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -109,6 +128,65 @@ tracks/0/keys = {
 "values": [ 25, 26, 27, 28, 29, 30, 30 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "casting"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "casting"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=39]
+blend_point_0/node = SubResource( 37 )
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource( 38 )
+blend_point_1/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "idle_left"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=44]
+blend_point_0/node = SubResource( 42 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 43 )
+blend_point_1/pos = -0.1
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "move_left"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=49]
+blend_point_0/node = SubResource( 53 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 54 )
+blend_point_1/pos = -0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachine" id=16]
+states/casting/node = SubResource( 39 )
+states/casting/position = Vector2( 393.806, 213.32 )
+states/idle/node = SubResource( 44 )
+states/idle/position = Vector2( 300.806, 116 )
+states/walk/node = SubResource( 49 )
+states/walk/position = Vector2( 467.806, 116 )
+transitions = [ "idle", "casting", SubResource( 47 ), "casting", "idle", SubResource( 48 ), "idle", "walk", SubResource( 50 ), "walk", "idle", SubResource( 51 ), "walk", "casting", SubResource( 52 ) ]
+start_node = "idle"
+graph_offset = Vector2( -21.1938, 64.32 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+
 [node name="Emuwaa" instance=ExtResource( 1 )]
 collision_mask = 1
 character_name = "Emuwaa"
@@ -128,30 +206,35 @@ mirrored_sprite = false
 script = ExtResource( 4 )
 
 [node name="ItsRainingRock" parent="Skills" index="0" instance=ExtResource( 7 )]
+position = Vector2( 9.45283, -0.420448 )
 
-[node name="ItsRainingRock2" parent="Skills" index="1" instance=ExtResource( 7 )]
+[node name="BigDestructiveSummonMeteor" parent="Skills" index="1" instance=ExtResource( 8 )]
+character_path = NodePath("../..")
 
-[node name="Weapon" parent="." index="4"]
+[node name="DevilBlessing" parent="Blessing" index="0" instance=ExtResource( 9 )]
+position = Vector2( 0.997029, 0 )
+
+[node name="Weapon" parent="." index="5"]
 visible = true
 
 [node name="ParseidsStaff" parent="Weapon" index="0" instance=ExtResource( 5 )]
 heavy_charged = false
 
-[node name="ShadowSprite" parent="." index="6"]
+[node name="ShadowSprite" parent="." index="7"]
 visible = true
 modulate = Color( 1, 1, 1, 0.333333 )
 position = Vector2( -1.19209e-07, 11.0249 )
 scale = Vector2( 0.729361, 0.260693 )
 texture = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="7"]
+[node name="Sprite" parent="." index="8"]
 visible = true
 scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 hframes = 8
-vframes = 4
+vframes = 6
 
-[node name="CollisionShape2D" parent="." index="8"]
+[node name="CollisionShape2D" parent="." index="9"]
 position = Vector2( -0.331211, 9.14386 )
 shape = SubResource( 1 )
 
@@ -159,12 +242,22 @@ shape = SubResource( 1 )
 position = Vector2( -0.331211, 9.03948 )
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" parent="." index="11"]
 anims/RESET = SubResource( 3 )
+anims/casting = SubResource( 36 )
 anims/idle = SubResource( 4 )
 anims/idle_left = SubResource( 12 )
 anims/move = SubResource( 5 )
 anims/move_left = SubResource( 11 )
+
+[node name="AnimationTree" parent="." index="16"]
+tree_root = SubResource( 16 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 15 )
+parameters/casting/blend_position = -0.768961
+parameters/idle/blend_position = 0.127188
+parameters/walk/blend_position = -0.0198367
 
 [editable path="Blinker"]
 [editable path="Dash"]

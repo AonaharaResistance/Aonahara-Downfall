@@ -1,24 +1,26 @@
 extends StateMachine
 
-onready var animation = parent.get_node("AnimationPlayer")
+onready var animation_tree: AnimationTree = parent.get_node("AnimationTree")
+onready var animation_mode = animation_tree.get("parameters/playback")
 
 
 func _ready() -> void:
 	_add_state("idle")
 	_add_state("move")
-	_add_state("idle_left")
-	_add_state("move_left")
+	_add_state("casting")
 	_add_state("dash")
 	set_state(states.idle)
 
 
 func _state_logic(delta) -> void:
-	parent.move(delta)
-	parent.apply_dash()
-	parent.listen_knockback(delta)
-	parent.listen_to_skills()
-	parent.listen_to_attacks()
-	parent.sprite_control()
+	animation_tree.set("parameters/idle/blend_position", parent.get_mouse_direction().x)
+	animation_tree.set("parameters/walk/blend_position", parent.get_mouse_direction().x)
+
+	if !state == states.casting:
+		parent.move(delta)
+		parent.sprite_control()
+		parent.apply_dash()
+		parent.listen_knockback(delta)
 
 	if state != states.idle && parent.velocity.length() > 20 && parent.dash.can_dash:
 		parent.activate_dash()
@@ -27,13 +29,11 @@ func _state_logic(delta) -> void:
 func _enter_state(_previous_state: int, new_state: int) -> void:
 	match new_state:
 		states.idle:
-			animation.play("idle")
+			animation_mode.travel("idle")
 		states.move:
-			animation.play("move")
-		states.idle_left:
-			animation.play("idle_left")
-		states.move_left:
-			animation.play("move_left")
+			animation_mode.travel("walk")
+		states.casting:
+			animation_mode.travel("casting")
 
 
 func _get_transition() -> int:
@@ -41,39 +41,20 @@ func _get_transition() -> int:
 		states.idle:
 			if parent.velocity.length() > 10:
 				return states.move
-			elif parent.velocity.length() > 10 and parent.get_mouse_direction().x < 0:
-				return states.move_left
-			elif parent.velocity.length() < 10 and parent.get_mouse_direction().x < 0:
-				return states.idle_left
-		states.idle_left:
-			if parent.velocity.length() > 10:
-				return states.move
-			elif parent.velocity.length() > 10 and parent.get_mouse_direction().x < 0:
-				return states.move_left
-			elif parent.velocity.length() < 10 and parent.get_mouse_direction().x > 0:
-				return states.idle
+			if !parent.skill_two.cast_timer.is_stopped():
+				return states.casting
 		states.move:
 			if parent.velocity.length() < 10:
 				return states.idle
-			elif parent.velocity.length() > 10 and parent.get_mouse_direction().x < 0:
-				return states.move_left
-			elif parent.velocity.length() < 10 and parent.get_mouse_direction().x < 0:
-				return states.idle_left
-			elif round(parent.velocity.length()) > parent.max_speed:
+			if round(parent.velocity.length()) > parent.max_speed:
 				return states.dash
-		states.move_left:
-			if parent.velocity.length() < 10:
-				return states.idle
-			elif parent.velocity.length() > 10 and parent.get_mouse_direction().x > 0:
-				return states.move
-			elif parent.velocity.length() < 10 and parent.get_mouse_direction().x < 0:
-				return states.idle_left
-			elif round(parent.velocity.length()) > parent.max_speed:
-				return states.dash
+			if !parent.skill_two.cast_timer.is_stopped():
+				return states.casting
 		states.dash:
 			if !parent.dash.is_dashing():
 				return states.move
-			elif !parent.dash.is_dashing() and parent.get_mouse_direction().x < 0:
-				return states.move_left
+		states.casting:
+			if parent.skill_two.cast_timer.is_stopped():
+				return states.idle
 
 	return -1

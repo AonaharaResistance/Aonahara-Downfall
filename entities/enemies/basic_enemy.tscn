@@ -58,22 +58,30 @@ texture = ExtResource( 2 )
 hframes = 4
 
 [node name="CollisionShape2D" parent="." index="3"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/fly = SubResource( 2 )
+
+[node name="HurtBox" parent="." index="5"]
+visible = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, 0.176777 )
 shape = SubResource( 3 )
 
 [node name="HitBox" parent="." index="6"]
+visible = false
 damage = 1
 knockback_strength = 120
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.471939, 0.943874 )
 shape = SubResource( 4 )
+
+[node name="Rays" parent="." index="7"]
+visible = false
 
 [node name="RayCast2D2" parent="Rays" index="0"]
 collision_mask = 3

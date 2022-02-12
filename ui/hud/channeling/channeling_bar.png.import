@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/its_raining_rocks.png-ba841e27c2755eab2fd2eebc6417c06c.stex"
+path="res://.import/channeling_bar.png-1accd782b4149d31445b083e8fb935b0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/skill_icons/emu/its_raining_rocks.png"
-dest_files=[ "res://.import/its_raining_rocks.png-ba841e27c2755eab2fd2eebc6417c06c.stex" ]
+source_file="res://ui/hud/channeling/channeling_bar.png"
+dest_files=[ "res://.import/channeling_bar.png-1accd782b4149d31445b083e8fb935b0.stex" ]
 
 [params]
 

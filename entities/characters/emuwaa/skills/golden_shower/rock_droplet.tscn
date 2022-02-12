@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://objects/weapons/staves/parseids_staff/sprites/rock_shard_1.png" type="Texture" id=1]
-[ext_resource path="res://entities/characters/emuwaa/skills/its_raining_rocks/rock_droplet.gd" type="Script" id=2]
-[ext_resource path="res://assets/place_holder/effects (new)/hit_effect_anim_f0.png" type="Texture" id=3]
+[ext_resource path="res://entities/characters/emuwaa/skills/golden_shower/rock_droplet.gd" type="Script" id=1]
+[ext_resource path="res://assets/place_holder/effects (new)/hit_effect_anim_f0.png" type="Texture" id=2]
+[ext_resource path="res://objects/weapons/staves/parseids_staff/sprites/rock_shard_1.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -146,15 +146,15 @@ tracks/4/keys = {
 radius = 7.14922
 height = 8.83376
 
-[node name="Node2D" type="Area2D"]
+[node name="RockDroplet" type="Area2D"]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource( 2 )
-damage = 10
+script = ExtResource( 1 )
+damage = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 4, 4 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 visible = false
@@ -162,7 +162,7 @@ amount = 200
 lifetime = 2.0
 local_coords = false
 process_material = SubResource( 10 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "test"

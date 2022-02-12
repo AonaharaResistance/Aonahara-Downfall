@@ -16,5 +16,14 @@ func disable():
 	collision.free()
 
 
+func launch():
+	var angle_to_mouse = ((get_global_mouse_position() - Party.current_character().global_position).normalized()).angle()
+	sprite.rotate(angle_to_mouse)
+
+
 func _on_LifeTime_timeout():
 	disable()
+
+
+func _on_Lifetime_timeout():
+	queue_free()

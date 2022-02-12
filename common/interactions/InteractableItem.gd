@@ -16,9 +16,9 @@ func interaction_can_interact(interactionComponentParent: Node) -> bool:
 	return interactionComponentParent is Character
 
 
-func show_ui():
+func show_ui() -> void:
 	ui_component.set_visible(true)
 
 
-func hide_ui():
+func hide_ui() -> void:
 	ui_component.set_visible(false)

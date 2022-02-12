@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Character
 
 onready var animation: AnimationPlayer = $AnimationPlayer
+onready var animation_tree: AnimationTree = $AnimationTree
+onready var animation_mode = animation_tree.get("paramaters/playback")
 onready var sprite: Sprite = $Sprite
 onready var weapon: Node2D = $Weapon
 onready var dash := $Dash
@@ -34,9 +36,9 @@ export var mirrored_sprite: bool = true
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var friction: float = 0.20
-var isOnControl: bool = true
-var is_facing_left: bool = false setget set_is_facing_left, get_is_facing_left
-var is_on_battle: bool = false setget set_is_on_battle, get_is_on_battle
+var is_in_control: bool = true
+var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
+var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
 
 signal battle_state_changed
 
@@ -44,6 +46,14 @@ signal battle_state_changed
 func _ready() -> void:
 	stamina_timer.wait_time = stamina_regen
 	add_to_group("current_character")
+
+
+func _unhandled_input(event):
+	if is_in_control:
+		listen_to_skills(event)
+		listen_to_attacks(event)
+		listen_to_party_change(event)
+		listen_to_input_direction(event)
 
 
 func equiped_weapon():
@@ -54,24 +64,52 @@ func equiped_weapon():
 		return null
 
 
-func listen_to_attacks() -> void:
-	if equiped_weapon().holdable_light:
-		if Input.is_action_pressed("light_attack") && isOnControl:
-			equiped_weapon().light_attack()
-	else:
-		if Input.is_action_just_pressed("light_attack") && isOnControl:
-			equiped_weapon().light_attack()
-	if Input.is_action_just_released("light_attack") && isOnControl:
+func listen_to_attacks(event) -> void:
+	if event.is_action_pressed("light_attack"):
+		equiped_weapon().light_attack()
+	if event.is_action_released("light_attack"):
 		equiped_weapon().light_attack_release()
-	if Input.is_action_just_pressed("heavy_attack") && isOnControl:
+	if event.is_action_pressed("heavy_attack"):
 		equiped_weapon().heavy_attack()
-	if Input.is_action_just_released("heavy_attack") && isOnControl:
+	if event.is_action_released("heavy_attack"):
 		equiped_weapon().heavy_attack_release()
 
 
-func listen_to_skills() -> void:
-	if Input.is_action_just_pressed("first_skill") && isOnControl:
+func listen_to_skills(event) -> void:
+	if event.is_action_pressed("first_skill"):
 		skill_one.activate_skill()
+	if event.is_action_pressed("second_skill"):
+		skill_two.activate_skill()
+
+
+func listen_to_party_change(event) -> void:
+	if event.is_action_pressed("party1") && Party.party_members.size() >= 1:
+		Party.change_party_member(0)
+	if event.is_action_pressed("party2") && Party.party_members.size() >= 2:
+		Party.change_party_member(1)
+	if event.is_action_pressed("party3") && Party.party_members.size() >= 3:
+		Party.change_party_member(2)
+	if event.is_action_pressed("party4") && Party.party_members.size() >= 4:
+		Party.change_party_member(3)
+
+
+func listen_to_input_direction(event) -> void:
+	if event.is_action_pressed("up"):
+		movement_key["up"] = true
+	if event.is_action_pressed("down"):
+		movement_key["down"] = true
+	if event.is_action_pressed("left"):
+		movement_key["left"] = true
+	if event.is_action_pressed("right"):
+		movement_key["right"] = true
+	if event.is_action_released("up"):
+		movement_key["up"] = false
+	if event.is_action_released("down"):
+		movement_key["down"] = false
+	if event.is_action_released("left"):
+		movement_key["left"] = false
+	if event.is_action_released("right"):
+		movement_key["right"] = false
 
 
 func set_stamina(new_value) -> void:
@@ -81,22 +119,22 @@ func set_stamina(new_value) -> void:
 func move(delta: float) -> void:
 	var input_direction: Vector2 = get_input_direction()
 
-	# * Using lerp or Linear Interpolation to simulate friction
+	# * Using Linear Interpolation to simulate friction
 	velocity = move_and_slide(velocity)
 	velocity += acceleration * input_direction * delta * 60
 	velocity = lerp(velocity, Vector2.ZERO, friction)
 	velocity = velocity.clamped(max_speed)
 
 
-func set_is_on_battle(new_state) -> void:
+func set_is_in_battle(new_state) -> void:
 	if new_state == true:
 		battle_timer.start()
-	is_on_battle = new_state
+	is_in_battle = new_state
 	emit_signal("battle_state_changed")
 
 
-func get_is_on_battle() -> bool:
-	return is_on_battle
+func get_is_in_battle() -> bool:
+	return is_in_battle
 
 
 func get_mouse_direction() -> Vector2:
@@ -134,7 +172,7 @@ func apply_dash() -> void:
 
 # warning-ignore:unsafe_method_access
 func activate_dash() -> void:
-	if Input.is_action_just_pressed("dash") && isOnControl:
+	if Input.is_action_just_pressed("dash") && is_in_control:
 		stamina -= 1
 		set_stamina_regen_timer(stamina)
 		stamina_timer.start()
@@ -143,27 +181,13 @@ func activate_dash() -> void:
 
 func get_input_direction() -> Vector2:
 	var input_direction: Vector2 = Vector2.ZERO
-	input_direction.x = (
-		Input.get_action_strength("move_right")
-		- Input.get_action_strength("move_left")
-	)
-	input_direction.y = (
-		Input.get_action_strength("move_down")
-		- Input.get_action_strength("move_up")
-	)
+	input_direction.x = (int(movement_key["right"]) - int(movement_key["left"]))
+	input_direction.y = (int(movement_key["down"]) - int(movement_key["up"]))
 	input_direction = input_direction.normalized()
-	if isOnControl:
+	if is_in_control:
 		return input_direction
 	else:
 		return Vector2.ZERO
-
-
-func get_is_facing_left() -> bool:
-	return is_facing_left
-
-
-func set_is_facing_left(new_value: bool) -> void:
-	is_facing_left = new_value
 
 
 func sprite_control() -> void:
@@ -214,7 +238,7 @@ func apply_knockback(direction, strength) -> void:
 
 
 func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
-	set_is_on_battle(false)
+	set_is_in_battle(false)
 	blinker.start_blinking(sprite, 1.0)
 	_whiten_sprite(0.3)
 	_take_damage(hitbox.damage)
@@ -244,4 +268,4 @@ func die() -> void:
 
 
 func _on_BattleTimer_timeout():
-	set_is_on_battle(false)
+	set_is_in_battle(false)

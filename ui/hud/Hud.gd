@@ -6,6 +6,7 @@ onready var empty_health_container: HBoxContainer = $CanvasLayer/GUI/MarginConta
 onready var stamina_fill: HBoxContainer = $CanvasLayer/GUI/MarginContainer/Top/Stamina
 onready var stamina_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/TopBackground/StaminaFill
 onready var skill: SkillHud = $CanvasLayer/GUI/MarginContainer2/Bottom/SkillsHud
+onready var channeling: TextureProgress = $CanvasLayer/GUI/MarginContainer2/Bottom/Channeling/Progress
 
 var health_full = preload("res://ui/hud/health/health_full.tscn")
 var health_empty = preload("res://ui/hud/health/health_empty.tscn")
@@ -25,6 +26,22 @@ func update_hud() -> void:
 		_update_health()
 		_update_stamina()
 		skill.update_skill()
+
+
+func _process(delta):
+	if channeling.is_visible():
+		channeling.value += 1 * delta * 60
+
+
+func start_channeling(duration: float) -> void:
+	channeling.set_value(0)
+	channeling.set_visible(true)
+	channeling.set_max(duration)
+
+
+func _on_Progress_value_changed(value: float):
+	if value == channeling.get_max():
+		channeling.set_visible(false)
 
 
 func _update_health() -> void:

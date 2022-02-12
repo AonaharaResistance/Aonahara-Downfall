@@ -7,20 +7,25 @@ onready var shadow: Sprite = $Shadow
 onready var duration_timer: Timer = $DurationTimer
 onready var spawning_circle: Sprite = $SpawningCircle
 onready var animation: AnimationPlayer = $AnimationPlayer
+onready var aoe_animation: AnimationPlayer = $AoeAnimation
 
-var rocks = preload("res://entities/characters/emuwaa/skills/its_raining_rocks/rock_droplet.tscn")
-var state: String
+var rocks = preload("res://entities/characters/emuwaa/skills/golden_shower/rock_droplet.tscn")
+var casting: bool = false
 
 
 func _process(delta) -> void:
 	_spin(delta)
 	if !cooldown_timer.is_stopped():
 		current_cooldown_indicator -= 60 * delta
-	if state == "Casting":
+	if casting:
 		aoe.global_position = get_global_mouse_position()
-		if Input.is_action_just_pressed("cast_skill"):
+
+
+func _unhandled_input(event):
+	if casting:
+		if event.is_action_pressed("cast_skill"):
 			cast_skill()
-		if Input.is_action_just_pressed("cancel_skill"):
+		if event.is_action_pressed("cancel_skill"):
 			cancel_cast()
 
 
@@ -38,26 +43,27 @@ func _start_timers() -> void:
 
 func activate_skill() -> void:
 	if cooldown_timer.is_stopped():
-		state = "Casting"
+		casting = true
 		aoe.set_visible(true)
 		Cursor.set_default_cursor(Cursor.target, Vector2(16, 16))
 
 
 func cast_skill() -> void:
-	state = "Not Casting"
+	animation.play("fade_in")
+	casting = false
 	_start_timers()
 	Cursor.set_default_cursor(Cursor.default, Vector2(16, 16))
-	spawning_circle.global_position = get_global_mouse_position()
-	shadow.global_position = spawning_circle.global_position - Vector2(0, -50)
+	shadow.global_position = get_global_mouse_position()
+	spawning_circle.global_position = shadow.global_position - Vector2(0, 80)
 	spawning_circle.set_rotation(aoe.get_rotation())
 	shadow.set_rotation(aoe.get_rotation())
 	spawning_circle.set_visible(true)
 	shadow.set_visible(true)
-	aoe.set_visible(false)
+	aoe_animation.play("fade")
 
 
 func cancel_cast() -> void:
-	state = "Not Casting"
+	casting = false
 	aoe.set_visible(false)
 	Cursor.set_default_cursor(Cursor.default, Vector2(16, 16))
 
@@ -74,6 +80,8 @@ func _on_Timer_timeout() -> void:
 func _on_DurationTimer_timeout() -> void:
 	timer.stop()
 	animation.play("end")
+	aoe.set_visible(false)
+	aoe_animation.play("RESET")
 
 
 func _on_CooldownTimer_timeout() -> void:
