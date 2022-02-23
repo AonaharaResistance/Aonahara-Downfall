@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/logos/Aonahara_bg.png" type="Texture" id=1]
 [ext_resource path="res://assets/logos/aonahara_resistance_logo.png" type="Texture" id=2]
-[ext_resource path="res://assets/logos/aonahara_logo.png" type="Texture" id=3]
+[ext_resource path="res://assets/logos/aonahara_resistance_logo.png" type="Texture" id=3]
 [ext_resource path="res://assets/sounds/splash_audio.mp3" type="AudioStream" id=4]
 [ext_resource path="res://scenes/splash_screen/splash_screen.gd" type="Script" id=5]
 [ext_resource path="res://assets/logos/aonahara_kanji.png" type="Texture" id=6]
