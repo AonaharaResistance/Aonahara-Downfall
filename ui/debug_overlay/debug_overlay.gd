@@ -7,8 +7,8 @@ var stats: Array = []
 onready var label: Label = $Label
 
 
-func add_stat(stat_name, object, stat_ref, is_method) -> void:
-	stats.append([stat_name, object, stat_ref, is_method])
+func add_stat(stat_name, object, stat_ref, is_method, arg = "") -> void:
+	stats.append([stat_name, object, stat_ref, is_method, arg])
 
 
 func _process(_delta) -> void:
@@ -26,7 +26,9 @@ func _process(_delta) -> void:
 		var value = null
 
 		if s[1] and weakref(s[1]).get_ref():
-			if s[3]:
+			if s[3] and s[4]:
+				value = s[1].call(s[2], s[4])
+			elif s[3]:
 				value = s[1].call(s[2])
 			else:
 				value = s[1].get(s[2])

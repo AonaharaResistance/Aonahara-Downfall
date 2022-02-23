@@ -191,16 +191,23 @@ graph_offset = Vector2( -21.1938, 64.32 )
 collision_mask = 1
 character_name = "Emuwaa"
 character_icon = ExtResource( 6 )
-acceleration = 50
-max_speed = 100
-hp = 2
-max_hp = 2
-stamina = 3
-max_stamina = 3
-base_damage = 20
-stamina_regen = 3.0
-stamina_regen_rate = 1.0
 mirrored_sprite = false
+stateful_attributes = {
+"hp": 2,
+"stamina": 3
+}
+stateless_attributes = {
+"acceleration": 20,
+"base_damage": 1,
+"dash_duration": 0.2,
+"friction": 0.2,
+"max_hp": 2,
+"max_speed": 100,
+"max_stamina": 3,
+"receives_knockback": false,
+"stamina_regen": 1.0,
+"stamina_regen_rate": 1
+}
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -214,27 +221,22 @@ character_path = NodePath("../..")
 [node name="DevilBlessing" parent="Blessing" index="0" instance=ExtResource( 9 )]
 position = Vector2( 0.997029, 0 )
 
-[node name="Weapon" parent="." index="5"]
-visible = true
-
 [node name="ParseidsStaff" parent="Weapon" index="0" instance=ExtResource( 5 )]
 heavy_charged = false
 
-[node name="ShadowSprite" parent="." index="7"]
-visible = true
+[node name="ShadowSprite" parent="." index="9"]
 modulate = Color( 1, 1, 1, 0.333333 )
 position = Vector2( -1.19209e-07, 11.0249 )
 scale = Vector2( 0.729361, 0.260693 )
 texture = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="8"]
-visible = true
+[node name="Sprite" parent="." index="10"]
 scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 6
 
-[node name="CollisionShape2D" parent="." index="9"]
+[node name="CollisionShape2D" parent="." index="11"]
 position = Vector2( -0.331211, 9.14386 )
 shape = SubResource( 1 )
 
@@ -242,7 +244,7 @@ shape = SubResource( 1 )
 position = Vector2( -0.331211, 9.03948 )
 shape = SubResource( 2 )
 
-[node name="AnimationPlayer" parent="." index="11"]
+[node name="AnimationPlayer" parent="." index="13"]
 anims/RESET = SubResource( 3 )
 anims/casting = SubResource( 36 )
 anims/idle = SubResource( 4 )
@@ -250,7 +252,7 @@ anims/idle_left = SubResource( 12 )
 anims/move = SubResource( 5 )
 anims/move_left = SubResource( 11 )
 
-[node name="AnimationTree" parent="." index="16"]
+[node name="AnimationTree" parent="." index="18"]
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 active = true

@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://menus/main_menu/main_menu.gd" type="Script" id=1]
-[ext_resource path="res://assets/miscs/yomsplash.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/miscs/meeko.png" type="Texture" id=2]
 [ext_resource path="res://assets/prosperosus_standard_theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/place_holder/GUI.png" type="Texture" id=5]
+[ext_resource path="res://assets/place_holder/effects (new)/hit_effect_anim_f0.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( -0.0566616, 95.8471, 47.9351, 32.2566 )
+margin_left = 6.2409
+margin_right = 5.72685
+margin_top = 6.25702
+margin_bottom = 5.12851
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 180, 1, 0 )
+flag_disable_z = true
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.505882, 0.596078, 1, 1 )
+color_ramp = SubResource( 8 )
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -13,6 +50,7 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
@@ -20,38 +58,150 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Tittle" type="Label" parent="."]
 anchor_right = 1.0
+margin_top = 20.5061
+margin_bottom = 46.5061
+custom_colors/font_color = Color( 1, 0.792157, 0.992157, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Aonahara: Downfall"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 1.12373
-margin_top = -0.749153
-margin_right = 1.12372
-margin_bottom = -0.749146
+margin_left = -23.4126
+margin_top = 84.5402
+margin_right = 26.5874
+margin_bottom = -13.4598
 theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 136.0
-margin_top = 64.0
-margin_right = 183.0
-margin_bottom = 116.0
-alignment = 1
+margin_right = 50.0
+margin_bottom = 82.0
+custom_constants/separation = 10
+alignment = 2
 
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 47.0
-margin_bottom = 24.0
-text = "Play"
+margin_right = 50.0
+margin_bottom = 13.0
+text = "New Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LoadButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 23.0
+margin_right = 50.0
+margin_bottom = 36.0
+text = "Load Game"
+
 [node name="OptionButton" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 28.0
-margin_right = 47.0
-margin_bottom = 52.0
+margin_top = 46.0
+margin_right = 50.0
+margin_bottom = 59.0
 text = "Option"
 
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 69.0
+margin_right = 50.0
+margin_bottom = 82.0
+text = "Get Milk"
+
+[node name="CenterPopup" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGamePopup" type="PopupDialog" parent="CenterPopup"]
+margin_left = 100.0
+margin_top = 60.0
+margin_right = 220.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 120, 60 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterPopup/NewGamePopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 6.0
+margin_right = -6.0
+margin_bottom = -6.0
+theme = ExtResource( 3 )
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelContainer" type="HBoxContainer" parent="CenterPopup/NewGamePopup/VBoxContainer"]
+margin_top = 6.0
+margin_right = 107.0
+margin_bottom = 19.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterPopup/NewGamePopup/VBoxContainer/LabelContainer"]
+margin_left = 3.0
+margin_right = 103.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 3 )
+text = "Start a new game?"
+align = 1
+valign = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="CenterPopup/NewGamePopup/VBoxContainer"]
+margin_top = 29.0
+margin_right = 107.0
+margin_bottom = 42.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Yes" type="Button" parent="CenterPopup/NewGamePopup/VBoxContainer/ButtonContainer"]
+margin_left = 24.0
+margin_right = 45.0
+margin_bottom = 13.0
+text = "Yes"
+
+[node name="No" type="Button" parent="CenterPopup/NewGamePopup/VBoxContainer/ButtonContainer"]
+margin_left = 65.0
+margin_right = 83.0
+margin_bottom = 13.0
+text = "No"
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 158.059, 181.832 )
+amount = 20
+lifetime = 5.0
+randomness = 1.0
+process_material = SubResource( 4 )
+texture = ExtResource( 6 )
+
+[node name="test" type="Button" parent="."]
+margin_left = 21.6498
+margin_top = 95.0
+margin_right = 48.6498
+margin_bottom = 108.0
+text = "Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionButton" to="." method="_on_OptionButton_pressed"]
+[connection signal="pressed" from="CenterPopup/NewGamePopup/VBoxContainer/ButtonContainer/Yes" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="CenterPopup/NewGamePopup/VBoxContainer/ButtonContainer/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="test" to="." method="_on_test_pressed"]

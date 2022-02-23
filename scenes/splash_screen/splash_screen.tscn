@@ -43,6 +43,7 @@ tracks/0/keys = {
 }
 
 [node name="SplashScreen" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 5 )
 
 [node name="bg" type="Node2D" parent="."]
@@ -227,7 +228,6 @@ __meta__ = {
 position = Vector2( 147.196, -324.306 )
 collision_layer = 33
 physics_material_override = SubResource( 1 )
-gravity_scale = 10.0
 contacts_reported = 1
 contact_monitor = true
 
@@ -253,6 +253,7 @@ process_material = ExtResource( 8 )
 
 [node name="boom" type="AudioStreamPlayer" parent="Aonares"]
 stream = ExtResource( 7 )
+volume_db = -15.0
 
 [node name="Aonahara" type="RigidBody2D" parent="."]
 position = Vector2( 86.1447, 89.9103 )
@@ -292,6 +293,7 @@ shape = SubResource( 6 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -15.0
 autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -327,6 +329,7 @@ autoplay = "slide"
 anims/slide = SubResource( 8 )
 
 [node name="ModulateTween" type="Tween" parent="."]
+pause_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 160, 90 )

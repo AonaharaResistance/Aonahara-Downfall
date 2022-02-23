@@ -137,6 +137,7 @@ margin_top = 134.0
 margin_right = 310.0
 margin_bottom = 142.0
 rect_min_size = Vector2( 0, 8 )
+mouse_filter = 2
 alignment = 1
 
 [node name="Progress" type="TextureProgress" parent="CanvasLayer/GUI/MarginContainer2/Bottom/Channeling"]
@@ -145,6 +146,7 @@ margin_left = 102.0
 margin_right = 208.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 106, 8 )
+mouse_filter = 2
 texture_under = ExtResource( 8 )
 texture_progress = ExtResource( 7 )
 nine_patch_stretch = true

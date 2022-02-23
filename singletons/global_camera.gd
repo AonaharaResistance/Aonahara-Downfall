@@ -4,9 +4,11 @@ onready var camera2D: Camera2D = $Camera2D
 
 
 func _process(_delta):
-	if Party.current_character() != null:
+	if Party.current_character() != null && Party.party_members != []:
 		camera2D.current = true
 		global_position = Party.current_character().global_position
+	else:
+		camera2D.current = false
 
 
 func get_camera():

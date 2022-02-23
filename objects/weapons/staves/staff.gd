@@ -73,7 +73,7 @@ func _spawn_projectile(projectile_type):
 		active_projectile = light_projectile.instance()
 	if projectile_type == HEAVY:
 		active_projectile = heavy_projectile.instance()
-	get_tree().get_current_scene().add_child(active_projectile)
+	Game.get_active_scene().add_child(active_projectile)
 	active_projectile.direction = character.get_mouse_direction()
 	active_projectile.global_position = self.global_position
 	active_projectile.launch()

@@ -7,7 +7,9 @@ export var effect_died: PackedScene = null
 export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
 export var projectile: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
 export var receives_knockback: bool = true
+export var speed: int = 40
 export var max_speed: int = 100
+export var agro_range: int = 0
 var max_steering: float = 2.5
 var avoid_force: int = 100000
 
@@ -23,6 +25,16 @@ var arrival_zone_radius: int = 20
 var vector_to_target: Vector2 = Vector2.ZERO setget set_target
 
 onready var raycasts: Node2D = get_node("Rays")
+
+
+func move():
+	if !Party.is_party_empty():
+		velocity = global_position.direction_to(Party.current_character().global_position) * speed
+		velocity = move_and_slide(velocity)
+
+
+func direction_to_target():
+	return global_position.direction_to(Party.current_character().global_position)
 
 
 func set_target(new_target):
@@ -119,7 +131,7 @@ func _randomize_damage(damage: int) -> int:
 
 func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position) -> PackedScene:
 	var effect = EFFECT.instance()
-	get_tree().current_scene.add_child(effect)
+	Game.get_active_scene().add_child(effect)
 	effect.global_position = effect_position
 	return effect
 
@@ -140,13 +152,6 @@ func spawn_damage_indicator(damage: int) -> void:
 
 func _take_damage(damage: int) -> void:
 	set_hp(hp - damage)
-	_die_check(hp)
-
-
-func _die_check(current_hp: int) -> void:
-	if current_hp <= 0:
-		spawn_death_effect()
-		die()
 
 
 func die() -> void:
@@ -163,7 +168,7 @@ func shoot():
 func throw_projectile(projectile_direction: Vector2):
 	if projectile:
 		var _projectile = projectile.instance()
-		get_tree().current_scene.add_child(_projectile)
+		Game.get_active_scene().add_child(_projectile)
 		_projectile.global_position = self.global_position
 
 		var projectile_rotation = projectile_direction.angle()

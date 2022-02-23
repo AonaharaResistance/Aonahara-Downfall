@@ -72,7 +72,8 @@ func tactical_character_hiding(character):
 	var sprites = [
 		character.get_node("Sprite"),
 		character.get_node("ShadowSprite"),
-		character.get_node("Weapon")
+		character.get_node("Weapon"),
+		character.get_node("StateLabel")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(true)
 	character.is_in_control = false
@@ -85,7 +86,8 @@ func tactical_character_showing(character):
 	var sprites = [
 		character.get_node("Sprite"),
 		character.get_node("ShadowSprite"),
-		character.get_node("Weapon")
+		character.get_node("Weapon"),
+		character.get_node("StateLabel")
 	]
 	character.get_node("HurtBox/CollisionShape2D").set_disabled(false)
 	character.is_in_control = true

@@ -15,9 +15,12 @@ onready var camera = $Camera2D
 
 var ajig: bool = false
 
+var params = {
+	show_progress_bar = true,
+}
 
-func _ready():
-	$Camera2D.add_to_group("current_camera")
+
+func start():
 	$Aonares.gravity_scale = 0
 	tween.pause_mode = Node.PAUSE_MODE_PROCESS
 
@@ -51,13 +54,13 @@ func _on_Aonares_body_entered(body):
 
 func _on_ModulateTween_tween_completed(object, key):
 	camera.queue_free()
-	Game.emit_signal("ChangeScene", "res://menus/main_menu/main_menu.tscn")
+	Game.change_scene("res://menus/main_menu/main_menu.tscn", params)
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			for bgss in bg.get_children():
 				$ModulateTween.stop_all()
 			tween.stop_all()
-			Game.emit_signal("ChangeScene", "res://menus/main_menu/main_menu.tscn")
+			Game.change_scene("res://menus/main_menu/main_menu.tscn", params)

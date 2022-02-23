@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/place_holder/enemies/flying creature/fly_anim_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://entities/enemies/basic_enemy.gd" type="Script" id=3]
 [ext_resource path="res://entities/enemies/basic_enemy_state_machine.gd" type="Script" id=4]
-[ext_resource path="res://common/effects/HitEffect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://common/effects/hit_effect.tscn" type="PackedScene" id=5]
 [ext_resource path="res://common/ai/chase_and_shoot/chase_and_shoot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://common/effects/DeathEffect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://common/effects/death_effect.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.89892
@@ -64,14 +64,14 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" parent="." index="4"]
 anims/fly = SubResource( 2 )
 
-[node name="HurtBox" parent="." index="5"]
+[node name="HurtBox" parent="." index="6"]
 visible = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, 0.176777 )
 shape = SubResource( 3 )
 
-[node name="HitBox" parent="." index="6"]
+[node name="HitBox" parent="." index="7"]
 visible = false
 damage = 1
 knockback_strength = 120
@@ -80,7 +80,7 @@ knockback_strength = 120
 position = Vector2( 0.471939, 0.943874 )
 shape = SubResource( 4 )
 
-[node name="Rays" parent="." index="7"]
+[node name="Rays" parent="." index="8"]
 visible = false
 
 [node name="RayCast2D2" parent="Rays" index="0"]

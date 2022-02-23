@@ -7,7 +7,6 @@ onready var skill_one_time_left: Label = $Skill1/CooldownLabel
 onready var skill_two_time_left: Label = $Skill2/CooldownLabel
 onready var skill_one_cooldown_progress: TextureProgress = $Skill1/CooldownIndicator
 onready var skill_two_cooldown_progress: TextureProgress = $Skill2/CooldownIndicator
-onready var desc: Label = $Skill1/Label
 
 var skill_one_timer: Timer
 var skill_two_timer: Timer

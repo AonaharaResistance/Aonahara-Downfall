@@ -4,7 +4,7 @@ extends Control
 var text_speed := 0.02  # Higher = lower speed
 var theme_text_speed = text_speed
 
-onready var text_label = $RichTextLabel
+onready var text_label = $Control/RichTextLabel
 onready var name_label = $NameLabel
 onready var next_indicator = $NextIndicatorContainer/NextIndicator
 
