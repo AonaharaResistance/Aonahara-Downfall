@@ -15,7 +15,7 @@ var rock_sprites: Array = [
 
 
 func sum_damage() -> void:
-	character_damage = Party.current_character().base_damage
+	character_damage = Party.current_character().get_attribute("base_damage")
 	total_damage = damage + character_damage - character_damage
 
 
