@@ -7,6 +7,7 @@ var state: int = -1 setget set_state
 
 # * Not specifying the type because it might vary
 onready var parent = get_parent()
+onready var state_label: Label = parent.get_node("StateLabel")
 
 
 func _physics_process(delta) -> void:
@@ -41,6 +42,7 @@ func set_state(new_state: int) -> void:
 
 
 func _enter_state(_previous_state: int, _new_state: int) -> void:
+	state_label.set_text(states.keys()[_new_state])
 	pass
 
 

@@ -17,35 +17,67 @@ onready var interaction_component: InteractionComponent = $InteractionComponent
 onready var skills: Node = $Skills
 onready var skill_one: Skill = $Skills.get_child(0)
 onready var skill_two: Skill = $Skills.get_child(1)
+onready var buffs: Node2D = $Buffs
+onready var buff_timer: Timer = $BuffTimer
+onready var state_label: Label = $StateLabel
 
 export var character_name: String
 export var character_icon: Resource
-export var acceleration: int
-export var max_speed: int
-export var hp: int
-export var max_hp: int
-export var stamina: int setget set_stamina
-export var max_stamina: int
-export var base_damage: int
-export var stamina_regen: float
-export var stamina_regen_rate: float
-export var dash_duration: float = 0.2
-export var receives_knockback: bool = true
 export var mirrored_sprite: bool = true
+
+export var stateful_attributes: Dictionary = {
+	"hp": 0,
+	"stamina": 0,
+}
+
+export var stateless_attributes: Dictionary = {
+	"stamina_regen": 0.0,
+	"acceleration": 0,
+	"max_hp": 0,
+	"max_speed": 0,
+	"max_stamina": 0,
+	"base_damage": 0,
+	"stamina_regen_rate": 0,
+	"dash_duration": 0.0,
+	"friction": 0.0,
+	"receives_knockback": false,
+}
+
+var active_attributes: Dictionary = {
+	"hp": 0,
+	"stamina": 0,
+	"stamina_regen": 0.0,
+	"acceleration": 0,
+	"max_hp": 0,
+	"max_speed": 0,
+	"max_stamina": 0,
+	"base_damage": 0,
+	"stamina_regen_rate": 0,
+	"dash_duration": 0.0,
+	"friction": 0.0,
+	"receives_knockback": false,
+}
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
-var friction: float = 0.20
-var is_in_control: bool = true
+var is_in_control: bool = false
+var is_focus: bool = false
 var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
 var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
 
 signal battle_state_changed
 
+## -----------------------------------------------------------------------------
+##																Virtual Methods
+## -----------------------------------------------------------------------------
+
 
 func _ready() -> void:
-	stamina_timer.wait_time = stamina_regen
-	add_to_group("current_character")
+	stamina_timer.wait_time = get_attribute("stamina_regen")
+
+
+func _process(_delta):
+	modifier_tick()
 
 
 func _unhandled_input(event):
@@ -56,41 +88,9 @@ func _unhandled_input(event):
 		listen_to_input_direction(event)
 
 
-func equiped_weapon():
-	if !weapon.get_children().empty():
-		return weapon.get_child(0)
-	else:
-		# TDOO: Handle if weapon is not equiped
-		return null
-
-
-func listen_to_attacks(event) -> void:
-	if event.is_action_pressed("light_attack"):
-		equiped_weapon().light_attack()
-	if event.is_action_released("light_attack"):
-		equiped_weapon().light_attack_release()
-	if event.is_action_pressed("heavy_attack"):
-		equiped_weapon().heavy_attack()
-	if event.is_action_released("heavy_attack"):
-		equiped_weapon().heavy_attack_release()
-
-
-func listen_to_skills(event) -> void:
-	if event.is_action_pressed("first_skill"):
-		skill_one.activate_skill()
-	if event.is_action_pressed("second_skill"):
-		skill_two.activate_skill()
-
-
-func listen_to_party_change(event) -> void:
-	if event.is_action_pressed("party1") && Party.party_members.size() >= 1:
-		Party.change_party_member(0)
-	if event.is_action_pressed("party2") && Party.party_members.size() >= 2:
-		Party.change_party_member(1)
-	if event.is_action_pressed("party3") && Party.party_members.size() >= 3:
-		Party.change_party_member(2)
-	if event.is_action_pressed("party4") && Party.party_members.size() >= 4:
-		Party.change_party_member(3)
+## -----------------------------------------------------------------------------
+##																Input Listeners
+## -----------------------------------------------------------------------------
 
 
 func listen_to_input_direction(event) -> void:
@@ -112,8 +112,45 @@ func listen_to_input_direction(event) -> void:
 		movement_key["right"] = false
 
 
-func set_stamina(new_value) -> void:
-	stamina += new_value
+func listen_to_attacks(event) -> void:
+	if event.is_action_pressed("light_attack"):
+		equiped_weapon().light_attack()
+	if event.is_action_released("light_attack"):
+		equiped_weapon().light_attack_release()
+	if event.is_action_pressed("heavy_attack"):
+		equiped_weapon().heavy_attack()
+	if event.is_action_released("heavy_attack"):
+		equiped_weapon().heavy_attack_release()
+
+
+func listen_to_focus_mode(event) -> void:
+	if event.is_action_pressed("focus"):
+		is_focus = true
+	if event.is_action_released("focus"):
+		is_focus = false
+
+
+func listen_to_skills(event) -> void:
+	if event.is_action_pressed("first_skill"):
+		skill_one.activate_skill()
+	if event.is_action_pressed("second_skill"):
+		skill_two.activate_skill()
+
+
+func listen_to_party_change(event) -> void:
+	if event.is_action_pressed("party1") && Party.party_members.size() >= 1:
+		Party.change_party_member(0)
+	if event.is_action_pressed("party2") && Party.party_members.size() >= 2:
+		Party.change_party_member(1)
+	if event.is_action_pressed("party3") && Party.party_members.size() >= 3:
+		Party.change_party_member(2)
+	if event.is_action_pressed("party4") && Party.party_members.size() >= 4:
+		Party.change_party_member(3)
+
+
+## -----------------------------------------------------------------------------
+##																Movement Stuff
+## -----------------------------------------------------------------------------
 
 
 func move(delta: float) -> void:
@@ -121,9 +158,42 @@ func move(delta: float) -> void:
 
 	# * Using Linear Interpolation to simulate friction
 	velocity = move_and_slide(velocity)
-	velocity += acceleration * input_direction * delta * 60
-	velocity = lerp(velocity, Vector2.ZERO, friction)
-	velocity = velocity.clamped(max_speed)
+	velocity += get_attribute("acceleration") * input_direction * delta * 60
+	velocity = lerp(velocity, Vector2.ZERO, get_attribute("friction"))
+	velocity = velocity.clamped(get_attribute("max_speed"))
+
+
+# warning-ignore:unsafe_method_access
+func activate_dash() -> void:
+	if Input.is_action_just_pressed("dash") && is_in_control:
+		set_attribute("stamina", get_attribute("stamina") - 1)
+		set_stamina_regen_timer(get_attribute("stamina"))
+		stamina_timer.start()
+		dash.start_dash(sprite, get_attribute("dash_duration"), get_input_direction())
+
+
+# warning-ignore:unsafe_method_access
+# Why the fuck is the actual dash function is on character??
+func apply_dash() -> void:
+	if dash.is_dashing():
+		velocity = (get_attribute("acceleration") * 8) * get_input_direction()
+
+
+## -----------------------------------------------------------------------------
+##																Combat Stuff
+## -----------------------------------------------------------------------------
+
+
+func equiped_weapon():
+	if !weapon.get_children().empty():
+		return weapon.get_child(0)
+	else:
+		# TDOO: Handle if weapon is not equiped
+		return null
+
+
+func get_is_in_battle() -> bool:
+	return is_in_battle
 
 
 func set_is_in_battle(new_state) -> void:
@@ -133,102 +203,8 @@ func set_is_in_battle(new_state) -> void:
 	emit_signal("battle_state_changed")
 
 
-func get_is_in_battle() -> bool:
-	return is_in_battle
-
-
-func get_mouse_direction() -> Vector2:
-	return (get_global_mouse_position() - global_position).normalized()
-
-
-func regenerate_stamina() -> void:
-	while stamina < max_stamina && stamina_timer.is_stopped():
-		stamina += 1
-		Hud.update_hud()
-		yield(get_tree().create_timer(stamina_regen_rate), "timeout")
-
-
-func get_stamina_timer() -> float:
-	return stamina_timer.time_left
-
-
-func _on_StaminaTimer_timeout() -> void:
-	regenerate_stamina()
-
-
-func set_stamina_regen_timer(current_stamina) -> void:
-	if current_stamina == 0:
-		stamina_timer.wait_time = stamina_regen * 2
-	else:
-		stamina_timer.wait_time = stamina_regen
-
-
-# warning-ignore:unsafe_method_access
-# Why the fuck is the actual dash function is on character??
-func apply_dash() -> void:
-	if dash.is_dashing():
-		velocity = (acceleration * 8) * get_input_direction()
-
-
-# warning-ignore:unsafe_method_access
-func activate_dash() -> void:
-	if Input.is_action_just_pressed("dash") && is_in_control:
-		stamina -= 1
-		set_stamina_regen_timer(stamina)
-		stamina_timer.start()
-		dash.start_dash(sprite, dash_duration, get_input_direction())
-
-
-func get_input_direction() -> Vector2:
-	var input_direction: Vector2 = Vector2.ZERO
-	input_direction.x = (int(movement_key["right"]) - int(movement_key["left"]))
-	input_direction.y = (int(movement_key["down"]) - int(movement_key["up"]))
-	input_direction = input_direction.normalized()
-	if is_in_control:
-		return input_direction
-	else:
-		return Vector2.ZERO
-
-
-func sprite_control() -> void:
-	# ? Pretty sure there's a better way of doing this
-	var mouse_direction: Vector2 = get_mouse_direction()
-
-	# Interaction Component
-	if mouse_direction.x < 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
-		interaction_component.scale.x *= -1
-	elif mouse_direction.x > 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
-		interaction_component.scale.x *= -1
-
-	# Character control
-	if mirrored_sprite:
-		if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
-			sprite.scale.x *= -1
-		elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
-			sprite.scale.x *= -1
-
-	# Weapon control
-	weapon.rotation = mouse_direction.angle()
-	if mouse_direction.x < 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
-		weapon.scale.y *= -1
-	elif mouse_direction.x > 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
-		weapon.scale.y *= -1
-	if mouse_direction.y < 0 and sign(weapon.z_index) != sign(mouse_direction.y):
-		weapon.z_index *= -1
-	elif mouse_direction.y > 0 and sign(weapon.z_index) != sign(mouse_direction.y):
-		weapon.z_index *= -1
-
-
-func _take_damage(damage: int) -> void:
-	hp -= damage
-	Hud.update_hud()
-	if hp < 0:
-		hp = 0
-	_die_check(hp)
-
-
 func listen_knockback(delta) -> void:
-	if receives_knockback:
+	if get_attribute("receives_knockback"):
 		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 		knockback = move_and_slide(knockback)
 
@@ -246,16 +222,40 @@ func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
 	_enable_iframes(1.0)
 
 
+func regenerate_stamina() -> void:
+	while get_attribute("stamina") < get_attribute("max_stamina") && stamina_timer.is_stopped():
+		set_attribute("stamina", get_attribute("stamina") + 1)
+		Hud.update_hud()
+		yield(get_tree().create_timer(get_attribute("stamina_regen_rate")), "timeout")
+
+
+func get_stamina_timer() -> float:
+	return stamina_timer.time_left
+
+
+func _on_StaminaTimer_timeout() -> void:
+	regenerate_stamina()
+
+
+func set_stamina_regen_timer(current_stamina) -> void:
+	if current_stamina == 0:
+		stamina_timer.wait_time = get_attribute("stamina_regen") * 2
+	else:
+		stamina_timer.wait_time = get_attribute("stamina_regen")
+
+
+func _take_damage(damage: int) -> void:
+	set_attribute("hp", get_attribute("hp") - damage)
+	Hud.update_hud()
+	if get_attribute("hp") < 0:
+		set_attribute("hp", 0)
+	_die_check(get_attribute("hp"))
+
+
 func _enable_iframes(duration: float) -> void:
 	hurt_box.set_deferred("disabled", true)
 	yield(get_tree().create_timer(duration), "timeout")
 	hurt_box.disabled = false
-
-
-func _whiten_sprite(duration: float):
-	sprite_shader_material.set_shader_param("whiten", true)
-	yield(get_tree().create_timer(duration), "timeout")
-	sprite_shader_material.set_shader_param("whiten", false)
 
 
 func _die_check(current_hp: int) -> void:
@@ -269,3 +269,113 @@ func die() -> void:
 
 func _on_BattleTimer_timeout():
 	set_is_in_battle(false)
+
+
+## -----------------------------------------------------------------------------
+##															Modifier Stuff
+## -----------------------------------------------------------------------------
+
+
+func get_attribute(attribute: String):
+	if active_attributes.has(attribute):
+		return active_attributes[attribute]
+	else:
+		return 0
+
+
+func set_attribute(attribute: String, new_value):
+	if stateful_attributes.has(attribute):
+		stateful_attributes[attribute] = new_value
+	else:
+		stateless_attributes[attribute] = new_value
+
+
+func apply_buff(new_buff: Buff) -> void:
+	buffs.add_child(new_buff)
+
+
+func get_buffs() -> Array:
+	var buff_list: Array = []
+	buff_list = buffs.get_children()
+	return buff_list
+
+
+func modifier_tick() -> void:
+	var res: Dictionary = stateless_attributes.duplicate()
+	var buff_list: Array = get_buffs()
+	for buff in buff_list:
+		res = buff.modify_stateless(res)
+	active_attributes = {
+		"hp": stateful_attributes.hp,
+		"stamina": stateful_attributes.stamina,
+		"stamina_regen": res.stamina_regen,
+		"acceleration": res.acceleration,
+		"max_hp": res.max_hp,
+		"max_speed": res.max_speed,
+		"max_stamina": res.max_stamina,
+		"base_damage": res.base_damage,
+		"stamina_regen_rate": res.stamina_regen_rate,
+		"dash_duration": res.dash_duration,
+		"friction": res.friction,
+		"receives_knockback": res.receives_knockback,
+	}
+
+
+## -----------------------------------------------------------------------------
+##																	Miscs
+## -----------------------------------------------------------------------------
+
+
+func get_mouse_direction() -> Vector2:
+	return (get_global_mouse_position() - global_position).normalized()
+
+
+func get_input_direction() -> Vector2:
+	var input_direction: Vector2 = Vector2.ZERO
+	input_direction.x = (int(movement_key["right"]) - int(movement_key["left"]))
+	input_direction.y = (int(movement_key["down"]) - int(movement_key["up"]))
+	input_direction = input_direction.normalized()
+	if is_in_control:
+		return input_direction
+	else:
+		return Vector2.ZERO
+
+
+func sprite_control() -> void:
+	var mouse_direction: Vector2 = get_mouse_direction()
+	_flip_interaction_detection(mouse_direction)
+	_control_weapon_direction(mouse_direction)
+	_flip_character_sprite(mouse_direction)
+
+
+func _flip_interaction_detection(mouse_direction):
+	if mouse_direction.x < 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
+		interaction_component.scale.x *= -1
+	elif mouse_direction.x > 0 and sign(interaction_component.scale.x) != sign(mouse_direction.x):
+		interaction_component.scale.x *= -1
+
+
+func _flip_character_sprite(mouse_direction):
+	if mirrored_sprite:
+		if mouse_direction.x < 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
+			sprite.scale.x *= -1
+		elif mouse_direction.x > 0 and sign(sprite.scale.x) != sign(mouse_direction.x):
+			sprite.scale.x *= -1
+
+
+func _control_weapon_direction(mouse_direction):
+	weapon.rotation = mouse_direction.angle()
+	if mouse_direction.x < 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
+		weapon.scale.y *= -1
+	elif mouse_direction.x > 0 and sign(weapon.scale.y) != sign(mouse_direction.x):
+		weapon.scale.y *= -1
+	if mouse_direction.y < 0 and sign(weapon.z_index) != sign(mouse_direction.y):
+		weapon.z_index *= -1
+	elif mouse_direction.y > 0 and sign(weapon.z_index) != sign(mouse_direction.y):
+		weapon.z_index *= -1
+
+
+func _whiten_sprite(duration: float):
+	sprite_shader_material.set_shader_param("whiten", true)
+	yield(get_tree().create_timer(duration), "timeout")
+	sprite_shader_material.set_shader_param("whiten", false)

@@ -49,9 +49,9 @@ func _update_health() -> void:
 		health_container.remove_child(i)
 	for i in empty_health_container.get_children():
 		empty_health_container.remove_child(i)
-	for i in Party.current_character().hp:
+	for i in Party.current_character().get_attribute("hp"):
 		health_container.add_child(health_full.instance())
-	for i in Party.current_character().max_hp:
+	for i in Party.current_character().get_attribute("max_hp"):
 		empty_health_container.add_child(health_empty.instance())
 
 
@@ -61,9 +61,9 @@ func _update_stamina() -> void:
 	for i in stamina_fill.get_children():
 		stamina_fill.remove_child(i)
 
-	for i in Party.current_character().stamina:
+	for i in Party.current_character().get_attribute("stamina"):
 		stamina_fill.add_child(stamina_bar_filled.instance())
-	for i in Party.current_character().max_stamina:
+	for i in Party.current_character().get_attribute("max_stamina"):
 		stamina_container.add_child(stamina_bar_empty.instance())
 
 

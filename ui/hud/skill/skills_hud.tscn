@@ -46,16 +46,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Skill1"]
-margin_left = -21.2326
-margin_top = -15.7668
-margin_right = 18.7674
-margin_bottom = -2.76681
-mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Skill2" type="TextureRect" parent="."]
 margin_left = 296.0
 margin_right = 320.0

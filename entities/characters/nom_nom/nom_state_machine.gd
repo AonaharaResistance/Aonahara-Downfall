@@ -21,6 +21,7 @@ func _state_logic(delta) -> void:
 
 
 func _enter_state(_previous_state: int, new_state: int) -> void:
+	._enter_state(_previous_state, new_state)
 	match new_state:
 		states.idle:
 			animation.play("idle")
@@ -36,7 +37,7 @@ func _get_transition() -> int:
 		states.move:
 			if parent.velocity.length() < 10:
 				return states.idle
-			if round(parent.velocity.length()) > parent.max_speed:
+			if round(parent.velocity.length()) > parent.get_attribute("max_speed"):
 				return states.dash
 		states.dash:
 			if parent.dash.is_dashing() != true:

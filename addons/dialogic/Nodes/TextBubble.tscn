@@ -1,9 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/dialogic/Example Assets/backgrounds/background-2.png" type="Texture" id=2]
 [ext_resource path="res://addons/dialogic/Example Assets/next-indicator/next-indicator.png" type="Texture" id=3]
 [ext_resource path="res://addons/dialogic/Nodes/TextBubble.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.54902, 0.435294, 0.435294, 1 )
+border_width_left = 2
+border_width_right = 2
+border_color = Color( 0.145098, 0.145098, 0.164706, 1 )
+corner_detail = 12
+
+[sub_resource type="Theme" id=8]
+VScrollBar/styles/scroll = SubResource( 7 )
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -44,9 +54,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="StyleBoxFlat" id=6]
-content_margin_left = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 5.0
+content_margin_left = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 0.0
 bg_color = Color( 1, 1, 1, 0 )
 expand_margin_left = 10.0
 
@@ -59,6 +69,7 @@ margin_left = -455.0
 margin_top = 393.0
 margin_right = 455.0
 margin_bottom = 560.0
+theme = SubResource( 8 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -83,22 +94,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = -7.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 10.0
 margin_right = -20.0
 margin_bottom = -10.0
+rect_clip_content = false
 focus_mode = 2
-custom_styles/focus = SubResource( 1 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 0, 0, 0, 0 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 0 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
+custom_fonts/normal_font = ExtResource( 1 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Placeholder text for testing and formatting."
 meta_underlined = false
@@ -132,17 +154,16 @@ anims/Static = SubResource( 4 )
 "anims/Up and down" = SubResource( 5 )
 
 [node name="NameLabel" type="Label" parent="."]
-visible = false
 margin_top = -48.0
 margin_right = 58.0
 margin_bottom = -8.0
 size_flags_vertical = 1
-custom_styles/normal = SubResource( 6 )
-custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.423529, 0.580392, 0.74902, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.619608 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
+custom_fonts/font = ExtResource( 1 )
+custom_styles/normal = SubResource( 6 )
 align = 1
 valign = 1
 __meta__ = {
