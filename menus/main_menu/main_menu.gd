@@ -23,9 +23,10 @@ func _on_No_pressed():
 
 func _on_Yes_pressed():
 	Game.change_scene(
-		"res://scenes/opening/opening.tscn", {"show_texture": false, "show_tips": false}
+		"res://scenes/opening/opening.tscn",
+		{"show_texture": false, "show_tips": false, "show_progress_bar": false}
 	)
 
 
 func _on_test_pressed():
-	Game.change_scene("res://levels/test_world/test_world.tscn", {"show_progress_bar": true})
+	Game.change_scene("res://levels/test_world/test_world.tscn", {})

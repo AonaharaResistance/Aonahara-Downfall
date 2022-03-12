@@ -59,7 +59,7 @@ func _spin(delta: float) -> void:
 
 func _on_CastTimer_timeout():
 	var active_meteor = meteor.instance()
-	Game.get_active_scene().add_child(active_meteor)
+	get_tree().current_scene.add_child(active_meteor)
 	active_meteor.global_position = spawning_circle.global_position
 	active_meteor.global_position += Vector2(307.173, -265.675)
 	animation.play("fade")

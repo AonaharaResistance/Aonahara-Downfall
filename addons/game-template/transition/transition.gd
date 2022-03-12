@@ -1,4 +1,3 @@
-# warnings-disable
 # Transitions.
 # You can tweak transition speed and appearance, just make sure to
 # update `is_displayed`.
@@ -6,9 +5,11 @@ class_name Transition
 extends CanvasLayer
 
 signal progress_bar_filled
+signal transition_started(anim_name)
+signal transition_finished(anim_name)
 
 onready var anim: AnimationPlayer = $AnimationPlayer
-onready var progress: Control = $ColorRect/Progress
+onready var progress = $ColorRect/Progress
 onready var tips: Label = $ColorRect/TipsMargin/Tips
 onready var texture: TextureRect = $ColorRect/TextureRect
 
@@ -81,6 +82,16 @@ func _on_resource_stage_loaded(stage: int, stages_amount: int):
 		_update_progress_bar(percentage)
 	else:
 		pass
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "transition-out":
+		emit_signal("transition_finished", anim_name)
+
+
+func _on_AnimationPlayer_animation_started(anim_name):
+	if anim_name == "transition-in":
+		emit_signal("transition_started", anim_name)
 
 
 var tip_list = [

@@ -131,7 +131,7 @@ func _randomize_damage(damage: int) -> int:
 
 func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position) -> PackedScene:
 	var effect = EFFECT.instance()
-	Game.get_active_scene().add_child(effect)
+	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_position
 	return effect
 
@@ -168,7 +168,7 @@ func shoot():
 func throw_projectile(projectile_direction: Vector2):
 	if projectile:
 		var _projectile = projectile.instance()
-		Game.get_active_scene().add_child(_projectile)
+		get_tree().current_scene.add_child(_projectile)
 		_projectile.global_position = self.global_position
 
 		var projectile_rotation = projectile_direction.angle()

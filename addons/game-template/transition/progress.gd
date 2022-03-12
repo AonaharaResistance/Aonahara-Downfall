@@ -1,5 +1,5 @@
-# warnings-disable
 extends Control
+
 
 onready var bar := $ProgressBar
 onready var tween := $ProgressBar/Tween

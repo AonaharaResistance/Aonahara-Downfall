@@ -16,5 +16,6 @@ func _on_CooldownTimer_timeout() -> void:
 
 
 func activate_skill():
-	character.apply_buff(excited_buff.instance())
-	cooldown_timer.start()
+	if cooldown_timer.is_stopped():
+		character.apply_buff(excited_buff.instance())
+		cooldown_timer.start()

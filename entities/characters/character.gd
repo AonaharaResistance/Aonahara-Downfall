@@ -18,7 +18,6 @@ onready var skills: Node = $Skills
 onready var skill_one: Skill = $Skills.get_child(0)
 onready var skill_two: Skill = $Skills.get_child(1)
 onready var buffs: Node2D = $Buffs
-onready var buff_timer: Timer = $BuffTimer
 onready var state_label: Label = $StateLabel
 
 export var character_name: String
@@ -73,7 +72,7 @@ signal battle_state_changed
 
 
 func _ready() -> void:
-	stamina_timer.wait_time = get_attribute("stamina_regen")
+	modifier_tick()
 
 
 func _process(_delta):
@@ -276,10 +275,13 @@ func _on_BattleTimer_timeout():
 ## -----------------------------------------------------------------------------
 
 
+# Temporary solution for the delayed stateful
 func get_attribute(attribute: String):
 	if active_attributes.has(attribute):
+		modifier_tick()
 		return active_attributes[attribute]
 	else:
+		print("Attribute does not exist")
 		return 0
 
 

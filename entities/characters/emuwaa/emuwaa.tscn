@@ -197,7 +197,7 @@ stateful_attributes = {
 "stamina": 3
 }
 stateless_attributes = {
-"acceleration": 20,
+"acceleration": 50,
 "base_damage": 1,
 "dash_duration": 0.2,
 "friction": 0.2,

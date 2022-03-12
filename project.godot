@@ -104,11 +104,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://common/interactions/interaction_component_ui.gd"
 }, {
-"base": "Node",
-"class": "Main",
-"language": "GDScript",
-"path": "res://scenes/main/main.gd"
-}, {
 "base": "Area2D",
 "class": "Piercing",
 "language": "GDScript",
@@ -122,12 +117,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "SceneData",
 "language": "GDScript",
-"path": "res://scenes/main/scenes/scenes_data.gd"
+"path": "res://addons/game-template/scenes/scene-data.gd"
 }, {
 "base": "Node",
 "class": "Scenes",
 "language": "GDScript",
-"path": "res://scenes/main/scenes.gd"
+"path": "res://addons/game-template/scenes.gd"
 }, {
 "base": "Node2D",
 "class": "Skill",
@@ -157,7 +152,7 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "Transition",
 "language": "GDScript",
-"path": "res://scenes/main/transition/transition.gd"
+"path": "res://addons/game-template/transition/transition.gd"
 }, {
 "base": "Area2D",
 "class": "WeaponHitBox",
@@ -184,7 +179,6 @@ _global_script_class_icons={
 "InteractableItem": "",
 "InteractionComponent": "",
 "InteractionComponentUI": "",
-"Main": "",
 "Piercing": "",
 "PiercingHitBox": "",
 "SceneData": "",
@@ -214,12 +208,14 @@ default_bus_layout="res://addons/GameTemplate/Assets/Audio_bus_layout.tres"
 
 [autoload]
 
-Game="*res://singletons/game.gd"
+Game="*res://addons/game-template/game.gd"
 Hud="*res://ui/hud/Hud.tscn"
 Shake="*res://singletons/shake.gd"
 Party="*res://singletons/party.tscn"
 GlobalCamera="*res://singletons/global_camera.tscn"
 Cursor="*res://singletons/cursor.gd"
+Utils="*res://addons/game-template/utils.gd"
+Transitions="*res://addons/game-template/transition/transition.tscn"
 
 [debug]
 
@@ -240,7 +236,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/game-template/plugin.cfg" )
 
 [gui]
 
