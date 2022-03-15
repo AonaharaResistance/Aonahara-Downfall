@@ -83,6 +83,7 @@ stateless_attributes = {
 "acceleration": 60,
 "base_damage": 10,
 "dash_duration": 0.2,
+"extra_hp": 0,
 "friction": 0.2,
 "max_hp": 4,
 "max_speed": 110,

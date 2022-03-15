@@ -19,6 +19,8 @@ script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
+[node name="Modifiers" type="Node2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -33,25 +35,6 @@ collision_mask = 10
 [node name="HitBox" parent="." instance=ExtResource( 1 )]
 collision_layer = 4
 collision_mask = 2
-
-[node name="Rays" type="Node2D" parent="."]
-
-[node name="RayCast2D2" type="RayCast2D" parent="Rays"]
-scale = Vector2( 1, 1.00799 )
-enabled = true
-cast_to = Vector2( 0, 0 )
-
-[node name="RayCast2D3" type="RayCast2D" parent="Rays"]
-position = Vector2( 0, -8.19874 )
-scale = Vector2( 1, 1.00799 )
-enabled = true
-cast_to = Vector2( 0, 0 )
-
-[node name="RayCast2D4" type="RayCast2D" parent="Rays"]
-position = Vector2( 0, 9.24986 )
-scale = Vector2( 1, 1.00799 )
-enabled = true
-cast_to = Vector2( 0, 0 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

@@ -200,6 +200,7 @@ stateless_attributes = {
 "acceleration": 50,
 "base_damage": 1,
 "dash_duration": 0.2,
+"extra_hp": 0,
 "friction": 0.2,
 "max_hp": 2,
 "max_speed": 100,
@@ -258,7 +259,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 15 )
 parameters/casting/blend_position = -0.768961
-parameters/idle/blend_position = 0.127188
+parameters/idle/blend_position = -0.00264549
 parameters/walk/blend_position = -0.0198367
 
 [editable path="Blinker"]

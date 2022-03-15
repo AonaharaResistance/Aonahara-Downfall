@@ -30,6 +30,7 @@ enum { LIGHT, HEAVY }
 
 func _ready():
 	# ! Very dangerous and unsage but i like it :HenryMatsuri:
+	# Actually this might be safe
 	character = get_node("../../")
 	heavy_cooldown_timer.set_wait_time(heavy_cooldown_time)
 

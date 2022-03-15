@@ -39,7 +39,7 @@ script = ExtResource( 3 )
 visible = false
 z_index = 1
 
-[node name="Buffs" type="Node2D" parent="."]
+[node name="Modifiers" type="Node2D" parent="."]
 
 [node name="Debuffs" type="Node2D" parent="."]
 
