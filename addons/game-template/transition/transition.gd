@@ -27,7 +27,7 @@ func is_transition_in_playing():
 # appear
 func fade_in(params = {}):
 	randomize()
-	tips.set_text("Tips: \n " + tip_list[randi() % tip_list.size()])
+	tips.set_text("Tips: \n" + tip_list[randi() % tip_list.size()])
 	progress.hide()
 	if params and params.get("show_progress_bar") != null:
 		if params.get("show_progress_bar") == true:

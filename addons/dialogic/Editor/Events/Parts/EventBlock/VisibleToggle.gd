@@ -13,7 +13,7 @@ func _ready():
 
 
 func disabled():
-	self_modulate = Color(0, 0, 0, 0)
+	self_modulate = Color(0,0,0,0)
 	is_disabled = true
 
 
@@ -22,7 +22,7 @@ func set_visible(visible: bool):
 	var current_rect_size = current_piece.get("rect_size")
 	if visible:
 		current_piece.get_node("PanelContainer/VBoxContainer/Header/Preview").hide()
-
+		
 		var index = 0
 		for node in current_piece.get_node("PanelContainer/VBoxContainer").get_children():
 			if index > 0:
@@ -31,7 +31,7 @@ func set_visible(visible: bool):
 	else:
 		if current_piece.has_node("PanelContainer/VBoxContainer/Header/Preview"):
 			current_piece.get_node("PanelContainer/VBoxContainer/Header/Preview").show()
-
+			
 			var index = 0
 			for node in current_piece.get_node("PanelContainer/VBoxContainer").get_children():
 				if index > 0:
@@ -39,7 +39,7 @@ func set_visible(visible: bool):
 				index += 1
 			if "preview" in current_piece:
 				current_piece.get_node("PanelContainer/VBoxContainer/Header/Preview").text = current_piece.preview
-			current_piece.set("rect_size", Vector2(current_rect_size.x, 0))
+			current_piece.set("rect_size", Vector2(current_rect_size.x,0))
 	release_focus()
 
 

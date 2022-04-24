@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func load_data(data):
 	.load_data(data)
-
+	
 	text_editor.load_data(data)
 	voice_editor.visible = use_voices()
 	voice_editor.load_data(data)
@@ -28,15 +28,15 @@ func get_preview():
 
 func use_voices():
 	var config = DialogicResources.get_settings_config()
-	return config.get_value("dialog", "text_event_audio_enable", false)
+	return config.get_value('dialog', 'text_event_audio_enable', false)
 
 
 func _on_text_editor_data_changed(data) -> void:
-	event_data = data
-
-	#udpate the voice picker to check if we repopulate it
+	event_data = data 
+	
+	#udpate the voice picker to check if we repopulate it 
 	update_voices_lines()
-	# informs the parent
+	# informs the parent 
 	data_changed()
 
 
@@ -46,7 +46,10 @@ func update_voices_lines():
 
 
 func _on_voice_editor_data_changed(data) -> void:
-	event_data["voice_data"] = data["voice_data"]
+	event_data['voice_data'] = data['voice_data']
 	voice_editor.visible = use_voices()
-	# informs the parent
+	# informs the parent 
 	data_changed()
+
+func focus():
+	text_editor.focus()

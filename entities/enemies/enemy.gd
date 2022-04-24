@@ -1,13 +1,8 @@
 extends KinematicBody2D
 class_name Enemy
 
-export var hp: int
-export var speed: int
-export var max_speed: int
-export var agro_radius: int
-export var chase_radius: int
 export var steering_force: float
-export var receives_knockback: bool = true
+export var avoid_force: float
 
 export var effect_hit: PackedScene
 export var effect_died: PackedScene
@@ -17,6 +12,7 @@ export var projectile: PackedScene = preload("res://objects/weapons/staves/parse
 onready var ai = $Ai
 onready var animation: AnimationPlayer = $AnimationPlayer
 onready var modifiers: Node2D = $Modifiers
+onready var whiskers: Node2D = $Whiskers
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
@@ -32,6 +28,8 @@ export var stateless_attributes: Dictionary = {
 	"base_damage": 0,
 	"acceleration": 0,
 	"agro_radius": 0,
+	"steering_force": 0,
+	"avoid_force": 0,
 	"receives_knockback": true,
 }
 
@@ -50,9 +48,13 @@ var active_attributes: Dictionary = {
 ## -----------------------------------------------------------------------------
 
 
-func _process(_delta):
-	print(velocity)
-	velocity += seek_steering()
+func _physics_process(_delta):
+	var steering: Vector2 = Vector2.ZERO
+	steering += seek_steering()
+	steering = steering.clamped(steering_force)
+	steering += avoid_obstacles_steering()
+	velocity += steering
+
 	velocity = move_and_slide(velocity)
 
 
@@ -85,8 +87,14 @@ func arrival_steering() -> void:
 
 
 # Avoid obstacles while maintaining course to target
-func avoid_obstacles_steering() -> void:
-	pass
+func avoid_obstacles_steering() -> Vector2:
+	whiskers.rotation = velocity.angle()
+	for whisker in whiskers.get_children():
+		whisker.cast_to.x = velocity.length()
+		if whisker.is_colliding():
+			var obstacle = whisker.get_collider()
+			return (position + velocity - obstacle.position).normalized() * avoid_force
+	return Vector2.ZERO
 
 
 ## -----------------------------------------------------------------------------
@@ -103,7 +111,7 @@ func set_target(new_target) -> void:
 
 
 func listen_knockback(delta) -> void:
-	if receives_knockback:
+	if get_attribute("receives_knockback"):
 		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 		knockback = move_and_slide(knockback)
 

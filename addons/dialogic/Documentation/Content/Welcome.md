@@ -1,24 +1,23 @@
 ![WelcomeImage](./Images/dialogic-hero-1.3.png)
 Welcome to the help pages. Here you can find all the information available on how to use the plugin and its parts.  
 
-If you are looking for something specific, you can use the filter in the upper left. If you need extra help you can join [Emilio's Discord server](https://discord.gg/v4zhZNh)!
+If you are looking for something specific, you can use the filter in the upper left. If you need extra help you can ask questions here: [GitHub Discussions](https://github.com/coppolaemilio/dialogic/discussions) or alternatively chat about the development of Dialogic on [Emilio's Discord server](https://discord.gg/v4zhZNh)!
 
-This project is made possible by the support of our [Patreons](https://www.patreon.com/coppolaemilio)
+This project is made possible by the support of our [Patreons](https://www.patreon.com/coppolaemilio) and Github Sponsors.
 
 # Index
 ## Events
-- [Text event](./Events/000)
-- [Character Join](./Events/001)
-- [Character Leave](./Events/002)
-- [Question Event](./Events/010)
-- [Choice Event](./Events/011)
-- [Condition Event](./Events/012)
-- [End Event](./Events/013)
-- [Set Value](./Events/014)
-- [Audio Events](./Events/030)
-- [Emit Signal](./Events/040)
-- [Change Scene](./Events/041)
-- [Call Node](./Events/042)
+- [Text Event](./Events/001.md)
+- [Character Event](./Events/002.md)
+- [Question Event](./Events/010.md)
+- [Choice Event](./Events/011.md)
+- [Condition Event](./Events/012.md)
+- [End Event](./Events/013.md)
+- [Set Value](./Events/014.md)
+- [Audio Events](./Events/030.md)
+- [Emit Signal](./Events/040.md)
+- [Change Scene](./Events/041.md)
+- [Call Node](./Events/042.md)
 
 ## FAQ
 - [Can I use Dialogic in one of my projects?](./FAQ/can-i-use-dialogic-in-my-project.md)
@@ -26,7 +25,8 @@ This project is made possible by the support of our [Patreons](https://www.patre
 - [Can I use C# with Dialogic?](./FAQ/CSharp.md)
 - [How can I make a dialog show up in game?](./FAQ/how-to-make-dialog-show-up-in-game.md)
 - [The plugin is cool! Why is it not shipped with Godot?](./FAQ/plugin-shipped-godot.md)
-- [Portraits not showing in game?](./FAQ/Portraits.md)
+- [Portraits not showing in game?](./FAQ/portraits-not-showing.md)
+- [How can I define animated portraits?](./FAQ/custom-portraits.md)
 - [My resolution is too small and the dialog is too big.](./FAQ/resolution-small-dialog-big.md)
 - [Using signals?](./FAQ/Signals.md)
 - [Why are you not using graph nodes?](./FAQ/why-not-graph-nodes.md)
@@ -37,12 +37,15 @@ This project is made possible by the support of our [Patreons](https://www.patre
 - [Timeline Editor](./Reference/Timeline.md)
 - [Character Editor](./Reference/Character.md)
 - [Theme Editor](./Reference/Theme.md)
+- [History Log](./Reference/History.md)
 
 ## Tutorials
-- [Getting started (video)](https://www.youtube.com/watch?v=sYjgDIgD7AY)
-- [Saving and Loading](./Tutorials/Saving.md)
-- [Creating Custom Events](./Events/Custom Events/CreateCustomEvents)
 - [Beginners Guide](./Tutorials/BeginnersGuideStepByStep.md)
+- [Getting started (video)](https://www.youtube.com/watch?v=sYjgDIgD7AY)
+- [Updating to 1.4](./Tutorials/Updating.md)
+- [Saving and Loading](./Tutorials/Saving.md)
+- [Creating Custom Events](./Events/CustomEvents/CreateCustomEvents.md)
+- [Adding Character Animations](./Tutorials/AddingNewAnimations.md)
 - [Voice Line Support](./Tutorials/VoiceLines.md)
 
 
@@ -50,11 +53,11 @@ This project is made possible by the support of our [Patreons](https://www.patre
 # Dialogic is made by:
 **[Emilio Coppola](https://github.com/coppolaemilio)**
 [Jowan-Spooner](https://github.com/Jowan-Spooner)
-[Arnaud Vergnet](https://github.com/arnaudvergnet)
-[ellogwen](https://github.com/ellogwen)
 [Tim Krief](https://github.com/timkrief)
-[AnidemDex](https://github.com/AnidemDex)
 [zaknafean](https://github.com/zaknafean)
+[ellogwen](https://github.com/ellogwen)
+[AnidemDex](https://github.com/AnidemDex)
+[Arnaud Vergnet](https://github.com/arnaudvergnet)
 And many [more](https://github.com/coppolaemilio/dialogic/graphs/contributors)!
 
 

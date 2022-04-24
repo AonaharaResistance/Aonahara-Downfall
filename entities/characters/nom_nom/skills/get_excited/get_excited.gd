@@ -3,7 +3,8 @@ extends Skill
 export var character_path: NodePath
 
 onready var character: Character = get_node(character_path)
-onready var excited_buff = preload("res://entities/characters/nom_nom/skills/get_excited/excited.tscn")
+
+onready var excited_buff = preload("res://entities/characters/nom_nom/skills/get_excited/excited/excited.tscn")
 
 
 func _process(delta):

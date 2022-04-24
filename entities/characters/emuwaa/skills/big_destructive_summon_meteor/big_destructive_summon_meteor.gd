@@ -10,17 +10,23 @@ onready var animation: AnimationPlayer = $AnimationPlayer
 onready var cast_timer: Timer = $CastTimer
 var casting: bool = false
 
+signal skill_activated
+signal skill_canceled
+signal skill_casted
+
 
 func _unhandled_input(event):
 	if casting:
 		if event.is_action_pressed("cast_skill"):
 			cast_skill()
 		if event.is_action_pressed("cancel_skill"):
+			emit_signal("skill_canceled")
 			cancel_cast()
 
 
 func activate_skill() -> void:
 	if cooldown_timer.is_stopped():
+		emit_signal("skill_activated")
 		casting = true
 		spawning_circle.set_visible(true)
 		Cursor.set_default_cursor(Cursor.target, Vector2(16, 16))
@@ -32,6 +38,7 @@ func _start_timers() -> void:
 
 
 func cast_skill() -> void:
+	emit_signal("skill_casted")
 	casting = false
 	particle.set_visible(true)
 	_start_timers()
@@ -63,3 +70,7 @@ func _on_CastTimer_timeout():
 	active_meteor.global_position = spawning_circle.global_position
 	active_meteor.global_position += Vector2(307.173, -265.675)
 	animation.play("fade")
+
+
+func _on_CooldownTimer_timeout():
+	current_cooldown_indicator = cooldown_indicator

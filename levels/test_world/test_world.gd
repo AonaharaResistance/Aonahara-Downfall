@@ -38,10 +38,8 @@ func _ready():
 	print(Party.add_party_member(res2))
 	print(Party.party_members)
 	player = Party.party_members[Party.selected_member]
+	Party.set_selected_member(1)
 	Party.spawn_party(self)
-
-	var dialog = Dialogic.start("sexooooooo")
-	add_child(dialog)
 
 	add_child(overlay)
 	add_child(title)

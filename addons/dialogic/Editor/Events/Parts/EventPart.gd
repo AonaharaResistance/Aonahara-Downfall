@@ -3,7 +3,6 @@ extends Control
 
 # has to be set by the parent before adding it to the tree
 var editor_reference
-#var editorPopup
 
 var event_data = {}
 
@@ -21,24 +20,27 @@ signal request_selection
 
 # emit this if you want a warning to be displayed/hidden
 signal set_warning(text)
-signal remove_warning
+signal remove_warning()
 
 
 # when the node is ready
 func _ready():
 	pass
 
-
 # to be overwritten by the subclasses
-func load_data(data: Dictionary):
+func load_data(data:Dictionary):
 	event_data = data
 
 
 # to be overwritten by body-parts that provide a preview
 func get_preview_text():
-	return ""
+	return ''
 
+# to be overwritten by the body-parts if some kind of focus (on event creation) is wanted
+func focus():
+	pass
 
 # has to be called everytime the data got changed
 func data_changed():
 	emit_signal("data_changed", event_data)
+

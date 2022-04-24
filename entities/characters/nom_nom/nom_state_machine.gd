@@ -20,6 +20,30 @@ func _state_logic(delta) -> void:
 		parent.activate_dash()
 
 
+func _unhandled_input(event):
+	if parent.is_in_control:
+		if state == states.idle:
+			parent.listen_to_skills(event)
+			parent.listen_to_attacks(event)
+			parent.listen_to_party_change(event)
+			parent.listen_to_input_direction(event)
+			parent.sprite_control()
+
+		if state == states.move:
+			parent.listen_to_skills(event)
+			parent.listen_to_attacks(event)
+			parent.listen_to_party_change(event)
+			parent.listen_to_input_direction(event)
+			parent.sprite_control()
+
+		if state == states.dash:
+			parent.listen_to_skills(event)
+			parent.listen_to_attacks(event)
+			parent.listen_to_party_change(event)
+			parent.listen_to_input_direction(event)
+			parent.sprite_control()
+
+
 func _enter_state(_previous_state: int, new_state: int) -> void:
 	._enter_state(_previous_state, new_state)
 	match new_state:

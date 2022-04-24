@@ -265,7 +265,9 @@ __meta__ = {
 [node name="TipsMargin" type="MarginContainer" parent="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 13.0
 margin_top = 115.0
+margin_right = -27.0
 margin_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -275,11 +277,10 @@ __meta__ = {
 }
 
 [node name="Tips" type="Label" parent="ColorRect/TipsMargin"]
-margin_top = 15.0
-margin_right = 320.0
-margin_bottom = 32.0
-text = "Tips:
-"
+margin_top = 20.0
+margin_right = 280.0
+margin_bottom = 27.0
+text = "Tips:"
 align = 1
 autowrap = true
 __meta__ = {

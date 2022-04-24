@@ -10,6 +10,7 @@ onready var parent = get_parent()
 onready var state_label: Label = parent.get_node("StateLabel")
 
 
+# Checking transition and running state logic
 func _physics_process(delta) -> void:
 	if state != -1:
 		_state_logic(delta)

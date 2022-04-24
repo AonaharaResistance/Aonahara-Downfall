@@ -41,7 +41,7 @@ z_index = 1
 
 [node name="Modifiers" type="Node2D" parent="."]
 
-[node name="Debuffs" type="Node2D" parent="."]
+[node name="Vfx" type="Node2D" parent="."]
 
 [node name="Dash" parent="." instance=ExtResource( 2 )]
 

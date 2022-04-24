@@ -36,19 +36,21 @@ func _ready():
 
 
 func light_attack():
-	character.set_is_in_battle(true)
-	if chargable_light and light_cooldown_timer.is_stopped():
-		animation.play("light_charge")
-	elif !chargable_light and light_cooldown_timer.is_stopped():
-		animation.play("light_attack")
-		light_cooldown_timer.start()
+	if !animation.is_playing() and !heavy_charged:
+		character.set_is_in_battle(true)
+		if chargable_light and light_cooldown_timer.is_stopped():
+			animation.play("light_charge")
+		elif !chargable_light and light_cooldown_timer.is_stopped():
+			animation.play("light_attack")
+			light_cooldown_timer.start()
 
 
 func light_attack_release():
-	animation.stop()
-	if chargable_light:
-		character.set_is_in_battle(true)
-		animation.play("light_attack")
+	if !animation.is_playing() and !heavy_charged:
+		animation.stop()
+		if chargable_light:
+			character.set_is_in_battle(true)
+			animation.play("light_attack")
 
 
 func heavy_attack():

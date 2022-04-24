@@ -9,7 +9,7 @@
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,
-	"offset_y": -10,
+	"offset_y": 0,
 	"portraits": [
 		{
 			"name": "Default",
@@ -24,5 +24,6 @@
 			"path": "res://assets/place_holder/Nitsu test.png"
 		}
 	],
-	"scale": 30
+	"scale": 30,
+	"theme": ""
 }

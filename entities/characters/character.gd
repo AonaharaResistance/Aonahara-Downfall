@@ -60,7 +60,7 @@ var active_attributes: Dictionary = {
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
-var is_in_control: bool = false
+var is_in_control: bool = true
 var is_focus: bool = false
 var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
 var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
@@ -77,16 +77,7 @@ func _ready() -> void:
 
 
 func _process(_delta):
-	Hud.update_hud()
 	modifier_tick()
-
-
-func _unhandled_input(event):
-	if is_in_control:
-		listen_to_skills(event)
-		listen_to_attacks(event)
-		listen_to_party_change(event)
-		listen_to_input_direction(event)
 
 
 ## -----------------------------------------------------------------------------
