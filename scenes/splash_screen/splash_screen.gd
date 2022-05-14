@@ -20,13 +20,9 @@ var params = {
 }
 
 
-func start():
+func _ready():
 	$Aonares.gravity_scale = 0
-	tween.pause_mode = Node.PAUSE_MODE_PROCESS
-
-	bg.pause_mode = Node.PAUSE_MODE_PROCESS
 	var _interpolate: bool = tween.interpolate_property(rect, "modulate:a", 1.0, 0.0, 2.0, 3, 1)
-
 	var _tween_status: bool = tween.start()
 
 
@@ -53,7 +49,9 @@ func _on_Aonares_body_entered(body):
 
 
 func _on_ModulateTween_tween_completed(object, key):
-	camera.queue_free()
+	for bgss in bg.get_children():
+		$ModulateTween.stop_all()
+	tween.stop_all()
 	Game.change_scene("res://menus/main_menu/main_menu.tscn", params)
 
 

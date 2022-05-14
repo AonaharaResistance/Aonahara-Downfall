@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/miscs/taishiisama.png" type="Texture" id=2]
 [ext_resource path="res://assets/place_holder/light.png" type="Texture" id=3]
 [ext_resource path="res://scenes/pause_layer/pause_layer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://entities/NPCs/test_npc.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/miscs/yuka.png" type="Texture" id=5]
 [ext_resource path="res://levels/testto.gd" type="Script" id=6]
 [ext_resource path="res://levels/test_world/test_world.gd" type="Script" id=7]
 [ext_resource path="res://entities/NPCs/test_npc.gd" type="Script" id=8]
@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/place_holder/enemies/goblin/goblin_idle_spritesheet.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.9314, 7.27459 )
+extents = Vector2( 6.9314, 36.3997 )
 
 [sub_resource type="Animation" id=2]
 length = 0.3
@@ -521,12 +521,9 @@ range_height = -503.9
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="KinematicBody2D" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 253.861, 66.3968 )
-
 [node name="KinematicBody2D2" type="KinematicBody2D" parent="YSort"]
 position = Vector2( 197.508, 97.3511 )
-collision_layer = 32
+collision_layer = 33
 collision_mask = 0
 script = ExtResource( 8 )
 
@@ -536,6 +533,7 @@ hframes = 6
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/KinematicBody2D2"]
+position = Vector2( 0, 29.1251 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/KinematicBody2D2"]
@@ -584,6 +582,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 135.436
+margin_top = -376.0
+margin_right = 409.436
+margin_bottom = -193.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="."]
 margin_left = -14.0
 margin_top = -641.0
@@ -591,6 +603,17 @@ margin_right = 127.0
 margin_bottom = -364.0
 text = "Toyosatomimi no Miko is my one and only love, ever since I met her I've been able to wake up without asking myself if life is even worth it, Miko is the only reason I need to live, I want to marry her and love her for the rest of my life, it's almost scary how much I love her, and it might be my only obsession and addiction, but I love her, I really do, I Cannot express my love for her, I can only say that I love her over and over again like a broken record expecting someone to understand, I love her voice and all the sounds it makes, I love her smile and how happy she looks when she preach about daoism, I love her hughs, I love being next to her, her warmth and her hands and her face and her thighs and like, damn. I will never get tired of listening to that sweet angelic voice of hers, I love to fall asleep while she hugs me, I love listening to her breathing and feeling her chest breathing and feeling her heartbeat, I want to hold her hands all the time, all I want is to make her happy for as long as I possibly can, and love her until I die. No matter what I do, I am constantly thinking of her.
 "
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = -14.0
+margin_top = -376.0
+margin_right = 111.0
+margin_bottom = -99.0
+text = "But I'm kinda mad in love with Yuuka too"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

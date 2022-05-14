@@ -39,9 +39,9 @@ script = ExtResource( 3 )
 visible = false
 z_index = 1
 
-[node name="Buffs" type="Node2D" parent="."]
+[node name="Modifiers" type="Node2D" parent="."]
 
-[node name="Debuffs" type="Node2D" parent="."]
+[node name="Vfx" type="Node2D" parent="."]
 
 [node name="Dash" parent="." instance=ExtResource( 2 )]
 
@@ -87,10 +87,6 @@ shape = SubResource( 2 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 3 )
 
-[node name="BuffTimer" type="Timer" parent="."]
-wait_time = 0.01
-autostart = true
-
 [node name="StateLabel" type="Label" parent="."]
 visible = false
 margin_left = -4.441
@@ -104,7 +100,6 @@ __meta__ = {
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_StaminaTimer_timeout"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
-[connection signal="timeout" from="BuffTimer" to="." method="_on_BuffTimer_timeout"]
 
 [editable path="Blinker"]
 [editable path="Dash"]

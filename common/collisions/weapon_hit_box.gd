@@ -1,8 +1,8 @@
 extends Area2D
 class_name WeaponHitBox
 
-# * The difference between normal hitbox is that
-# * Weapon hitbox require character damage
+# The difference between normal hitbox is that
+# Weapon hitbox require character damage
 
 export var damage: int
 export var knockback_strength: float

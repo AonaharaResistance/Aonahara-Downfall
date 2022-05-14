@@ -26,7 +26,7 @@ func set_debug_overlay():
 	overlay.add_stat("is on battle: ", player, "get_is_in_battle", true)
 	overlay.add_stat("can dash: ", dash, "can_dash", false)
 	overlay.add_stat("dash cooldown: ", dash, "get_cooldown_timer", true)
-	overlay.add_stat("stamina: ", player, "stamina", false)
+	overlay.add_stat("stamina: ", player, "get_attribute", true, "stamina")
 	overlay.add_stat("stamina regen timer: ", player, "get_stamina_timer", true)
 	overlay.add_stat("hp: ", player, "get_attribute", true, "hp")
 
@@ -38,10 +38,8 @@ func _ready():
 	print(Party.add_party_member(res2))
 	print(Party.party_members)
 	player = Party.party_members[Party.selected_member]
+	Party.set_selected_member(1)
 	Party.spawn_party(self)
-
-	var dialog = Dialogic.start("sexooooooo")
-	add_child(dialog)
 
 	add_child(overlay)
 	add_child(title)

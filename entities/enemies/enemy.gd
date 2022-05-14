@@ -1,112 +1,117 @@
 extends KinematicBody2D
 class_name Enemy
 
-export var hp: int setget set_hp, get_hp
-export var effect_hit: PackedScene = null
-export var effect_died: PackedScene = null
-export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
-export var projectile: PackedScene = preload("res://objects/projectiles/PlayerDagger.tscn")
-export var receives_knockback: bool = true
-export var speed: int = 40
-export var max_speed: int = 100
-export var agro_range: int = 0
-var max_steering: float = 2.5
-var avoid_force: int = 100000
+export var steering_force: float
+export var avoid_force: float
 
-onready var animation: AnimationPlayer = $AnimationPlayer
-onready var attack_timer: Timer = $AttackTimer
-onready var spawn_location: Vector2 = global_position
+export var effect_hit: PackedScene
+export var effect_died: PackedScene
+export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
+export var projectile: PackedScene = preload("res://objects/weapons/staves/parseids_staff/rock_shard/RockShard.tscn")
+
 onready var ai = $Ai
+onready var animation: AnimationPlayer = $AnimationPlayer
+onready var modifiers: Node2D = $Modifiers
+onready var whiskers: Node2D = $Whiskers
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
+var target setget set_target, get_target
 
-var arrival_zone_radius: int = 20
-var vector_to_target: Vector2 = Vector2.ZERO setget set_target
+export var stateful_attributes: Dictionary = {
+	"hp": 0,
+}
 
-onready var raycasts: Node2D = get_node("Rays")
+export var stateless_attributes: Dictionary = {
+	"max_hp": 0,
+	"max_speed": 0,
+	"base_damage": 0,
+	"acceleration": 0,
+	"agro_radius": 0,
+	"steering_force": 0,
+	"avoid_force": 0,
+	"receives_knockback": true,
+}
+
+var active_attributes: Dictionary = {
+	"hp": 0,
+	"max_hp": 0,
+	"max_speed": 0,
+	"base_damage": 0,
+	"acceleration": 0,
+	"agro_radius": 0,
+	"receives_knockback": true,
+}
+
+## -----------------------------------------------------------------------------
+##																Virtual Methods
+## -----------------------------------------------------------------------------
 
 
-func move():
-	if !Party.is_party_empty():
-		velocity = global_position.direction_to(Party.current_character().global_position) * speed
-		velocity = move_and_slide(velocity)
+func _physics_process(_delta):
+	var steering: Vector2 = Vector2.ZERO
+	steering += seek_steering()
+	steering = steering.clamped(steering_force)
+	steering += avoid_obstacles_steering()
+	velocity += steering
+
+	velocity = move_and_slide(velocity)
+
+
+## -----------------------------------------------------------------------------
+##																Movement Stuff
+## -----------------------------------------------------------------------------
 
 
 func direction_to_target():
-	return global_position.direction_to(Party.current_character().global_position)
+	return global_position.direction_to(get_target().global_position)
 
 
-func set_target(new_target):
-	vector_to_target = new_target - position
-
-
-func _process(_delta):
+# Wander around designated radius
+func patrol() -> void:
 	pass
 
 
-#var steering: Vector2 = Vector2.ZERO
-#
-#if vector_to_target.length() > arrival_zone_radius:
-#    steering += seek_steering()
-#else:
-#    steering += arrival_steering()
-#steering += avoid_obstacles_steering()
-#steering = steering.clamped(max_steering)
-#
-#velocity += steering * delta * 100
-#velocity = velocity.clamped(max_speed)
-#
-#velocity = move_and_slide(
-#    velocity * int(ai.get_children().front().patrol_duration.is_stopped())
-#)
+# Seek target
+func seek_steering() -> Vector2:
+	var desired_velocity: Vector2 = (
+		direction_to_target().normalized()
+		* get_attribute("acceleration")
+	)
+	return desired_velocity - velocity
 
 
-func seek_steering() -> void:
-	pass
-
-
-#var desired_velocity: Vector2 = vector_to_target.normalized() * max_speed
-#return desired_velocity - velocity
-
-
+# Slowly slows down on arrival at destination
 func arrival_steering() -> void:
 	pass
 
 
-#var speed: float = (vector_to_target.length() / arrival_zone_radius) * max_speed
-#var desired_velocity: Vector2 = vector_to_target.normalized() * speed
-#return desired_velocity - velocity
+# Avoid obstacles while maintaining course to target
+func avoid_obstacles_steering() -> Vector2:
+	whiskers.rotation = velocity.angle()
+	for whisker in whiskers.get_children():
+		whisker.cast_to.x = velocity.length()
+		if whisker.is_colliding():
+			var obstacle = whisker.get_collider()
+			return (position + velocity - obstacle.position).normalized() * avoid_force
+	return Vector2.ZERO
 
 
-func avoid_obstacles_steering() -> void:
-	pass
+## -----------------------------------------------------------------------------
+##																Combat Stuff
+## -----------------------------------------------------------------------------
 
 
-#raycasts.rotation = velocity.angle()
-##Something is wrong here
-#for raycast in raycasts.get_children():
-#    raycast.cast_to.x = velocity.length()
-#    if raycast.is_colliding():
-#        var obstacle = raycast.get_collider()
-#        return (position + velocity - obstacle.position).normalized() * avoid_force
-#
-#return Vector2.ZERO
+func get_target():
+	return Party.current_character()
 
 
-func get_hp() -> int:
-	return hp
-
-
-func set_hp(new_hp) -> void:
-	if new_hp < 0:
-		hp = 0
-	else:
-		hp = new_hp
+func set_target(new_target) -> void:
+	target = new_target
 
 
 func listen_knockback(delta) -> void:
-	if receives_knockback:
+	if get_attribute("receives_knockback"):
 		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 		knockback = move_and_slide(knockback)
 
@@ -129,9 +134,32 @@ func _randomize_damage(damage: int) -> int:
 	return int(round(rand_range(damage * 0.9, damage * 1.2)))
 
 
+func _take_damage(damage: int) -> void:
+	set_attribute("hp", get_attribute("hp") - damage)
+
+
+func _die() -> void:
+	# Do dying stuff before freeing
+	queue_free()
+
+
+func shoot_projectile() -> void:
+	var active_projectile = projectile.instance()
+	get_tree().current_scene.add_child(active_projectile)
+	active_projectile.direction = direction_to_target()
+	active_projectile.global_position = self.global_position
+	active_projectile.launch()
+	pass
+
+
+## -----------------------------------------------------------------------------
+##																Sprites
+## -----------------------------------------------------------------------------
+
+
 func spawn_effect(EFFECT: PackedScene, effect_position: Vector2 = global_position) -> PackedScene:
 	var effect = EFFECT.instance()
-	Game.get_active_scene().add_child(effect)
+	get_tree().current_scene.add_child(effect)
 	effect.global_position = effect_position
 	return effect
 
@@ -150,26 +178,54 @@ func spawn_damage_indicator(damage: int) -> void:
 		indicator.label.text = str(damage)
 
 
-func _take_damage(damage: int) -> void:
-	set_hp(hp - damage)
+## -----------------------------------------------------------------------------
+##																Modifier Stuff
+## -----------------------------------------------------------------------------
 
 
-func die() -> void:
-	queue_free()
+func get_attribute(attribute: String):
+	if active_attributes.has(attribute):
+		modifier_tick()
+		return active_attributes[attribute]
+	else:
+		print("Attribute does not exist")
+		return 0
 
 
-func shoot():
-	var projectile_direction = self.global_position.direction_to(
-		Party.current_character().global_position
-	)
-	throw_projectile(projectile_direction)
+func set_attribute(attribute: String, new_value):
+	if stateful_attributes.has(attribute):
+		stateful_attributes[attribute] = new_value
+	else:
+		stateless_attributes[attribute] = new_value
+	modifier_tick()
+	Hud.update_hud()
 
 
-func throw_projectile(projectile_direction: Vector2):
-	if projectile:
-		var _projectile = projectile.instance()
-		Game.get_active_scene().add_child(_projectile)
-		_projectile.global_position = self.global_position
+func apply_modifier(new_modifier: Modifier) -> void:
+	modifiers.add_child(new_modifier)
+	modifier_tick()
+	new_modifier.modify_stateful(self)
 
-		var projectile_rotation = projectile_direction.angle()
-		_projectile.rotation = projectile_rotation
+
+func get_modifiers() -> Array:
+	return modifiers.get_children()
+
+
+func modifier_tick() -> void:
+	var res: Dictionary = stateless_attributes.duplicate()
+	var modifier_list: Array = get_modifiers()
+	for modifier in modifier_list:
+		res = modifier.modify_stateless(res)
+	active_attributes = {
+		"hp": stateful_attributes.hp,
+		"max_hp": res.max_hp,
+		"max_speed": res.max_speed,
+		"base_damage": res.base_damage,
+		"acceleration": res.acceleration,
+		"agro_radius": res.agro_radius,
+		"receives_knockback": res.receives_knockback,
+	}
+
+## -----------------------------------------------------------------------------
+##																Misc
+## -----------------------------------------------------------------------------

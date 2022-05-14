@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://entities/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/characters/emuwaa/sprites/emu_spritesheet.png" type="Texture" id=2]
@@ -41,6 +41,22 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "after_cast"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43 ]
 }
 
 [sub_resource type="Animation" id=36]
@@ -128,6 +144,9 @@ tracks/0/keys = {
 "values": [ 25, 26, 27, 28, 29, 30, 30 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "after_cast"
+
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "casting"
 
@@ -166,24 +185,30 @@ blend_point_1/pos = -0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=50]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=16]
+states/after_cast/node = SubResource( 56 )
+states/after_cast/position = Vector2( 186.325, 214.32 )
 states/casting/node = SubResource( 39 )
-states/casting/position = Vector2( 393.806, 213.32 )
+states/casting/position = Vector2( 379.806, 237.32 )
 states/idle/node = SubResource( 44 )
 states/idle/position = Vector2( 300.806, 116 )
 states/walk/node = SubResource( 49 )
 states/walk/position = Vector2( 467.806, 116 )
-transitions = [ "idle", "casting", SubResource( 47 ), "casting", "idle", SubResource( 48 ), "idle", "walk", SubResource( 50 ), "walk", "idle", SubResource( 51 ), "walk", "casting", SubResource( 52 ) ]
+transitions = [ "idle", "casting", SubResource( 47 ), "idle", "walk", SubResource( 50 ), "walk", "idle", SubResource( 51 ), "walk", "casting", SubResource( 52 ), "casting", "after_cast", SubResource( 57 ), "after_cast", "idle", SubResource( 58 ) ]
 start_node = "idle"
-graph_offset = Vector2( -21.1938, 64.32 )
+graph_offset = Vector2( 79.325, 64.32 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
@@ -197,15 +222,16 @@ stateful_attributes = {
 "stamina": 3
 }
 stateless_attributes = {
-"acceleration": 20,
+"acceleration": 50,
 "base_damage": 1,
 "dash_duration": 0.2,
+"extra_hp": 0,
 "friction": 0.2,
 "max_hp": 2,
-"max_speed": 100,
+"max_speed": 200,
 "max_stamina": 3,
 "receives_knockback": false,
-"stamina_regen": 1.0,
+"stamina_regen": 3.0,
 "stamina_regen_rate": 1
 }
 
@@ -246,6 +272,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="13"]
 anims/RESET = SubResource( 3 )
+anims/after_cast = SubResource( 55 )
 anims/casting = SubResource( 36 )
 anims/idle = SubResource( 4 )
 anims/idle_left = SubResource( 12 )
@@ -257,8 +284,8 @@ tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 15 )
-parameters/casting/blend_position = -0.768961
-parameters/idle/blend_position = 0.127188
+parameters/casting/blend_position = 0.163293
+parameters/idle/blend_position = -0.00264549
 parameters/walk/blend_position = -0.0198367
 
 [editable path="Blinker"]

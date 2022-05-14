@@ -17,8 +17,7 @@ onready var interaction_component: InteractionComponent = $InteractionComponent
 onready var skills: Node = $Skills
 onready var skill_one: Skill = $Skills.get_child(0)
 onready var skill_two: Skill = $Skills.get_child(1)
-onready var buffs: Node2D = $Buffs
-onready var buff_timer: Timer = $BuffTimer
+onready var modifiers: Node2D = $Modifiers
 onready var state_label: Label = $StateLabel
 
 export var character_name: String
@@ -34,6 +33,7 @@ export var stateless_attributes: Dictionary = {
 	"stamina_regen": 0.0,
 	"acceleration": 0,
 	"max_hp": 0,
+	"extra_hp": 0,
 	"max_speed": 0,
 	"max_stamina": 0,
 	"base_damage": 0,
@@ -60,7 +60,7 @@ var active_attributes: Dictionary = {
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
-var is_in_control: bool = false
+var is_in_control: bool = true
 var is_focus: bool = false
 var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
 var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
@@ -73,19 +73,11 @@ signal battle_state_changed
 
 
 func _ready() -> void:
-	stamina_timer.wait_time = get_attribute("stamina_regen")
+	modifier_tick()
 
 
 func _process(_delta):
 	modifier_tick()
-
-
-func _unhandled_input(event):
-	if is_in_control:
-		listen_to_skills(event)
-		listen_to_attacks(event)
-		listen_to_party_change(event)
-		listen_to_input_direction(event)
 
 
 ## -----------------------------------------------------------------------------
@@ -225,7 +217,6 @@ func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
 func regenerate_stamina() -> void:
 	while get_attribute("stamina") < get_attribute("max_stamina") && stamina_timer.is_stopped():
 		set_attribute("stamina", get_attribute("stamina") + 1)
-		Hud.update_hud()
 		yield(get_tree().create_timer(get_attribute("stamina_regen_rate")), "timeout")
 
 
@@ -246,7 +237,6 @@ func set_stamina_regen_timer(current_stamina) -> void:
 
 func _take_damage(damage: int) -> void:
 	set_attribute("hp", get_attribute("hp") - damage)
-	Hud.update_hud()
 	if get_attribute("hp") < 0:
 		set_attribute("hp", 0)
 	_die_check(get_attribute("hp"))
@@ -278,8 +268,10 @@ func _on_BattleTimer_timeout():
 
 func get_attribute(attribute: String):
 	if active_attributes.has(attribute):
+		modifier_tick()
 		return active_attributes[attribute]
 	else:
+		print("Attribute does not exist")
 		return 0
 
 
@@ -288,25 +280,27 @@ func set_attribute(attribute: String, new_value):
 		stateful_attributes[attribute] = new_value
 	else:
 		stateless_attributes[attribute] = new_value
+	modifier_tick()
+	Hud.update_hud()
 
 
-func apply_buff(new_buff: Buff) -> void:
-	buffs.add_child(new_buff)
+func apply_modifier(new_modifier: Modifier) -> void:
+	modifiers.add_child(new_modifier)
+	modifier_tick()
+	new_modifier.modify_stateful(self)
 
 
-func get_buffs() -> Array:
-	var buff_list: Array = []
-	buff_list = buffs.get_children()
-	return buff_list
+func get_modifiers() -> Array:
+	return modifiers.get_children()
 
 
 func modifier_tick() -> void:
 	var res: Dictionary = stateless_attributes.duplicate()
-	var buff_list: Array = get_buffs()
-	for buff in buff_list:
-		res = buff.modify_stateless(res)
+	var modifier_list: Array = get_modifiers()
+	for modifier in modifier_list:
+		res = modifier.modify_stateless(res)
 	active_attributes = {
-		"hp": stateful_attributes.hp,
+		"hp": stateful_attributes.hp + res.extra_hp,
 		"stamina": stateful_attributes.stamina,
 		"stamina_regen": res.stamina_regen,
 		"acceleration": res.acceleration,

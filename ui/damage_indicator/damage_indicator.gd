@@ -1,16 +1,24 @@
 extends Node2D
 
-export(int) var SPEED: float = 30
-export(int) var FRICTION: float = 15
-var SHIFT_DIRECTION: Vector2 = Vector2.ZERO
+export var speed: float = 30
+export var friction: float = 15
+var shift_direction: Vector2 = Vector2.ZERO
 
 onready var label = $Label
 
 
-func _ready():
-	SHIFT_DIRECTION = Vector2(rand_range(-1, 1), rand_range(-2, 1))
+func _ready() -> void:
+	randomize_fly_direction()
 
 
-func _process(delta):
-	global_position += SPEED * SHIFT_DIRECTION * delta
-	SPEED = max(SPEED - FRICTION * delta, 0)
+func _process(delta) -> void:
+	move(delta)
+
+
+func move(delta) -> void:
+	global_position += speed * shift_direction * delta
+	speed = max(speed - friction * delta, 0)
+
+
+func randomize_fly_direction() -> void:
+	shift_direction = Vector2(rand_range(-1, 1), rand_range(-2, 1))

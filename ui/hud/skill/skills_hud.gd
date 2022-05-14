@@ -74,11 +74,11 @@ func _set_skills_cooldown_indicator() -> void:
 	skill_two_cooldown_progress.max_value = Party.current_character().skill_two.cooldown_indicator
 
 
-func _on_Skill1_gui_input(event):
+func _on_Skill1_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		Party.current_character().skill_one.activate_skill()
 
 
-func _on_Skill2_gui_input(event: InputEvent):
+func _on_Skill2_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		Party.current_character().skill_two.activate_skill()

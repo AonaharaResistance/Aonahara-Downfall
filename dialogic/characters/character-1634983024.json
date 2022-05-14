@@ -16,5 +16,6 @@
 			"path": "res://assets/place_holder/enemies/goblin/goblin_idle_anim_f0.png"
 		}
 	],
-	"scale": 100
+	"scale": 100,
+	"theme": "default-theme.cfg"
 }

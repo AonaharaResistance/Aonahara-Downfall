@@ -16,7 +16,7 @@ func summon_pillar():
 		if is_instance_valid(pillars[0]):
 			pillars[0].crumble()
 		pillars.remove(0)
-	Game.get_active_scene().add_child(active_pillar)
+	get_tree().current_scene.add_child(active_pillar)
 	active_pillar.global_position = get_global_mouse_position()
 
 

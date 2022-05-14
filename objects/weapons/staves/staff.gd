@@ -30,24 +30,27 @@ enum { LIGHT, HEAVY }
 
 func _ready():
 	# ! Very dangerous and unsage but i like it :HenryMatsuri:
+	# Actually this might be safe
 	character = get_node("../../")
 	heavy_cooldown_timer.set_wait_time(heavy_cooldown_time)
 
 
 func light_attack():
-	character.set_is_in_battle(true)
-	if chargable_light and light_cooldown_timer.is_stopped():
-		animation.play("light_charge")
-	elif !chargable_light and light_cooldown_timer.is_stopped():
-		animation.play("light_attack")
-		light_cooldown_timer.start()
+	if !animation.is_playing() and !heavy_charged:
+		character.set_is_in_battle(true)
+		if chargable_light and light_cooldown_timer.is_stopped():
+			animation.play("light_charge")
+		elif !chargable_light and light_cooldown_timer.is_stopped():
+			animation.play("light_attack")
+			light_cooldown_timer.start()
 
 
 func light_attack_release():
-	animation.stop()
-	if chargable_light:
-		character.set_is_in_battle(true)
-		animation.play("light_attack")
+	if !animation.is_playing() and !heavy_charged:
+		animation.stop()
+		if chargable_light:
+			character.set_is_in_battle(true)
+			animation.play("light_attack")
 
 
 func heavy_attack():
@@ -73,7 +76,7 @@ func _spawn_projectile(projectile_type):
 		active_projectile = light_projectile.instance()
 	if projectile_type == HEAVY:
 		active_projectile = heavy_projectile.instance()
-	Game.get_active_scene().add_child(active_projectile)
+	get_tree().current_scene.add_child(active_projectile)
 	active_projectile.direction = character.get_mouse_direction()
 	active_projectile.global_position = self.global_position
 	active_projectile.launch()
