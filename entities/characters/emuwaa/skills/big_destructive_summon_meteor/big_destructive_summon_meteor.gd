@@ -1,5 +1,6 @@
 extends Skill
 
+export var cast_duration: float
 export var meteor: PackedScene
 export var character_path: NodePath
 
@@ -22,6 +23,10 @@ func _unhandled_input(event):
 		if event.is_action_pressed("cancel_skill"):
 			emit_signal("skill_canceled")
 			cancel_cast()
+
+
+func _ready():
+	cast_timer.set_wait_time(cast_duration)
 
 
 func activate_skill() -> void:

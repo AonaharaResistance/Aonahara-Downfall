@@ -2,7 +2,7 @@ extends Node2D
 class_name Skill
 
 export var skill_name: String
-export var skill_description: String
+export(String, MULTILINE) var skill_description: String
 export var skill_icon: Resource
 export var cooldown_duration: float
 

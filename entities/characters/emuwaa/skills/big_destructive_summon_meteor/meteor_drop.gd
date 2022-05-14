@@ -3,10 +3,25 @@ extends Area2D
 onready var explosion_animation: AnimationPlayer = $ExplosionHitBox/AnimationPlayer
 onready var animation: AnimationPlayer = $AnimationPlayer
 onready var explosion_collision: CollisionShape2D = $ExplosionHitBox/CollisionShape2D
+onready var explosion_hitbox: ExplosionHitBox = $ExplosionHitBox
 onready var fire_collision: CollisionShape2D = $FireHitBox/CollisionShape2D
+onready var fire_hitbox: WeaponHitBox = $FireHitBox
 onready var duration_timer: Timer = $Duration
 onready var fire_interval: Timer = $FireDoT
+
+export var explosion_damage: int
+export var explosion_knockback: float
+export var fire_damage: int
+export var fire_knockback: float
+
 signal exploded
+
+
+func _ready():
+	explosion_hitbox.damage = explosion_damage
+	explosion_hitbox.knockback_strength = explosion_knockback
+	fire_hitbox.damage = fire_damage
+	fire_hitbox.knockback_strength = fire_knockback
 
 
 func explode() -> void:

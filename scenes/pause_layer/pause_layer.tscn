@@ -92,7 +92,7 @@ text = "Settings"
 margin_top = 63.0
 margin_right = 99.0
 margin_bottom = 76.0
-text = "Map"
+text = "Reset"
 
 [node name="MainMenu" type="Button" parent="Pause/VBoxOptions"]
 margin_top = 86.0
@@ -102,4 +102,5 @@ text = "Back to Menu"
 
 [connection signal="pressed" from="PauseButton" to="." method="_on_PauseButton_pressed"]
 [connection signal="pressed" from="Pause/VBoxOptions/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="Pause/VBoxOptions/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Pause/VBoxOptions/MainMenu" to="." method="_on_MainMenu_pressed"]

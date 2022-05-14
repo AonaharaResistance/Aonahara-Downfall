@@ -24,6 +24,8 @@ export var character_name: String
 export var character_icon: Resource
 export var mirrored_sprite: bool = true
 
+var is_alive: bool = true
+
 export var stateful_attributes: Dictionary = {
 	"hp": 0,
 	"stamina": 0,
@@ -60,7 +62,7 @@ var active_attributes: Dictionary = {
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
-var is_in_control: bool = true
+var is_in_control: bool = false
 var is_focus: bool = false
 var is_in_battle: bool = false setget set_is_in_battle, get_is_in_battle
 var movement_key: Dictionary = {"up": false, "down": false, "left": false, "right": false}
@@ -254,7 +256,8 @@ func _die_check(current_hp: int) -> void:
 
 
 func die() -> void:
-	queue_free()
+	is_alive = false
+	Party.switch_to_available_member()
 
 
 func _on_BattleTimer_timeout():
@@ -296,7 +299,7 @@ func get_modifiers() -> Array:
 
 func modifier_tick() -> void:
 	var res: Dictionary = stateless_attributes.duplicate()
-	var modifier_list: Array = get_modifiers()
+	var modifier_list: Array = $Modifiers.get_children()
 	for modifier in modifier_list:
 		res = modifier.modify_stateless(res)
 	active_attributes = {

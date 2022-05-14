@@ -38,8 +38,9 @@ func _ready():
 	print(Party.add_party_member(res2))
 	print(Party.party_members)
 	player = Party.party_members[Party.selected_member]
-	Party.set_selected_member(1)
 	Party.spawn_party(self)
+	Party.set_selected_member(0)
+	Party.tactical_character_showing(Party.current_character())
 
 	add_child(overlay)
 	add_child(title)

@@ -6,7 +6,6 @@
 [node name="Staff" type="Node2D"]
 position = Vector2( 11.3892, 0 )
 script = ExtResource( 1 )
-heavy_charged = true
 
 [node name="WeaponContainer" type="Node2D" parent="."]
 
@@ -25,5 +24,7 @@ amount = 30
 stream = ExtResource( 2 )
 
 [node name="HeavyCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="LightCooldown" type="Timer" parent="."]
+one_shot = true

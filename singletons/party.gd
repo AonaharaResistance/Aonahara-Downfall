@@ -18,6 +18,14 @@ func is_party_empty() -> bool:
 		return true
 
 
+func switch_to_available_member() -> void:
+	for i in range(party_members.size()):
+		if party_members[i].is_alive:
+			change_party_member(i)
+		else:
+			tactical_character_hiding(current_character())
+
+
 func set_selected_member(index: int) -> void:
 	selected_member = index
 
@@ -47,7 +55,7 @@ func remove_party_member(index: int) -> void:
 # TODO: Swap party member
 
 
-func current_character():
+func current_character() -> Character:
 	if !is_party_empty():
 		return party_members[get_selected_member_index()]
 	else:

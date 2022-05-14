@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/place_holder/top down exterior 16x16 free/top down exterior 16x16 free.png" type="Texture" id=1]
 [ext_resource path="res://assets/miscs/taishiisama.png" type="Texture" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://entities/NPCs/test_npc.gd" type="Script" id=8]
 [ext_resource path="res://common/interactions/intraction_component_ui.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/place_holder/enemies/goblin/goblin_idle_spritesheet.png" type="Texture" id=10]
+[ext_resource path="res://entities/enemies/chaser/fromb/fromb.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/place_holder/nitsub.png" type="Texture" id=12]
+[ext_resource path="res://scenes/train_station/station_tile_set.png" type="Texture" id=13]
+[ext_resource path="res://scenes/train_station/station_props.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.9314, 36.3997 )
@@ -29,6 +33,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1, 2, 4 ]
 }
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8.08754, 7.11526 )
 
 [sub_resource type="ConvexPolygonShape2D" id=11]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -462,6 +469,48 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 25/shapes = [  ]
 25/z_index = 0
 
+[sub_resource type="TileSet" id=14]
+0/name = "station_tile_set.png 0"
+0/texture = ExtResource( 13 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 32, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( 6, 4, 26, 4, 26, 28, 6, 28 )
+
+[sub_resource type="TileSet" id=16]
+0/name = "station_props.png 0"
+0/texture = ExtResource( 14 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 16, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 17 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 17 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 7 )
 
@@ -544,6 +593,22 @@ anims/idle = SubResource( 2 )
 script = ExtResource( 6 )
 ui_component_path = NodePath("../InteractionComponentUI")
 
+[node name="spawn_point" type="RigidBody2D" parent="YSort/KinematicBody2D2/Interaction"]
+collision_mask = 3
+gravity_scale = 0.0
+contact_monitor = true
+linear_damp = 53.874
+angular_damp = 34.309
+
+[node name="Sprite" type="Sprite" parent="YSort/KinematicBody2D2/Interaction/spawn_point"]
+position = Vector2( 0.14726, -0.686347 )
+scale = Vector2( 0.101787, 0.0325839 )
+texture = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/KinematicBody2D2/Interaction/spawn_point"]
+position = Vector2( -0.0320597, -0.00365639 )
+shape = SubResource( 13 )
+
 [node name="InteractionComponentUI" parent="YSort/KinematicBody2D2" instance=ExtResource( 9 )]
 margin_left = -19.0794
 margin_top = -16.6203
@@ -618,5 +683,38 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Fromb" parent="." instance=ExtResource( 11 )]
+position = Vector2( 599.656, 71.9163 )
+projectile = null
+stateful_attributes = {
+"hp": 50
+}
+stateless_attributes = {
+"acceleration": 300,
+"agro_radius": 50,
+"avoid_force": 10,
+"base_damage": 1,
+"max_hp": 50,
+"max_speed": 300,
+"receives_knockback": true,
+"steering_force": 10
+}
+
+[node name="TileMap2" type="TileMap" parent="."]
+visible = false
+z_index = -2
+tile_set = SubResource( 14 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65532, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 196607, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0 )
+
+[node name="TileMap3" type="TileMap" parent="."]
+visible = false
+tile_set = SubResource( 16 )
+cell_size = Vector2( 32, 32 )
+collision_mask = 8
+format = 1
+tile_data = PoolIntArray( 1, 0, 0 )
 
 [editable path="YSort/KinematicBody2D2/InteractionComponentUI"]

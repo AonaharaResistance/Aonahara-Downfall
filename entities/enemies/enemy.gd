@@ -4,8 +4,8 @@ class_name Enemy
 export var steering_force: float
 export var avoid_force: float
 
-export var effect_hit: PackedScene
-export var effect_died: PackedScene
+export var effect_hit: PackedScene = preload("res://common/effects/hit_effect.tscn")
+export var effect_died: PackedScene = preload("res://common/effects/death_effect.tscn")
 export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
 export var projectile: PackedScene = preload("res://objects/weapons/staves/parseids_staff/rock_shard/RockShard.tscn")
 
@@ -47,8 +47,12 @@ var active_attributes: Dictionary = {
 ##																Virtual Methods
 ## -----------------------------------------------------------------------------
 
+## -----------------------------------------------------------------------------
+##																Movement Stuff
+## -----------------------------------------------------------------------------
 
-func _physics_process(_delta):
+
+func move():
 	var steering: Vector2 = Vector2.ZERO
 	steering += seek_steering()
 	steering = steering.clamped(steering_force)
@@ -56,11 +60,6 @@ func _physics_process(_delta):
 	velocity += steering
 
 	velocity = move_and_slide(velocity)
-
-
-## -----------------------------------------------------------------------------
-##																Movement Stuff
-## -----------------------------------------------------------------------------
 
 
 func direction_to_target():

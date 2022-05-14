@@ -23,7 +23,9 @@ collision_mask = 4
 [node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
 
 [node name="LightCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="HeavyCooldown" type="Timer" parent="."]
+one_shot = true
 
 [editable path="WeaponContainer/HitBox"]

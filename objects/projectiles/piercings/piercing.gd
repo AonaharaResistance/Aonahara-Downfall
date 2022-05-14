@@ -2,13 +2,21 @@ extends Area2D
 class_name Piercing
 
 export var speed: int = 200
+export var damage: int
+export var knockback_strength: float
 var direction = Vector2.ZERO
 onready var sprite: Sprite = $Sprite
 onready var collision: CollisionShape2D = $CollisionShape2D
+onready var hit_box: PiercingHitBox = $PiercingHitBox
 
 
 func _process(delta):
 	global_position += speed * direction * delta
+
+
+func _ready():
+	hit_box.damage = damage
+	hit_box.knockback_strength = knockback_strength
 
 
 func disable():

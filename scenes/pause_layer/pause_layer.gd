@@ -46,3 +46,7 @@ func _on_PauseButton_pressed():
 func _on_MainMenu_pressed():
 	Game.change_scene("res://menus/main_menu/main_menu.tscn", {"show_progress_bar": false})
 	Party.party_members = []
+
+
+func _on_Button2_pressed():
+	Game.restart_scene()

@@ -21,8 +21,7 @@ func _state_logic(delta) -> void:
 	if state == states.move:
 		parent.move()
 
-	if !state == states.explode:
-		parent.listen_knockback(delta)
+	# if state == states.die:
 
 
 func _enter_state(_previous_state: int, new_state: int) -> void:
@@ -45,14 +44,14 @@ func _get_transition() -> int:
 				return states.move
 			if parent.global_position.distance_to(Party.current_character().global_position) < 20:
 				return states.explode
-			if parent.hp <= 0:
+			if parent.get_attribute("hp") <= 0:
 				return states.die
 		states.move:
 			if parent.global_position.distance_to(Party.current_character().global_position) < 20:
 				return states.explode
 			if parent.global_position.distance_to(Party.current_character().global_position) > 500:
 				return states.idle
-			if parent.hp <= 0:
+			if parent.get_attribute("hp") <= 0:
 				return states.die
 
 	return -1

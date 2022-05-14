@@ -19,7 +19,12 @@ func _on_PlayButton_pressed() -> void:
 
 
 func _on_test_pressed():
-	Game.change_scene("res://levels/test_world/test_world.tscn", {})
+	Game.change_scene(
+		"res://levels/test_world/test_world.tscn",
+		{
+			show_progress_bar = true,
+		}
+	)
 
 
 func _on_QuitButton_pressed():

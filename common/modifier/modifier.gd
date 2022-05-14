@@ -5,7 +5,7 @@ enum Types { Buff, Debuff }
 export(Types) var type = Types.Buff
 
 export var buff_name: String
-export var buff_description: String
+export(String, MULTILINE) var buff_description: String
 export var duration: float
 onready var duration_timer: Timer = $Duration
 
