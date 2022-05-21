@@ -18,6 +18,8 @@ func _state_logic(delta) -> void:
 	animation_tree.set("parameters/explode/blend_position", parent.direction_to_target().x)
 	animation_tree.set("parameters/die/blend_position", parent.direction_to_target().x)
 
+	parent.listen_knockback(delta)
+
 	if state == states.move:
 		parent.move()
 
@@ -40,17 +42,31 @@ func _enter_state(_previous_state: int, new_state: int) -> void:
 func _get_transition() -> int:
 	match state:
 		states.idle:
-			if parent.global_position.distance_to(Party.current_character().global_position) < 500:
-				return states.move
-			if parent.global_position.distance_to(Party.current_character().global_position) < 20:
-				return states.explode
+			if !Party.is_party_empty():
+				if (
+					parent.global_position.distance_to(Party.current_character().global_position)
+					< 500
+				):
+					return states.move
+				if (
+					parent.global_position.distance_to(Party.current_character().global_position)
+					< 20
+				):
+					return states.explode
 			if parent.get_attribute("hp") <= 0:
 				return states.die
 		states.move:
-			if parent.global_position.distance_to(Party.current_character().global_position) < 20:
-				return states.explode
-			if parent.global_position.distance_to(Party.current_character().global_position) > 500:
-				return states.idle
+			if !Party.is_party_empty():
+				if (
+					parent.global_position.distance_to(Party.current_character().global_position)
+					< 20
+				):
+					return states.explode
+				if (
+					parent.global_position.distance_to(Party.current_character().global_position)
+					> 500
+				):
+					return states.idle
 			if parent.get_attribute("hp") <= 0:
 				return states.die
 

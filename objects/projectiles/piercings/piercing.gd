@@ -7,7 +7,7 @@ export var knockback_strength: float
 var direction = Vector2.ZERO
 onready var sprite: Sprite = $Sprite
 onready var collision: CollisionShape2D = $CollisionShape2D
-onready var hit_box: PiercingHitBox = $PiercingHitBox
+onready var hit_box: PiercingHitbox = $PiercingHitbox
 
 
 func _process(delta):

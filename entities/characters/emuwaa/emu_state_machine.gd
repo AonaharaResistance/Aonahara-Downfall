@@ -66,15 +66,14 @@ func _unhandled_input(event):
 
 
 func _state_logic(delta) -> void:
+	print(parent.global_position)
 	animation_tree.set("parameters/idle/blend_position", parent.get_mouse_direction().x)
 	animation_tree.set("parameters/walk/blend_position", parent.get_mouse_direction().x)
 
 	if !state == states.casting && !state == states.after_cast:
 		parent.move(delta)
 		parent.apply_dash()
-
-	if parent.velocity.length() > 20 && parent.dash.can_dash:
-		parent.activate_dash()
+		parent.listen_to_dash()
 
 
 func _enter_state(_previous_state: int, new_state: int) -> void:

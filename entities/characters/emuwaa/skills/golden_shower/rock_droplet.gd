@@ -1,4 +1,4 @@
-extends WeaponHitBox
+extends WeaponHitbox
 
 onready var sprite: Sprite = $Sprite
 
@@ -12,11 +12,6 @@ var rock_sprites: Array = [
 	"res://objects/weapons/staves/parseids_staff/rock_shard/rock_shard_7.png",
 	"res://objects/weapons/staves/parseids_staff/rock_shard/rock_shard_8.png",
 ]
-
-
-func sum_damage() -> void:
-	var character_damage: int = Party.current_character().get_attribute("base_damage")
-	total_damage = damage + character_damage - character_damage
 
 
 func _ready():

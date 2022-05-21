@@ -16,8 +16,8 @@ func _state_logic(delta) -> void:
 	parent.sprite_control()
 	parent.listen_knockback(delta)
 
-	if state != states.idle && parent.velocity.length() > 20 && parent.dash.can_dash:
-		parent.activate_dash()
+	if state != states.idle:
+		parent.listen_to_dash()
 
 
 func _unhandled_input(event):

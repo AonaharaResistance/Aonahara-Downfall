@@ -11,5 +11,9 @@ func _process(_delta):
 		camera2D.current = false
 
 
+func set_current(state: bool) -> void:
+	camera2D.current = state
+
+
 func get_camera():
 	return camera2D

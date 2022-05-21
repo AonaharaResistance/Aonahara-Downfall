@@ -20,3 +20,5 @@ func activate_skill():
 	if cooldown_timer.is_stopped():
 		character.apply_modifier(excited_buff.instance())
 		cooldown_timer.start()
+	else:
+		Hud.show_info("post nut clarity")

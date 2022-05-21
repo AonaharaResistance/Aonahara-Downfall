@@ -3,8 +3,8 @@ extends Explosive
 export var speed: int = 200
 var direction = Vector2.ZERO
 onready var animation: AnimationPlayer = $AnimationPlayer
-onready var explosion_collision: CollisionShape2D = $ExplosionHitBox/CollisionShape2D
-onready var explosion: Area2D = $ExplosionHitBox
+onready var explosion_collision: CollisionShape2D = $ExplosionHitbox/CollisionShape2D
+onready var explosion: Area2D = $ExplosionHitbox
 var formed: bool = false
 
 

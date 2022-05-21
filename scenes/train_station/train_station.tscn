@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/train_station/station_tile_set.png" type="Texture" id=1]
+[ext_resource path="res://levels/firing_range/firing_range_props.png" type="Texture" id=1]
 [ext_resource path="res://entities/characters/emuwaa/emuwaa.tscn" type="PackedScene" id=2]
 
 [sub_resource type="TileSet" id=1]

@@ -13,8 +13,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.58169, 3.04918 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4.00975, 3.39075 )
+[sub_resource type="CircleShape2D" id=59]
+radius = 3.97549
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -217,23 +217,17 @@ collision_mask = 1
 character_name = "Emuwaa"
 character_icon = ExtResource( 6 )
 mirrored_sprite = false
-stateful_attributes = {
-"hp": 2,
-"stamina": 3
-}
-stateless_attributes = {
-"acceleration": 50,
-"base_damage": 1,
-"dash_duration": 0.2,
-"extra_hp": 0,
-"friction": 0.2,
-"max_hp": 2,
-"max_speed": 200,
-"max_stamina": 3,
-"receives_knockback": false,
-"stamina_regen": 3.0,
-"stamina_regen_rate": 1
-}
+hp = 3
+stamina = 3
+stamina_regen = 2.0
+acceleration = 100
+max_hp = 3
+max_speed = 300
+max_stamina = 3
+base_damage = 10
+stamina_regen_rate = 1
+dash_duration = 0.2
+friction = 0.2
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -248,6 +242,9 @@ character_path = NodePath("../..")
 position = Vector2( 0.997029, 0 )
 
 [node name="ParseidsStaff" parent="Weapon" index="0" instance=ExtResource( 5 )]
+chargable_light = false
+holdabke_heavy = false
+heavy_charged = false
 
 [node name="ShadowSprite" parent="." index="9"]
 modulate = Color( 1, 1, 1, 0.333333 )
@@ -256,6 +253,7 @@ scale = Vector2( 0.729361, 0.260693 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="10"]
+visible = false
 scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 hframes = 8
@@ -265,9 +263,10 @@ vframes = 6
 position = Vector2( -0.331211, 9.14386 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2( -0.331211, 9.03948 )
-shape = SubResource( 2 )
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( -0.373886, 9.14819 )
+scale = Vector2( 1, 1.0127 )
+shape = SubResource( 59 )
 
 [node name="AnimationPlayer" parent="." index="13"]
 anims/RESET = SubResource( 3 )
@@ -289,5 +288,5 @@ parameters/walk/blend_position = -0.0198367
 
 [editable path="Blinker"]
 [editable path="Dash"]
-[editable path="HurtBox"]
+[editable path="Hurtbox"]
 [editable path="InteractionComponent"]

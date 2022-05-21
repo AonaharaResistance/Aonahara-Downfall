@@ -1,4 +1,4 @@
-extends HitBox
+extends Hitbox
 
 export(int) var SPEED: int = 100
 

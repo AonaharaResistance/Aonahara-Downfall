@@ -4,7 +4,7 @@ export var projectile: PackedScene
 var velocity: Vector2
 var speed: int = 120
 var hp: int = 5000
-onready var hpbar = $hpbar
+onready var hpbar = $CanvasLayer/hpbar
 export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
 
 
@@ -62,11 +62,11 @@ func spawn_damage_indicator(damage: int) -> void:
 		indicator.label.text = str(damage)
 
 
-func _on_HurtBox_area_entered(hitbox) -> void:
-	if hitbox is WeaponHitBox:
+func _on_Hurtbox_area_entered(hitbox) -> void:
+	if hitbox is WeaponHitbox:
 		Shake.shake(1.0, 0.2, 1)
-		_take_damage(hitbox.total_damage)
-		spawn_damage_indicator(hitbox.total_damage)
+		_take_damage(hitbox.total_damage())
+		spawn_damage_indicator(hitbox.total_damage())
 
 
 func throw_projectile(projectile_direction: Vector2):

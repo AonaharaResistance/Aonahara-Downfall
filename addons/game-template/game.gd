@@ -2,7 +2,6 @@
 # Eg: `Game.change_scene("res://scenes/gameplay/gameplay.tscn)`
 extends Node
 
-
 onready var transitions = get_node_or_null("/root/Transitions")
 
 var pause_scenes_on_transitions = false
@@ -12,12 +11,14 @@ var size: Vector2
 
 
 func _enter_tree() -> void:
-	pause_mode = Node.PAUSE_MODE_PROCESS # needed to make "prevent_input_on_transitions" work even if the game is paused
+	pause_mode = Node.PAUSE_MODE_PROCESS  # needed to make "prevent_input_on_transitions" work even if the game is paused
 	_register_size()
 	get_tree().connect("screen_resized", self, "_on_screen_resized")
 	if transitions:
 		transitions.connect("transition_started", self, "_on_Transitions_transition_started")
 		transitions.connect("transition_finished", self, "_on_Transitions_transition_finished")
+
+
 #	add_script("Utils", "utils", "res://addons/game-template/utils.gd")
 
 
@@ -40,10 +41,10 @@ func change_scene(new_scene: String, params = {}):
 		printerr("Scene file not found: ", new_scene)
 		return
 
-	if OS.has_feature('HTML5'): # Godot 3.2.3 HTML5 export template does not support multithreading
-		scenes.change_scene_background_loading(new_scene, params) # single-thread
+	if OS.has_feature("HTML5"):  # Godot 3.2.3 HTML5 export template does not support multithreading
+		scenes.change_scene_background_loading(new_scene, params)  # single-thread
 	else:
-		scenes.change_scene_multithread(new_scene, params) # multi-thread
+		scenes.change_scene_multithread(new_scene, params)  # multi-thread
 
 
 # Restart the current scene

@@ -35,6 +35,8 @@ func activate_skill() -> void:
 		casting = true
 		spawning_circle.set_visible(true)
 		Cursor.set_default_cursor(Cursor.target, Vector2(16, 16))
+	else:
+		Hud.show_info("The balls is not ready")
 
 
 func _start_timers() -> void:

@@ -1,37 +1,31 @@
 extends KinematicBody2D
 class_name Enemy
 
-export var steering_force: float
-export var avoid_force: float
-
+var attributes
 export var effect_hit: PackedScene = preload("res://common/effects/hit_effect.tscn")
 export var effect_died: PackedScene = preload("res://common/effects/death_effect.tscn")
 export var indicator_damage: PackedScene = preload("res://ui/damage_indicator/damage_indicator.tscn")
-export var projectile: PackedScene = preload("res://objects/weapons/staves/parseids_staff/rock_shard/RockShard.tscn")
+export var projectile: PackedScene = preload("res://objects/weapons/staves/parseids_staff/rock_shard/rock_shard.tscn")
 
 onready var ai = $Ai
 onready var animation: AnimationPlayer = $AnimationPlayer
 onready var modifiers: Node2D = $Modifiers
+onready var enemy_hitbox: Hitbox = $Hitbox
 onready var whiskers: Node2D = $Whiskers
 
 var velocity: Vector2 = Vector2.ZERO
 var knockback: Vector2 = Vector2.ZERO
 var target setget set_target, get_target
 
-export var stateful_attributes: Dictionary = {
-	"hp": 0,
-}
-
-export var stateless_attributes: Dictionary = {
-	"max_hp": 0,
-	"max_speed": 0,
-	"base_damage": 0,
-	"acceleration": 0,
-	"agro_radius": 0,
-	"steering_force": 0,
-	"avoid_force": 0,
-	"receives_knockback": true,
-}
+export var hp: int
+export var max_hp: int
+export var max_speed: int
+export var base_damage: int
+export var acceleration: int
+export var agro_radius: int
+export var receives_knockback: bool
+export var steering_force: float
+export var avoid_force: float
 
 var active_attributes: Dictionary = {
 	"hp": 0,
@@ -46,6 +40,22 @@ var active_attributes: Dictionary = {
 ## -----------------------------------------------------------------------------
 ##																Virtual Methods
 ## -----------------------------------------------------------------------------
+
+
+func _ready():
+	attributes = EnemeyAttributes.new(
+		hp,
+		max_hp,
+		max_speed,
+		base_damage,
+		acceleration,
+		steering_force,
+		avoid_force,
+		receives_knockback
+	)
+	enemy_hitbox.damage = get_attribute("base_damage")
+	modifier_tick()
+
 
 ## -----------------------------------------------------------------------------
 ##																Movement Stuff
@@ -102,7 +112,9 @@ func avoid_obstacles_steering() -> Vector2:
 
 
 func get_target():
-	return Party.current_character()
+	if !Party.is_party_empty():
+		return Party.current_character()
+	return self
 
 
 func set_target(new_target) -> void:
@@ -119,9 +131,9 @@ func apply_knockback(direction, strength) -> void:
 	knockback = (direction.direction_to(self.global_position) * strength)
 
 
-func _on_HurtBox_area_entered(hitbox) -> void:
-	if hitbox is WeaponHitBox:
-		var final_damage = _randomize_damage(hitbox.total_damage)
+func _on_Hurtbox_area_entered(hitbox) -> void:
+	if hitbox is WeaponHitbox:
+		var final_damage = _randomize_damage(hitbox.total_damage())
 		apply_knockback(hitbox.global_position, hitbox.knockback_strength)
 		Shake.shake(1.0, 0.2, 1)
 		spawn_hit_effect()
@@ -192,10 +204,10 @@ func get_attribute(attribute: String):
 
 
 func set_attribute(attribute: String, new_value):
-	if stateful_attributes.has(attribute):
-		stateful_attributes[attribute] = new_value
+	if attributes.stateful_attributes.has(attribute):
+		attributes.stateful_attributes[attribute] = new_value
 	else:
-		stateless_attributes[attribute] = new_value
+		attributes.stateless_attributes[attribute] = new_value
 	modifier_tick()
 	Hud.update_hud()
 
@@ -211,12 +223,12 @@ func get_modifiers() -> Array:
 
 
 func modifier_tick() -> void:
-	var res: Dictionary = stateless_attributes.duplicate()
+	var res: Dictionary = attributes.stateless_attributes.duplicate()
 	var modifier_list: Array = get_modifiers()
 	for modifier in modifier_list:
 		res = modifier.modify_stateless(res)
 	active_attributes = {
-		"hp": stateful_attributes.hp,
+		"hp": attributes.stateful_attributes.hp,
 		"max_hp": res.max_hp,
 		"max_speed": res.max_speed,
 		"base_damage": res.base_damage,

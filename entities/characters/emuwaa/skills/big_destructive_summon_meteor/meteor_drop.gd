@@ -1,11 +1,11 @@
 extends Area2D
 
-onready var explosion_animation: AnimationPlayer = $ExplosionHitBox/AnimationPlayer
+onready var explosion_animation: AnimationPlayer = $ExplosionHitbox/AnimationPlayer
 onready var animation: AnimationPlayer = $AnimationPlayer
-onready var explosion_collision: CollisionShape2D = $ExplosionHitBox/CollisionShape2D
-onready var explosion_hitbox: ExplosionHitBox = $ExplosionHitBox
-onready var fire_collision: CollisionShape2D = $FireHitBox/CollisionShape2D
-onready var fire_hitbox: WeaponHitBox = $FireHitBox
+onready var explosion_collision: CollisionShape2D = $ExplosionHitbox/CollisionShape2D
+onready var explosion_hitbox: ExplosionHitbox = $ExplosionHitbox
+onready var fire_collision: CollisionShape2D = $FireHitbox/CollisionShape2D
+onready var fire_hitbox: WeaponHitbox = $FireHitbox
 onready var duration_timer: Timer = $Duration
 onready var fire_interval: Timer = $FireDoT
 

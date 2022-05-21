@@ -20,7 +20,7 @@ func _on_PlayButton_pressed() -> void:
 
 func _on_test_pressed():
 	Game.change_scene(
-		"res://levels/test_world/test_world.tscn",
+		"res://levels/firing_range/firing_range.tscn",
 		{
 			show_progress_bar = true,
 		}

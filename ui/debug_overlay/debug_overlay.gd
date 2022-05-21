@@ -39,8 +39,8 @@ func set_stats() -> void:
 	for s in stats:
 		var value = null
 
-		if s[1] and weakref(s[1]).get_ref():
-			if s[3] and s[4]:
+		if s[1] && weakref(s[1]).get_ref():
+			if s[3] && s[4]:
 				value = s[1].call(s[2], s[4])
 			elif s[3]:
 				value = s[1].call(s[2])

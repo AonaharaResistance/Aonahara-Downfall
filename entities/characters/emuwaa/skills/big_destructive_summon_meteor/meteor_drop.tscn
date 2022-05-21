@@ -6,8 +6,8 @@
 [ext_resource path="res://entities/characters/emuwaa/skills/big_destructive_summon_meteor/meteor_impact.png" type="Texture" id=4]
 [ext_resource path="res://assets/place_holder/light.png" type="Texture" id=5]
 [ext_resource path="res://entities/characters/emuwaa/skills/big_destructive_summon_meteor/meteor_drop.gd" type="Script" id=6]
-[ext_resource path="res://objects/projectiles/explosives/explosion_hit_box.gd" type="Script" id=7]
-[ext_resource path="res://common/collisions/weapon_hit_box.gd" type="Script" id=8]
+[ext_resource path="res://objects/projectiles/explosives/explosion_hitbox.gd" type="Script" id=7]
+[ext_resource path="res://common/collisions/weapon_hitbox.gd" type="Script" id=8]
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0.010989, 1 )
@@ -83,7 +83,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("ExplosionHitBox/Sprite:visible")
+tracks/4/path = NodePath("ExplosionHitbox/Sprite:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -173,7 +173,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("ExplosionHitBox/Sprite:visible")
+tracks/5/path = NodePath("ExplosionHitbox/Sprite:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -220,7 +220,7 @@ radius = 84.0108
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("ExplosionHitBox/Sprite:frame")
+tracks/0/path = NodePath("ExplosionHitbox/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -232,7 +232,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ExplosionHitBox/Sprite/ExplosionParticle:emitting")
+tracks/1/path = NodePath("ExplosionHitbox/Sprite/ExplosionParticle:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -244,7 +244,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExplosionHitBox/Sprite:visible")
+tracks/2/path = NodePath("ExplosionHitbox/Sprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -296,7 +296,7 @@ tracks/5/keys = {
 resource_name = "explode"
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("ExplosionHitBox/Sprite:frame")
+tracks/0/path = NodePath("ExplosionHitbox/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -308,7 +308,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("ExplosionHitBox/Sprite/ExplosionParticle:emitting")
+tracks/1/path = NodePath("ExplosionHitbox/Sprite/ExplosionParticle:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -320,7 +320,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("ExplosionHitBox/Sprite:visible")
+tracks/2/path = NodePath("ExplosionHitbox/Sprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -401,14 +401,14 @@ texture_scale = 0.5
 color = Color( 0.92549, 0.619608, 0.258824, 1 )
 energy = 0.0
 
-[node name="ExplosionHitBox" type="Area2D" parent="."]
+[node name="ExplosionHitbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 monitoring = false
 script = ExtResource( 7 )
 detonator_path = NodePath("..")
 
-[node name="Sprite" type="Sprite" parent="ExplosionHitBox"]
+[node name="Sprite" type="Sprite" parent="ExplosionHitbox"]
 visible = false
 position = Vector2( -306.42, 265.853 )
 scale = Vector2( 2, 2 )
@@ -418,7 +418,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="ExplosionParticle" type="Particles2D" parent="ExplosionHitBox/Sprite"]
+[node name="ExplosionParticle" type="Particles2D" parent="ExplosionHitbox/Sprite"]
 emitting = false
 amount = 200
 lifetime = 2.0
@@ -427,25 +427,25 @@ speed_scale = 3.0
 explosiveness = 0.47
 process_material = ExtResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ExplosionHitBox"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ExplosionHitbox"]
 root_node = NodePath("../..")
 anims/RESET = SubResource( 5 )
 anims/explode = SubResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitbox"]
 modulate = Color( 0.25098, 1, 0.541176, 1 )
 position = Vector2( -299.344, 260.954 )
 shape = SubResource( 11 )
 disabled = true
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="ExplosionHitBox"]
+[node name="Audio" type="AudioStreamPlayer2D" parent="ExplosionHitbox"]
 
-[node name="FireHitBox" type="Area2D" parent="."]
+[node name="FireHitbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource( 8 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FireHitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireHitbox"]
 position = Vector2( -302.212, 261.443 )
 shape = SubResource( 12 )
 disabled = true

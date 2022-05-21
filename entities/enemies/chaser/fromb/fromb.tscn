@@ -7,6 +7,7 @@
 [ext_resource path="res://entities/enemies/chaser/fromb/fromb_state_machine.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=19]
+radius = 7.64902
 
 [sub_resource type="Animation" id=18]
 length = 0.001
@@ -23,7 +24,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -65,7 +66,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -107,7 +108,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -192,27 +193,21 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=20]
 
 [sub_resource type="CircleShape2D" id=21]
-radius = 33.5345
+radius = 29.138
 
 [node name="Fromb" instance=ExtResource( 2 )]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource( 4 )
-steering_force = 4.0
+hp = 30
+max_hp = 30
+max_speed = 300
+base_damage = 1
+acceleration = 100
+agro_radius = 20
+receives_knockback = true
+steering_force = 10.0
 avoid_force = 10.0
-stateful_attributes = {
-"hp": 50
-}
-stateless_attributes = {
-"acceleration": 300,
-"agro_radius": 50,
-"avoid_force": 10,
-"base_damage": 1,
-"max_hp": 50,
-"max_speed": 300,
-"receives_knockback": true,
-"steering_force": 10
-}
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 5 )
@@ -246,15 +241,18 @@ parameters/explode/blend_position = 0.0769231
 parameters/idle/blend_position = -0.00944668
 parameters/walk/blend_position = -0.1
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 20 )
 
-[node name="HitBox" parent="." index="8"]
-damage = 1
-
-[node name="CollisionShape2D" parent="HitBox" index="0"]
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 21 )
 disabled = true
 
-[editable path="HurtBox"]
-[editable path="HitBox"]
+[node name="StateLabel" parent="." index="11"]
+margin_left = 0.44545
+margin_top = -2.6727
+margin_right = 40.4454
+margin_bottom = 4.3273
+
+[editable path="Hurtbox"]
+[editable path="Hitbox"]

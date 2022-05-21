@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/weapons/staves/parseids_staff/rock_pillar/rock_pillar.png" type="Texture" id=1]
-[ext_resource path="res://common/collisions/weapon_hit_box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://common/collisions/weapon_hitbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/rock_pillar/rock_pillar.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=3]

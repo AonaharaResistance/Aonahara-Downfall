@@ -14,9 +14,8 @@
 radius = 4.03739
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 5.24396
-height = 0.0
+[sub_resource type="CircleShape2D" id=13]
+radius = 3.93763
 
 [sub_resource type="Animation" id=10]
 length = 0.001
@@ -75,23 +74,17 @@ collision_mask = 17
 script = ExtResource( 2 )
 character_name = "Nom Nom"
 character_icon = ExtResource( 7 )
-stateful_attributes = {
-"hp": 4,
-"stamina": 4
-}
-stateless_attributes = {
-"acceleration": 60,
-"base_damage": 10,
-"dash_duration": 0.2,
-"extra_hp": 0,
-"friction": 0.2,
-"max_hp": 4,
-"max_speed": 110,
-"max_stamina": 4,
-"receives_knockback": false,
-"stamina_regen": 3.0,
-"stamina_regen_rate": 1
-}
+hp = 5
+stamina = 4
+stamina_regen = 2.0
+acceleration = 80
+max_hp = 5
+max_speed = 100
+max_stamina = 4
+base_damage = 20
+stamina_regen_rate = 1
+dash_duration = 0.2
+friction = 0.2
 
 [node name="StateMachine" parent="." index="0"]
 script = ExtResource( 4 )
@@ -122,6 +115,7 @@ scale = Vector2( 0.611197, 0.285642 )
 texture = ExtResource( 5 )
 
 [node name="Sprite" parent="." index="10"]
+visible = false
 scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 hframes = 8
@@ -131,9 +125,9 @@ vframes = 2
 position = Vector2( 0.520279, 8.45346 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2( 0.520277, 7.48735 )
-shape = SubResource( 7 )
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0.556811, 8.50424 )
+shape = SubResource( 13 )
 
 [node name="AnimationPlayer" parent="." index="13"]
 anims/RESET = SubResource( 10 )
@@ -151,5 +145,5 @@ parameters/playback = SubResource( 12 )
 
 [editable path="Blinker"]
 [editable path="Dash"]
-[editable path="HurtBox"]
+[editable path="Hurtbox"]
 [editable path="InteractionComponent"]

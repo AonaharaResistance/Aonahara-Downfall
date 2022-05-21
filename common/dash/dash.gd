@@ -30,6 +30,11 @@ func set_can_dash(new_value: bool) -> void:
 func get_can_dash() -> bool:
 	if character.get_attribute("stamina") <= 0:
 		return false
+	else:
+		return true
+
+
+func cooldown_finished() -> bool:
 	return cooldown_timer.is_stopped()
 
 
@@ -38,7 +43,7 @@ func start_dash(character_sprite: Sprite, duration: float, direction: Vector2) -
 	Shake.shake(1, 0.1)
 	set_can_dash(false)
 
-	character.hurt_box.disabled = true
+	character.hurtbox.disabled = true
 
 	cooldown_timer.start()
 	duration_timer.wait_time = duration
@@ -81,7 +86,7 @@ func is_dashing() -> bool:
 func end_dash() -> void:
 	emit_signal("dash_ended")
 
-	character.hurt_box.disabled = false
+	character.hurtbox.disabled = false
 
 	dash_sprite_shader.set_shader_param("whiten", false)
 	ghost_timer.stop()

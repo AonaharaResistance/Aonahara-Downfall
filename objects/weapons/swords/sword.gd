@@ -6,7 +6,7 @@ onready var effect: AnimationPlayer = $EffectAnimation
 onready var sound: AudioStreamPlayer2D = $SoundEffect
 onready var light_cooldown_timer: Timer = $LightCooldown
 onready var heavy_cooldown_timer: Timer = $HeavyCooldown
-onready var hit_box: WeaponHitBox = $WeaponContainer/HitBox
+onready var hit_box: WeaponHitbox = $WeaponContainer/WeaponHitbox
 
 export var damage: int
 export var holdable_light: bool

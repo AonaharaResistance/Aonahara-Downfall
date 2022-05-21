@@ -1,5 +1,8 @@
 extends Node
 
+export var pop_up: PackedScene
+export var death_screen: PackedScene
+
 onready var gui: Control = $CanvasLayer/GUI
 onready var health_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/Top/Health
 onready var empty_health_container: HBoxContainer = $CanvasLayer/GUI/MarginContainer/TopBackground/HealthEmpty
@@ -28,6 +31,16 @@ func update_hud() -> void:
 		skill.update_skill()
 
 
+func show_info(info: String):
+	var popup: PopupInfo = pop_up.instance()
+	get_tree().current_scene.add_child(popup)
+	popup.show_info(info)
+
+
+func show_death_screen():
+	get_tree().current_scene.add_child(death_screen.instance())
+
+
 func _process(delta):
 	update_hud()
 	if channeling.is_visible():
@@ -49,6 +62,8 @@ func _update_health() -> void:
 	for i in health_container.get_children():
 		#health_container.remove_child(i)
 		i.free()
+
+		#empty_health_container.remove_child(i)
 	for i in empty_health_container.get_children():
 		i.free()
 		#empty_health_container.remove_child(i)

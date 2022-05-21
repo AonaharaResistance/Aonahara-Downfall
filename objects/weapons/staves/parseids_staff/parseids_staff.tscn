@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/place_holder/light.png" type="Texture" id=6]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/shart/shart.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/weapons/staves/parseids_staff/rock_pillar/rock_pillar.tscn" type="PackedScene" id=8]
-[ext_resource path="res://objects/weapons/staves/parseids_staff/rock_shard/RockShard.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/weapons/staves/parseids_staff/rock_shard/rock_shard.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -212,10 +212,11 @@ texture = ExtResource( 3 )
 
 [node name="ChargeLight" parent="WeaponContainer" index="3"]
 position = Vector2( 0, -5.01073 )
-scale = Vector2( 0.0656596, 0.0762848 )
 enabled = false
 texture = ExtResource( 6 )
 color = Color( 1, 0.576471, 0.12549, 1 )
+energy = 0.5
+shadow_enabled = true
 
 [node name="WeaponAnimation" parent="." index="1"]
 anims/RESET = SubResource( 6 )
@@ -223,9 +224,5 @@ anims/heavy_attack = SubResource( 11 )
 anims/heavy_charge = SubResource( 12 )
 anims/light_attack = SubResource( 13 )
 
-[node name="HeavyCooldown" parent="." index="3"]
-one_shot = true
-
 [node name="LightCooldown" parent="." index="4"]
 wait_time = 0.5
-one_shot = true

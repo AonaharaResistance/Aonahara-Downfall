@@ -10,7 +10,7 @@ onready var dash := $Dash
 onready var stamina_timer: Timer = $StaminaTimer
 onready var camera: Camera2D = $Camera2D
 onready var blinker: Blinker = $Blinker
-onready var hurt_box: CollisionShape2D = $HurtBox/CollisionShape2D
+onready var hurtbox: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var sprite_shader_material: ShaderMaterial = sprite.material
 onready var battle_timer: Timer = $BattleTimer
 onready var interaction_component: InteractionComponent = $InteractionComponent
@@ -25,25 +25,20 @@ export var character_icon: Resource
 export var mirrored_sprite: bool = true
 
 var is_alive: bool = true
-
-export var stateful_attributes: Dictionary = {
-	"hp": 0,
-	"stamina": 0,
-}
-
-export var stateless_attributes: Dictionary = {
-	"stamina_regen": 0.0,
-	"acceleration": 0,
-	"max_hp": 0,
-	"extra_hp": 0,
-	"max_speed": 0,
-	"max_stamina": 0,
-	"base_damage": 0,
-	"stamina_regen_rate": 0,
-	"dash_duration": 0.0,
-	"friction": 0.0,
-	"receives_knockback": false,
-}
+var attributes: CharacterAttributes
+export var hp: int
+export var stamina: int
+export var stamina_regen: float
+export var acceleration: int
+export var max_hp: int
+export var extra_hp: int
+export var max_speed: int
+export var max_stamina: int
+export var base_damage: int
+export var stamina_regen_rate: int
+export var dash_duration: float
+export var friction: float
+export var receives_knockback: bool
 
 var active_attributes: Dictionary = {
 	"hp": 0,
@@ -75,6 +70,23 @@ signal battle_state_changed
 
 
 func _ready() -> void:
+	if attributes == null:
+		attributes = CharacterAttributes.new(
+			hp,
+			stamina,
+			stamina_regen,
+			max_hp,
+			extra_hp,
+			max_speed,
+			max_stamina,
+			base_damage,
+			acceleration,
+			stamina_regen_rate,
+			dash_duration,
+			friction,
+			receives_knockback
+		)
+
 	modifier_tick()
 
 
@@ -158,8 +170,14 @@ func move(delta: float) -> void:
 
 
 # warning-ignore:unsafe_method_access
-func activate_dash() -> void:
+func listen_to_dash() -> void:
 	if Input.is_action_just_pressed("dash") && is_in_control:
+		if !dash.get_can_dash():
+			Hud.show_info("You skipped leg day")
+			return
+		if !dash.cooldown_finished():
+			Hud.show_info("Knees weak")
+			return
 		set_attribute("stamina", get_attribute("stamina") - 1)
 		set_stamina_regen_timer(get_attribute("stamina"))
 		stamina_timer.start()
@@ -207,7 +225,7 @@ func apply_knockback(direction, strength) -> void:
 	knockback = (direction.direction_to(self.global_position) * strength)
 
 
-func _on_HurtBox_area_entered(hitbox: HitBox) -> void:
+func _on_Hurtbox_area_entered(hitbox: Hitbox) -> void:
 	set_is_in_battle(false)
 	blinker.start_blinking(sprite, 1.0)
 	_whiten_sprite(0.3)
@@ -245,9 +263,9 @@ func _take_damage(damage: int) -> void:
 
 
 func _enable_iframes(duration: float) -> void:
-	hurt_box.set_deferred("disabled", true)
+	hurtbox.set_deferred("disabled", true)
 	yield(get_tree().create_timer(duration), "timeout")
-	hurt_box.disabled = false
+	hurtbox.disabled = false
 
 
 func _die_check(current_hp: int) -> void:
@@ -257,6 +275,7 @@ func _die_check(current_hp: int) -> void:
 
 func die() -> void:
 	is_alive = false
+	Party.tactical_character_hiding(Party.current_character())
 	Party.switch_to_available_member()
 
 
@@ -279,10 +298,10 @@ func get_attribute(attribute: String):
 
 
 func set_attribute(attribute: String, new_value):
-	if stateful_attributes.has(attribute):
-		stateful_attributes[attribute] = new_value
+	if attributes.stateful_attributes.has(attribute):
+		attributes.stateful_attributes[attribute] = new_value
 	else:
-		stateless_attributes[attribute] = new_value
+		attributes.stateless_attributes[attribute] = new_value
 	modifier_tick()
 	Hud.update_hud()
 
@@ -298,13 +317,13 @@ func get_modifiers() -> Array:
 
 
 func modifier_tick() -> void:
-	var res: Dictionary = stateless_attributes.duplicate()
-	var modifier_list: Array = $Modifiers.get_children()
+	var res: Dictionary = attributes.stateless_attributes.duplicate()
+	var modifier_list: Array = get_modifiers()
 	for modifier in modifier_list:
 		res = modifier.modify_stateless(res)
 	active_attributes = {
-		"hp": stateful_attributes.hp + res.extra_hp,
-		"stamina": stateful_attributes.stamina,
+		"hp": attributes.stateful_attributes.hp + res.extra_hp,
+		"stamina": attributes.stateful_attributes.stamina,
 		"stamina_regen": res.stamina_regen,
 		"acceleration": res.acceleration,
 		"max_hp": res.max_hp,

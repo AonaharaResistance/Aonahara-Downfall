@@ -38,7 +38,7 @@ func shake(intensity, duration, type = Type.Random):
 	# if player_no_want:
 	# 	intensity = 0
 
-	if intensity > camera_shake_intensity and duration > camera_shake_duration:
+	if intensity > camera_shake_intensity && duration > camera_shake_duration:
 		camera_shake_intensity = intensity
 		camera_shake_duration = duration
 		camera_shake_type = type
