@@ -66,7 +66,7 @@ func _unhandled_input(event):
 
 
 func _state_logic(delta) -> void:
-	print(parent.global_position)
+	print(parent.velocity)
 	animation_tree.set("parameters/idle/blend_position", parent.get_mouse_direction().x)
 	animation_tree.set("parameters/walk/blend_position", parent.get_mouse_direction().x)
 

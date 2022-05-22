@@ -1,17 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/m5x7.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/place_holder/GUI.png" type="Texture" id=2]
+[ext_resource path="res://ui/panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/prosperosus_standard_theme.tres" type="Theme" id=3]
 [ext_resource path="res://menus/main_menu/new_game_popup.gd" type="Script" id=4]
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 2 )
-region_rect = Rect2( -0.0566616, 95.8471, 47.9351, 32.2566 )
-margin_left = 6.2409
-margin_right = 5.72685
-margin_top = 6.25702
-margin_bottom = 5.12851
 
 [sub_resource type="DynamicFont" id=3]
 outline_size = 1
@@ -24,7 +16,7 @@ margin_top = 60.0
 margin_right = 220.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 120, 60 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
